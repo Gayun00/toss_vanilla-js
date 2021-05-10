@@ -1,0 +1,31 @@
+{
+  "name": "vanilla-js-toss",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Gayun00",
+  "repository": "https://github.com/Gayun00/toss_vanilla-js.git",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack serve --mode=development",
+    "start:prod": "webpack serve --mode=production",
+    "build": "webpack  --mode=development",
+    "build:prod": "webpack  --mode=development"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/eslint-parser": "^7.13.14",
+    "@babel/preset-env": "^7.14.1",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "html-webpack-plugin": "^5.3.1",
+    "mini-css-extract-plugin": "^1.6.0",
+    "prettier": "^2.3.0",
+    "webpack": "^5.37.0",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
