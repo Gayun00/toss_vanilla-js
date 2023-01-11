@@ -9,7 +9,8 @@
     "start": "webpack serve --mode=development",
     "start:prod": "webpack serve --mode=production",
     "build": "webpack  --mode=development",
-    "build:prod": "webpack  --mode=development"
+    "build:prod": "webpack  --mode=development",
+    "run:mock": "json-server --watch db.json --port 5000"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
@@ -22,6 +23,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.1",
     "html-webpack-plugin": "^5.3.1",
+    "json-server": "^0.17.1",
     "mini-css-extract-plugin": "^1.6.0",
     "prettier": "^2.3.0",
     "webpack": "^5.37.0",
