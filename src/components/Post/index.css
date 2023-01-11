@@ -1,0 +1,13 @@
+.post_item {
+  display: flex;
+}
+
+.post_thumbnail {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-right: 48px;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
