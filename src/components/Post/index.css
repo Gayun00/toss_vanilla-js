@@ -1,13 +1,35 @@
+@import url("../../css/global.css");
+
 .post_item {
   display: flex;
 }
 
 .post_thumbnail {
+  margin-right: 48px;
   width: 240px;
   height: 240px;
   object-fit: cover;
   border-radius: 14px;
-  margin-right: 48px;
-  -webkit-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
+}
+
+.post_title {
+  margin-bottom: 14px;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.4;
+  color: var(--black-primary);
+}
+
+.post_description {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--gray-primary);
+}
+
+.post_date {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray-secondary);
 }
