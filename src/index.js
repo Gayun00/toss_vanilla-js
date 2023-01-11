@@ -1,5 +1,5 @@
 import { App } from "./components/App.js";
-import { Post } from "./components/Post";
+import { PostList } from "./components/PostList.js/index.js";
 import "./css/reset.css";
 
 const app = new App();
@@ -11,11 +11,9 @@ const createPosts = async () => {
 };
 
 const addPosts = (postList) => {
-  // TODO: add mapping post to render postlist
-  const post = postList[0];
-
-  const $post = new Post(post);
-  app.add($post.create());
+  const $postList = new PostList(postList);
+  // TODO: add post list wrapper component
+  app.add($postList.create());
 };
 
 createPosts();
