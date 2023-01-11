@@ -4,13 +4,13 @@ import "./css/reset.css";
 
 const app = new App();
 
-const fetchPosts = async () => {
+const createPosts = async () => {
   const res = await fetch("http://localhost:5000/posts");
   const json = await res.json();
-  renderPosts(json);
+  addPosts(json);
 };
 
-const renderPosts = (postList) => {
+const addPosts = (postList) => {
   // TODO: add mapping post to render postlist
   const post = postList[0];
 
@@ -18,4 +18,4 @@ const renderPosts = (postList) => {
   app.add($post.create());
 };
 
-fetchPosts();
+createPosts();
