@@ -1,8 +1,10 @@
+import { Router } from "../../router";
 import { Post } from "../Post";
 
 export class PostList {
   constructor(postList) {
     this.postList = postList;
+    this.router = new Router();
   }
 
   render() {
