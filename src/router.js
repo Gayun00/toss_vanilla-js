@@ -11,12 +11,15 @@ const routes = {
 
 export class Router {
   constructor() {
-    //
+    this.$app = document.querySelector(".root");
+
+    window.onpopstate = () => {
+      this.$app.innerHTML = routes[window.location.pathname];
+    };
   }
 
   render(pathName) {
-    const $app = document.querySelector(".root");
-    $app.innerHTML = routes[pathName];
+    this.$app.innerHTML = routes[pathName];
   }
 
   navigate = (pathName) => {
