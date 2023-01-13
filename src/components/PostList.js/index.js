@@ -5,13 +5,13 @@ export class PostList {
     this.postList = postList;
   }
 
-  create() {
+  render() {
     const $postList = document.createElement("ul");
-
-    this.postList.forEach((post) => {
-      const $post = new Post(post).create();
-      $postList.appendChild($post);
-    });
+    $postList.innerHTML = this.postList
+      .map((post) => {
+        return new Post(post).render();
+      })
+      .join();
 
     return $postList;
   }

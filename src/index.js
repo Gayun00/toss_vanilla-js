@@ -13,7 +13,7 @@ const createPosts = async () => {
 const addPosts = (postList) => {
   const $postList = new PostList(postList);
   // TODO: add post list wrapper component
-  app.add($postList.create());
+  app.add($postList.render());
 };
 
 createPosts();
