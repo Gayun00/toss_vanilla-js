@@ -1,5 +1,8 @@
 :root {
+  --white: white;
+
   --black-primary: #333d4b;
+  --black-background: rgba(2, 9, 19, 0.91);
 
   --gray-primary: #4e5968;
   --gray-secondary: #8b95a1;
@@ -11,4 +14,7 @@
   --blue-700: #1b64da;
 
   --padding-container-base: 48px;
+
+  --btn-line-height: 18px;
+  --btn-border-radius: 7px;
 }

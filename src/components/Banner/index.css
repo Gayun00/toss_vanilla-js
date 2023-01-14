@@ -1,0 +1,40 @@
+@import url("../../css/global.css");
+
+.banner {
+  padding: 60px 24px;
+  background-color: var(--black-background);
+  color: var(--white);
+}
+
+.banner_contianer {
+  display: flex;
+  align-items: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.banner_img {
+  width: 186px;
+}
+
+.banner_text--title {
+  font-size: 25px;
+}
+
+.banner_text--subtitle {
+  margin-top: 8px;
+  font-size: 17px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  color: #e5e8eb;
+}
+
+.banner_button {
+  margin-top: 24px;
+  padding: 11px 16px;
+  line-height: var(--btn-line-height);
+  border-radius: var(--btn-border-radius);
+  background-color: var(--blue-primary);
+  color: var(--white);
+  font-size: var(--btn-font-size);
+}
