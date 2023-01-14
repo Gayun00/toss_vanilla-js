@@ -6,9 +6,12 @@
 
   --gray-primary: #4e5968;
   --gray-secondary: #8b95a1;
+  --grey-background: #f9fafb;
   --gray-border: rgba(0, 27, 55, 0.1);
   --gray-opacity50: rgba(0, 23, 51, 0.02);
-  --grey-opacity100: rgba(2, 32, 71, 0.05);
+  --gray-opacity100: rgba(2, 32, 71, 0.05);
+  --gray-500: #8b95a1;
+  --gray-600: #6b7684;
 
   --blue-primary: #3182f6;
   --blue-700: #1b64da;
@@ -17,4 +20,10 @@
 
   --btn-line-height: 18px;
   --btn-border-radius: 7px;
+
+  --btn-font-size: 15px;
+  --font-size-m: 15px;
+  --font-size-l: 17px;
+
+  --font-weight-bold: bold;
 }
