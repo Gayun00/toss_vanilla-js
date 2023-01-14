@@ -4,8 +4,11 @@
   --gray-primary: #4e5968;
   --gray-secondary: #8b95a1;
   --gray-border: rgba(0, 27, 55, 0.1);
+  --gray-opacity50: rgba(0, 23, 51, 0.02);
+  --grey-opacity100: rgba(2, 32, 71, 0.05);
 
   --blue-primary: #3182f6;
+  --blue-700: #1b64da;
 
   --padding-container-base: 48px;
 }
