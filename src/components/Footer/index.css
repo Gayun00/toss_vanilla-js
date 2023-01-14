@@ -1,8 +1,9 @@
 @import url("../../css/global.css");
 
 .footer {
-  background-color: var(--grey-background);
   padding: 50px 0 100px;
+  width: 100%;
+  background-color: var(--grey-background);
 }
 
 .footer_container {

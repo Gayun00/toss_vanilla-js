@@ -1,8 +1,7 @@
 export class PageComponent {
-  constructor(htmlString) {
-    this.$page = document.createElement("ul");
-    this.$page.classList.add("page");
-    this.$page.innerHTML = htmlString;
+  constructor(className) {
+    this.$page = document.createElement("div");
+    this.$page.classList.add(className);
   }
 
   attachTo($parent, position = "afterbegin") {
