@@ -1,0 +1,36 @@
+@import url("../../css/global.css");
+
+.header {
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  border-bottom: 1px solid var(--gray-border);
+}
+
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 92%;
+  max-width: calc(100% - var(--padding-container-base));
+}
+
+.menu_button {
+  margin: 0 8px;
+  padding: 12px 10px;
+  font-size: 15px;
+  line-height: 10px;
+  color: var(--gray-primary);
+  border-radius: 8px;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+  text-decoration: none;
+  text-align: left;
+  font-size: 15px;
+}
+
+.menu_button.highlighted {
+  background-color: var(--blue-primary);
+  color: white;
+}
