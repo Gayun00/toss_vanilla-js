@@ -1,7 +1,9 @@
 @import url("../../css/global.css");
 
 .banner {
+  margin-top: 192px;
   padding: 60px 24px;
+  width: 100%;
   background-color: var(--black-background);
   color: var(--white);
 }
