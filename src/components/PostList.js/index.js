@@ -9,11 +9,12 @@ export class PostList {
 
   render() {
     const $postList = document.createElement("ul");
+
     $postList.innerHTML = this.postList
       .map((post) => {
         return new Post(post).render();
       })
-      .join();
+      .join("");
 
     return $postList;
   }
