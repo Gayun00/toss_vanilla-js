@@ -1,26 +1,20 @@
+import { BaseComponent } from "../BaseComponent";
 import "./index.css";
 
-export class Post {
+export class Post extends BaseComponent {
   constructor(post) {
-    this.thumbnail = post.thumbnail;
-    this.title = post.title;
-    this.description = post.description;
-    this.date = post.date;
-  }
-
-  render() {
-    return `
-      <li class="post_item">
-        <div>
-          <img src=${this.thumbnail} class="post_thumbnail">
-        </div>
-        <div>
-          <h2 class="post_title">
-            ${this.title}
-          </h2>
-          <p class="post_description">${this.description}</p>
-          <p class="post_date">${this.date}</p>
-        </div>
-      </li>`;
+    super(`
+    <li class="post_item">
+      <div>
+        <img src=${post.thumbnail} class="post_thumbnail">
+      </div>
+      <div>
+        <h2 class="post_title">
+          ${post.title}
+        </h2>
+        <p class="post_description">${post.description}</p>
+        <p class="post_date">${post.date}</p>
+      </div>
+    </li>`);
   }
 }
