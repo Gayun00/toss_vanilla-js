@@ -3,4 +3,9 @@
 
   --gray-primary: #4e5968;
   --gray-secondary: #8b95a1;
+  --gray-border: rgba(0, 27, 55, 0.1);
+
+  --blue-primary: #3182f6;
+
+  --padding-container-base: 48px;
 }
