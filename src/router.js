@@ -4,7 +4,7 @@ import { ListPage } from "./pages/List/index.js";
 const listPage = new ListPage();
 const detailPage = new DetailPage();
 
-const routes = {
+export const routes = {
   "/": listPage.render(),
   "/detail": detailPage.render(),
 };
@@ -12,10 +12,6 @@ const routes = {
 export class Router {
   constructor() {
     this.$app = document.querySelector(".root");
-
-    window.onpopstate = () => {
-      this.$app.innerHTML = routes[window.location.pathname];
-    };
   }
 
   render(pathName) {

@@ -1,9 +1,15 @@
+import { routes } from "../../router";
+
 export class App {
   constructor() {
-    this.$root = document.querySelector(".root");
+    this.$app = document.querySelector(".root");
+
+    window.onpopstate = () => {
+      this.$app.innerHTML = routes[window.location.pathname];
+    };
   }
 
   add(dom) {
-    this.$root.appendChild(dom);
+    this.$app.appendChild(dom);
   }
 }
