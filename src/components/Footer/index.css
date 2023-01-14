@@ -1,0 +1,77 @@
+@import url("../../css/global.css");
+
+.footer {
+  background-color: var(--grey-background);
+  padding: 50px 0 100px;
+}
+
+.footer_container {
+  max-width: 1064px;
+  margin: auto;
+  padding: 0 67px;
+  box-sizing: border-box;
+}
+
+.footer_menu {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.footer_menu > ul:nth-child(3) {
+  width: 250px;
+}
+
+.footer_menu__category {
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer_menu__category > li {
+  display: flex;
+  flex-direction: column;
+  line-height: 30px;
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  color: var(--black-primary);
+}
+
+.footer_menu__category > li > a {
+  display: flex;
+  flex-direction: column;
+  line-height: 30px;
+  font-size: var(--font-size-m);
+  font-weight: 350;
+  color: var(--gray-600);
+}
+
+.footer_menu__category > li > a:hover {
+  text-decoration: underline;
+}
+
+.footer__address {
+  margin-bottom: 54px;
+}
+
+.footer__address > p:nth-child(2) {
+  font-size: 13px;
+  color: var(--gray-500);
+}
+
+.footer__address__company-name {
+  margin-bottom: 16px;
+}
+
+.footer__social-list {
+  display: flex;
+}
+
+.footer__social-list-item {
+  margin-right: 8px;
+  transition: opacity 0.2s ease;
+  opacity: 0.7;
+}
+
+.footer__social-list-item:hover {
+  opacity: 1;
+}
