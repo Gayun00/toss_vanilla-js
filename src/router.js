@@ -18,8 +18,10 @@ export class Router {
     this.$app.innerHTML = routes[pathName];
   }
 
-  navigate = (pathName) => {
-    window.history.pushState({}, "", window.location.origin + pathName);
+  navigate = (pathName, queryKey, queryVal) => {
+    const url = new URL(window.location);
+    url.searchParams.set(queryKey, queryVal);
+    window.history.pushState({}, "", url + pathName);
     this.render(pathName);
   };
 }

@@ -16,7 +16,7 @@ export class ListPage {
 
     const addPosts = (postList) => {
       const $postList = new PostList(postList);
-      // TODO: add post list wrapper component
+      // TODO: refactor appendChild, set innerHTML to add method with inheritance
       $listPage.appendChild($postList.render());
     };
 
