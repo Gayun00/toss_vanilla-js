@@ -1,8 +1,8 @@
-import { PageComponent } from "../components/Page.js/index.js";
-import { Header } from "../components/Header.js/index.js";
-import { Banner } from "../components/Banner/index.js";
-import { Footer } from "../components/Footer/index.js";
-import { PostList } from "../components/PostList.js/index.js";
+import { PageComponent } from "../../components/Page.js/index.js";
+import { Header } from "../../components/Header.js/index.js";
+import { Banner } from "../../components/Banner/index.js";
+import { Footer } from "../../components/Footer/index.js";
+import { PostList } from "../../components/PostList.js/index.js";
 
 import "./index.css";
 
