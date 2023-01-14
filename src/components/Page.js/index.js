@@ -1,11 +1,11 @@
 export class PageComponent {
   constructor(htmlString) {
-    this.$element = document.createElement("ul");
-    this.$element.classList.add("page");
-    this.$element.innerHTML = htmlString;
+    this.$page = document.createElement("ul");
+    this.$page.classList.add("page");
+    this.$page.innerHTML = htmlString;
   }
 
   attachTo($parent, position = "afterbegin") {
-    $parent.insertAdjacentElement(position, this.$element);
+    $parent.insertAdjacentElement(position, this.$page);
   }
 }
