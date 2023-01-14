@@ -1,19 +1,10 @@
-import { App } from "./components/App.js";
-import { PostList } from "./components/PostList.js/index.js";
-import "./css/reset.css";
+import { ListPage } from "./pages/List.js";
 
-const app = new App();
+class App {
+  constructor(appRoot) {
+    this.listPage = new ListPage();
+    this.listPage.attachTo(appRoot);
+  }
+}
 
-const createPosts = async () => {
-  const res = await fetch("http://localhost:5000/posts");
-  const json = await res.json();
-  addPosts(json);
-};
-
-const addPosts = (postList) => {
-  const $postList = new PostList(postList);
-  // TODO: add post list wrapper component
-  app.add($postList.render());
-};
-
-createPosts();
+new App(document.querySelector(".root"));
