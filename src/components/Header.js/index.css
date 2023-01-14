@@ -18,19 +18,24 @@
 .menu_button {
   margin: 0 8px;
   padding: 12px 10px;
-  font-size: 15px;
-  line-height: 10px;
-  color: var(--gray-primary);
   border-radius: 8px;
   border: 0;
-  cursor: pointer;
-  background-color: transparent;
-  text-decoration: none;
-  text-align: left;
+  color: var(--gray-primary);
+  line-height: 20px;
   font-size: 15px;
+}
+
+.menu_button:hover {
+  background-color: var(--grey-opacity100);
 }
 
 .menu_button.highlighted {
   background-color: var(--blue-primary);
+  line-height: 10px;
   color: white;
+  transition: background-color 0.2s ease, color 0.1s ease;
+}
+
+.menu_button.highlighted:hover {
+  background-color: var(--blue-700);
 }
