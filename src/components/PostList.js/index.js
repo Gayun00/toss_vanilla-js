@@ -1,18 +1,14 @@
+import { BaseComponent } from "../BaseComponent";
 import { Post } from "../Post";
+import "./index.css";
 
-export class PostList {
+export class PostList extends BaseComponent {
   constructor(postList) {
-    this.postList = postList;
-  }
+    super(`<ul class="post_list"></ul>`);
 
-  render() {
-    const $postList = document.createElement("ul");
-    $postList.innerHTML = this.postList
-      .map((post) => {
-        return new Post(post).render();
-      })
-      .join();
-
-    return $postList;
+    postList.forEach((post) => {
+      const $post = new Post(post);
+      $post.attachTo(this.$element);
+    });
   }
 }

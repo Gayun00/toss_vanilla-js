@@ -1,0 +1,8 @@
+@import url("../../css/global.css");
+
+.post_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: calc(100% - var(--padding-container-base));
+}
