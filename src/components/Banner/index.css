@@ -8,7 +8,7 @@
   color: var(--white);
 }
 
-.banner_contianer {
+.banner_container {
   display: flex;
   align-items: center;
   max-width: 640px;
@@ -46,4 +46,34 @@
 
 .banner_button:hover {
   background-color: var(--blue-700);
+}
+
+@media (max-width: 700px) {
+  .banner {
+    padding: 0;
+  }
+
+  .banner_container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 24px 60px 24px;
+  }
+
+  .banner_img {
+    margin-bottom: 20px;
+    width: 90px;
+  }
+
+  .banner_text--title {
+    font-size: 20px;
+  }
+
+  .banner_text--subtitle {
+    font-size: 16px;
+  }
+
+  .banner_button {
+    padding: 7px 12px;
+    font-size: 14px;
+  }
 }

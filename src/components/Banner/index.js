@@ -5,7 +5,7 @@ export class Banner extends BaseComponent {
   constructor() {
     super(`
       <article class="banner">
-        <div class="banner_contianer">
+        <div class="banner_container">
           <img class="banner_img" src="https://static.toss.im/3d/website_code_blue_alpha.png" alt="">
           <div class="banner_text">
             <div class="banner_text__container">
