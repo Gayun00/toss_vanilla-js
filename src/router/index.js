@@ -18,4 +18,11 @@ export class Router {
     this.$app.innerHTML = "";
     page.attachTo(this.$app);
   }
+
+  navigate(pathname, pathparam) {
+    const url = new URL(window.location);
+    window.history.pushState({}, "", `${url}${pathname}${pathparam ? pathparam : ""}`);
+    const historyChangeEvent = new CustomEvent("historychanged", {});
+    dispatchEvent(historyChangeEvent);
+  }
 }

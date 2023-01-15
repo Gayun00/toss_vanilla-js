@@ -1,3 +1,4 @@
+import { Router } from "../../router";
 import { BaseComponent } from "../BaseComponent";
 import "./index.css";
 
@@ -15,14 +16,14 @@ export class Post extends BaseComponent {
         </div>
       </li>`);
 
-    window.addEventListener("historychange", ({ detail }) => {});
+    this.post = post;
+    this.init();
+  }
 
+  init() {
     this.$element.addEventListener("click", () => {
-      const url = new URL(window.location);
-      window.history.pushState({}, "", `${url}detail/${post.id}`);
-
-      const historyChangeEvent = new CustomEvent("historychanged", {});
-      dispatchEvent(historyChangeEvent);
+      const router = new Router();
+      router.navigate("detail", `/${this.post.id}`);
     });
   }
 }
