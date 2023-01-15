@@ -21,9 +21,7 @@ export class Post extends BaseComponent {
       const url = new URL(window.location);
       window.history.pushState({}, "", `${url}detail/${post.id}`);
 
-      const historyChangeEvent = new CustomEvent("historychanged", {
-        detail: {},
-      });
+      const historyChangeEvent = new CustomEvent("historychanged", {});
       dispatchEvent(historyChangeEvent);
     });
   }
