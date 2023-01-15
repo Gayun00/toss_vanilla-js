@@ -4,5 +4,5 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: calc(100% - var(--padding-container-base));
+  max-width: 980px;
 }

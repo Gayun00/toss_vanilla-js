@@ -2,7 +2,7 @@
 
 .banner {
   margin-top: 192px;
-  padding: 60px 24px;
+  padding: 60px 0;
   width: 100%;
   background-color: var(--black-background);
   color: var(--white);
@@ -16,11 +16,13 @@
 }
 
 .banner_img {
+  margin-right: 18px;
   width: 186px;
 }
 
 .banner_text--title {
-  font-size: 25px;
+  font-size: 26px;
+  line-height: 1.4;
 }
 
 .banner_text--subtitle {
@@ -39,4 +41,9 @@
   background-color: var(--blue-primary);
   color: var(--white);
   font-size: var(--btn-font-size);
+  transition: background-color 0.2s ease;
+}
+
+.banner_button:hover {
+  background-color: var(--blue-700);
 }
