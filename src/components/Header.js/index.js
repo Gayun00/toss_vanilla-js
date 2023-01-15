@@ -6,7 +6,10 @@ export class Header extends BaseComponent {
     super(`
       <nav class="header">
         <div class="header_container">
-          <span class="logo">toss tech</span>
+          <div class="header_top">
+            <span class="logo">toss tech</span>
+            <button class="hamburger">button</button>
+          </div>
           <span class="menu">
             <button class="menu_button">디자인</button>
             <button class="menu_button">개발</button>
