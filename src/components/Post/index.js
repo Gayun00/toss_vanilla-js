@@ -3,6 +3,8 @@ import { BaseComponent } from "../BaseComponent";
 import "./index.css";
 
 export class Post extends BaseComponent {
+  #post;
+
   constructor(post) {
     super(`
       <li class="post_item">
@@ -16,14 +18,14 @@ export class Post extends BaseComponent {
         </div>
       </li>`);
 
-    this.post = post;
-    this.init();
+    this.#post = post;
+    this.#init();
   }
 
-  init() {
+  #init() {
     this.$element.addEventListener("click", () => {
       const router = new Router();
-      router.navigate("detail", `/${this.post.id}`);
+      router.navigate("detail", `/${this.#post.id}`);
     });
   }
 }

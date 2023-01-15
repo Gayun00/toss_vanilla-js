@@ -14,7 +14,7 @@ export class ListPage extends PageComponent {
     const $banner = new Banner();
     const $footer = new Footer();
 
-    this.createList().then((data) => {
+    this.#createList().then((data) => {
       const $postList = new PostList(data);
       $header.attachTo(this.$page);
       $postList.attachTo(this.$page);
@@ -23,7 +23,7 @@ export class ListPage extends PageComponent {
     });
   }
 
-  createList() {
+  #createList() {
     return new Promise((resolve, reject) => {
       fetch("http://localhost:5000/posts")
         .then((res) => {
