@@ -2,7 +2,7 @@
 
 .post_item {
   display: flex;
-  margin-top: 80px;
+  margin-bottom: 80px;
 }
 .post_item:hover .post_thumbnail {
   transform: translateY(-5%);

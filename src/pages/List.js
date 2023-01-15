@@ -3,7 +3,6 @@ import { Header } from "../components/Header.js/index.js";
 import { Banner } from "../components/Banner/index.js";
 import { Footer } from "../components/Footer/index.js";
 import { PostList } from "../components/PostList.js/index.js";
-
 import "./index.css";
 
 export class ListPage extends PageComponent {
@@ -14,16 +13,21 @@ export class ListPage extends PageComponent {
     const $banner = new Banner();
     const $footer = new Footer();
 
-    this.createList().then((data) => {
+    this.fetchList().then((data) => {
       const $postList = new PostList(data);
       $header.attachTo(this.$page);
       $postList.attachTo(this.$page);
       $banner.attachTo(this.$page);
       $footer.attachTo(this.$page);
+
+      $header.setEvent("click", (e) => {
+        if (e.target.className !== "hamburger") return;
+        $header.$element.classList.toggle("expanded");
+      });
     });
   }
 
-  createList() {
+  fetchList() {
     return new Promise((resolve, reject) => {
       fetch("http://localhost:5000/posts")
         .then((res) => {

@@ -8,4 +8,8 @@ export class BaseComponent {
   attachTo($parent, position = "beforeend") {
     $parent.insertAdjacentElement(position, this.$element);
   }
+
+  setEvent(name, handler) {
+    this.$element.addEventListener(name, handler);
+  }
 }
