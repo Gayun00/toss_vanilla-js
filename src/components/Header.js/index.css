@@ -30,7 +30,7 @@
 }
 
 .menu_button:hover {
-  background-color: var(--grey-opacity100);
+  background-color: var(--gray-opacity100);
 }
 
 .menu_button.highlighted {
