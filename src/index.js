@@ -14,17 +14,11 @@ class App {
 
   init() {
     window.addEventListener("historychanged", () => {
-      const [_, pathname, id] = window.location.pathname.split("/");
-      const page = this.router.routes[`/${pathname}`];
-      this.$app.innerHTML = "";
-      page.attachTo(this.$app);
+      this.router.renderPage();
     });
 
     window.addEventListener("popstate", () => {
-      const [_, pathname, id] = window.location.pathname.split("/");
-      const page = this.router.routes[`/${pathname}`];
-      this.$app.innerHTML = "";
-      page.attachTo(this.$app);
+      this.router.renderPage();
     });
   }
 }
