@@ -4,6 +4,14 @@
   display: flex;
   margin-top: 80px;
 }
+.post_item:hover .post_thumbnail {
+  transform: translateY(-5%);
+  box-shadow: var(--shadow-m);
+}
+
+.post_item:hover .post_title {
+  color: var(--blue-primary);
+}
 
 .post_thumbnail {
   margin-right: 48px;
@@ -11,6 +19,7 @@
   height: 240px;
   object-fit: cover;
   border-radius: 14px;
+  transition: 0.2s ease-in-out;
 }
 
 .post_title {
@@ -19,6 +28,7 @@
   font-size: 36px;
   line-height: 1.4;
   color: var(--black-primary);
+  transition: color 0.2s ease;
 }
 
 .post_description {
