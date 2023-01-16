@@ -13,13 +13,13 @@ class App {
   }
 
   init() {
-    window.addEventListener("historychanged", () => {
-      this.router.renderPage();
-    });
+    window.addEventListener("historychanged", this.renderPage);
 
-    window.addEventListener("popstate", () => {
-      this.router.renderPage();
-    });
+    window.addEventListener("popstate", this.renderPage);
+  }
+
+  renderPage() {
+    this.router.renderPage();
   }
 }
 
