@@ -4,7 +4,9 @@ import "./index.css";
 
 export class PostList extends BaseComponent {
   constructor(postList) {
-    super(`
+    super();
+
+    this.create(`
       <ul class="post_list">
         <h1 class="post_list__title">개발</h1>
       </ul>

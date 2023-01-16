@@ -3,7 +3,9 @@ import "./index.css";
 
 export class Banner extends BaseComponent {
   constructor() {
-    super(`
+    super();
+
+    this.create(`
       <article class="banner">
         <div class="banner_container">
           <img class="banner_img" src="https://static.toss.im/3d/website_code_blue_alpha.png" alt="">
