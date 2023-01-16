@@ -11,8 +11,8 @@ export class PostList extends BaseComponent {
     `);
 
     postList.forEach((post) => {
-      const $post = new Post(post);
-      $post.attachTo(this.$element);
+      const $post = new Post(post).render();
+      this.add($post);
     });
   }
 }
