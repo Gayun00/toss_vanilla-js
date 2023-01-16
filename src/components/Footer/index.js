@@ -3,7 +3,9 @@ import "./index.css";
 
 export class Footer extends BaseComponent {
   constructor() {
-    super(`
+    super();
+
+    this.create(`
       <footer class="footer">
         <div class="footer_container">
           <div class="footer_menu">

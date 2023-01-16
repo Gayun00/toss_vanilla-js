@@ -3,7 +3,9 @@ import "./index.css";
 
 export class Header extends BaseComponent {
   constructor() {
-    super(`
+    super();
+
+    this.create(`
       <nav class="header">
         <div class="header_container">
           <div class="header_top">
