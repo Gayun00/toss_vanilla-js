@@ -1,12 +1,12 @@
-export class BaseComponent {
+import { Render } from "../Render";
+
+export class BaseComponent extends Render {
   constructor(htmlString) {
+    super();
+
     const $template = document.createElement("template");
     $template.innerHTML = htmlString;
     this.$element = $template.content.firstElementChild;
-  }
-
-  attachTo($parent, position = "beforeend") {
-    $parent.insertAdjacentElement(position, this.$element);
   }
 
   setEvent(name, handler) {

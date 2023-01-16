@@ -13,12 +13,12 @@ export class ListPage extends PageComponent {
     const $banner = new Banner();
     const $footer = new Footer();
 
-    this.fetchList().then((data) => {
+    this.#fetchList().then((data) => {
       const $postList = new PostList(data);
-      $header.attachTo(this.$page);
-      $postList.attachTo(this.$page);
-      $banner.attachTo(this.$page);
-      $footer.attachTo(this.$page);
+      this.add($header.render());
+      this.add($postList.render());
+      this.add($banner.render());
+      this.add($footer.render());
 
       $header.setEvent("click", (e) => {
         if (e.target.className !== "hamburger") return;
@@ -27,7 +27,7 @@ export class ListPage extends PageComponent {
     });
   }
 
-  fetchList() {
+  #fetchList() {
     return new Promise((resolve, reject) => {
       fetch("http://localhost:5000/posts")
         .then((res) => {
