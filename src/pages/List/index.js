@@ -13,12 +13,12 @@ export class ListPage extends PageComponent {
     const $banner = new Banner().render();
     const $footer = new Footer().render();
 
-    this.#createList().then((data) => {
-      const $postList = new PostList(data);
-      this.add($header.render());
-      this.add($postList.render());
-      this.add($banner.render());
-      this.add($footer.render());
+    this.fetchList().then((data) => {
+      const $postList = new PostList(data).render();
+      this.add($header);
+      this.add($postList);
+      this.add($banner);
+      this.add($footer);
 
       $header.addEventListener("click", (e) => {
         if (e.target.className !== "hamburger") return;
@@ -27,15 +27,15 @@ export class ListPage extends PageComponent {
     });
   }
 
-  #createList() {
-    return new Promise((resolve, reject) => {
-      fetch("http://localhost:5000/posts")
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          resolve(data);
-        });
+  fetchList() {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await fetch("http://localhost:5000/posts");
+        const data = res.json();
+        resolve(data);
+      } catch (err) {
+        reject(err);
+      }
     });
   }
 }
