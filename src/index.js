@@ -1,8 +1,9 @@
+import { Base } from "./components/Base";
 import { ListPage } from "./pages/List";
 import { Router } from "./router";
 import "./css/reset.css";
 
-class App {
+class App extends Base {
   constructor($app) {
     this.$listPage = new ListPage();
     this.$listPage.attachTo($app);

@@ -1,6 +1,6 @@
-import { Render } from "../Render";
+import { Base } from "../Base";
 
-export class BaseComponent extends Render {
+export class BaseComponent extends Base {
   constructor() {
     super();
   }
