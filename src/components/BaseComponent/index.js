@@ -5,7 +5,6 @@ export class BaseComponent extends Render {
 
   constructor() {
     super();
-    this.$element;
   }
 
   create(htmlString) {
