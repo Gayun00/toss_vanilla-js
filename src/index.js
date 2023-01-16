@@ -8,18 +8,20 @@ class App {
     this.$listPage.attachTo($app);
     this.$app = $app;
 
-    this.router = new Router();
     this.init();
   }
 
   init() {
     window.addEventListener("historychanged", this.renderPage);
 
-    window.addEventListener("popstate", this.renderPage);
+    window.addEventListener("popstate", () => {
+      this.renderPage();
+    });
   }
 
   renderPage() {
-    this.router.renderPage();
+    const router = new Router();
+    router.renderPage();
   }
 }
 
