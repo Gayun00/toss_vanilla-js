@@ -1,15 +1,27 @@
-import { Render } from "./components/Render";
 import { ListPage } from "./pages/List";
+import { Router } from "./router";
 import "./css/reset.css";
 
-class App extends Render {
+class App {
   constructor($app) {
-    super($app);
-
+    this.$listPage = new ListPage();
+    this.$listPage.attachTo($app);
     this.$app = $app;
 
-    this.$listPage = new ListPage().render();
-    this.add(this.$listPage);
+    this.init();
+  }
+
+  init() {
+    window.addEventListener("historychanged", this.renderPage);
+
+    window.addEventListener("popstate", () => {
+      this.renderPage();
+    });
+  }
+
+  renderPage() {
+    const router = new Router();
+    router.renderPage();
   }
 }
 
