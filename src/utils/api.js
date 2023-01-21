@@ -1,5 +1,5 @@
 export const getPosts = async (errorCallback) => {
-  //put onSuccess, onError handler as parameters
+  // TODO: add onError, onSuccess callback func handling
   try {
     const res = await fetch("http://localhost:5000/posts");
     const data = await res.json();
@@ -8,5 +8,3 @@ export const getPosts = async (errorCallback) => {
     errorCallback();
   }
 };
-
-const data = getPosts(); //promise<pending>
