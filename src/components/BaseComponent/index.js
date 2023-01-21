@@ -1,15 +1,18 @@
 import { Render } from "../Render";
 
 export class BaseComponent extends Render {
-  constructor(htmlString) {
+  #$element;
+
+  constructor() {
     super();
 
-    const $template = document.createElement("template");
-    $template.innerHTML = htmlString;
-    this.$element = $template.content.firstElementChild;
+    this.#$element;
   }
 
-  setEvent(name, handler) {
-    this.$element.addEventListener(name, handler);
+  create(htmlString) {
+    const $template = document.createElement("template");
+    $template.innerHTML = htmlString;
+    this.#$element = $template.content.firstElementChild;
+    return this.#$element;
   }
 }

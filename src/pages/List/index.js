@@ -10,9 +10,9 @@ export class ListPage extends PageComponent {
   constructor() {
     super("list_page");
 
-    const $header = new Header();
-    const $banner = new Banner();
-    const $footer = new Footer();
+    const $header = new Header().render();
+    const $banner = new Banner().render();
+    const $footer = new Footer().render();
 
     this.#createList().then((data) => {
       const $postList = new PostList(data);
@@ -21,9 +21,9 @@ export class ListPage extends PageComponent {
       this.add($banner.render());
       this.add($footer.render());
 
-      $header.setEvent("click", (e) => {
+      $header.addEventListener("click", (e) => {
         if (e.target.className !== "hamburger") return;
-        $header.$element.classList.toggle("expanded");
+        $header.classList.toggle("expanded");
       });
     });
   }
