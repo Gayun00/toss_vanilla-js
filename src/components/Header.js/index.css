@@ -1,10 +1,14 @@
 @import url("../../css/global.css");
 
 .header {
+  position: sticky;
   display: flex;
   justify-content: center;
+  top: 0;
   width: 100%;
   height: 60px;
+  background-color: var(--white);
+  z-index: 2;
   border-bottom: 1px solid var(--gray-border);
 }
 
@@ -13,7 +17,11 @@
   justify-content: space-between;
   align-items: center;
   width: 92%;
-  max-width: calc(100% - var(--padding-container-base));
+  max-width: 1140px;
+}
+
+.hamburger {
+  display: none;
 }
 
 .menu_button {
@@ -21,22 +29,85 @@
   padding: 12px 10px;
   border-radius: 8px;
   border: 0;
-  color: var(--gray-primary);
+  color: var(--gray-secondary);
   line-height: 20px;
   font-size: 15px;
 }
 
 .menu_button:hover {
-  background-color: var(--grey-opacity100);
+  background-color: var(--gray-opacity100);
 }
 
 .menu_button.highlighted {
   background-color: var(--blue-primary);
-  line-height: 10px;
+  line-height: var(--btn-line-height);
   color: white;
   transition: background-color 0.2s ease, color 0.1s ease;
 }
 
 .menu_button.highlighted:hover {
   background-color: var(--blue-700);
+}
+
+@media (max-width: 640px) {
+  .header {
+    overflow: hidden;
+    transition: height 0.2s ease;
+  }
+
+  .header_container {
+    flex-direction: column;
+    margin: 5px;
+    width: 100%;
+  }
+
+  .header_top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 20px;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .hamburger:hover {
+    display: block;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+  }
+
+  .menu_button {
+    display: flex;
+    padding: 14px;
+    line-height: var(--btn-line-height);
+  }
+
+  .menu_button.highlighted {
+    justify-content: center;
+    margin: 16px 20px;
+  }
+
+  .header.expanded {
+    height: 220px;
+  }
+
+  .header.expanded > .hamburger {
+    color: yellow;
+    background-color: beige;
+  }
+
+  .logo {
+    margin-left: 22px;
+  }
+
+  .hamburger {
+    margin-right: 22px;
+  }
 }

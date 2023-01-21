@@ -4,8 +4,8 @@ import "./index.css";
 export class Banner extends BaseComponent {
   constructor() {
     super(`
-      <section class="banner">
-        <div class="banner_contianer">
+      <article class="banner">
+        <div class="banner_container">
           <img class="banner_img" src="https://static.toss.im/3d/website_code_blue_alpha.png" alt="">
           <div class="banner_text">
             <div class="banner_text__container">
@@ -15,7 +15,7 @@ export class Banner extends BaseComponent {
             <button class="banner_button">채용 중인 공고 보기</button>
           </div>
         </div>
-      </section>
+      </article>
     `);
   }
 }

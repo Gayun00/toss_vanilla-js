@@ -16,10 +16,15 @@ export class ListPage extends PageComponent {
 
     this.#createList().then((data) => {
       const $postList = new PostList(data);
-      $header.attachTo(this.$page);
-      $postList.attachTo(this.$page);
-      $banner.attachTo(this.$page);
-      $footer.attachTo(this.$page);
+      this.add($header.render());
+      this.add($postList.render());
+      this.add($banner.render());
+      this.add($footer.render());
+
+      $header.setEvent("click", (e) => {
+        if (e.target.className !== "hamburger") return;
+        $header.$element.classList.toggle("expanded");
+      });
     });
   }
 

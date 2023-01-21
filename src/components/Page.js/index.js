@@ -1,10 +1,10 @@
-export class PageComponent {
-  constructor(className) {
-    this.$page = document.createElement("div");
-    this.$page.classList.add(className);
-  }
+import { Render } from "../Render";
 
-  attachTo($parent, position = "afterbegin") {
-    $parent.insertAdjacentElement(position, this.$page);
+export class PageComponent extends Render {
+  constructor(className) {
+    super();
+
+    this.$element = document.createElement("div");
+    this.$element.classList.add(className);
   }
 }
