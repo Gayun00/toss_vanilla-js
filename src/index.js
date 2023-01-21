@@ -5,8 +5,9 @@ import "./css/reset.css";
 
 class App extends Base {
   constructor($app) {
-    this.$listPage = new ListPage();
-    this.$listPage.attachTo($app);
+    super($app);
+    this.$listPage = new ListPage().render();
+    this.add(this.$listPage);
     this.$app = $app;
 
     this.init();
