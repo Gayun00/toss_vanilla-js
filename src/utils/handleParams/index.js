@@ -1,32 +1,28 @@
 import { URLSearchParams } from "url";
 
-// handle QueryParams
 export const handleQueryParams = () => {
   const searchParams = new URLSearchParams(window.location.search);
   // TODO: add handleQueryParams
 };
 
-// handle pathParams
-export const handlePathParams = (routes, path) => {
+export const getPathParams = (routes, path) => {
+  // TODO: handle path that has more than one dynamic route path variable.
   for (let route of routes) {
     if (route.path.includes(":")) {
-      const dynamicRouteVarRegex = new RegExp(/:\w+/g);
-      const dynamicRouteVarIdx = route.path.search(dynamicRouteVarRegex);
-      const beforeVarPath = path.substr(0, dynamicRouteVarIdx - 1);
-      const beforeVarRoutePath = route.path.substr(0, dynamicRouteVarIdx - 1);
-      if (beforeVarPath === beforeVarRoutePath) return route.page;
+      const pathRegex = createPathRegex(route.path);
+      const matchedParam = path.match(pathRegex)[1];
+      if (!matchedParam) return;
+
+      return {
+        [getDynamicRoutingVar(route.path)]: matchedParam,
+      };
     }
-    if (route.path === path) return route.page;
   }
 };
 
-export const getParams = (routes, path, param) => {
-  for (let route of routes) {
-    if (route.path.includes(":")) {
-      const dynamicRouteVarRegex = new RegExp(/:\w/g);
-      const dynamicRouteVarIdx = route.path.search(dynamicRouteVarRegex);
-      const beforeVarPath = path.substr(dynamicRouteVarIdx, path.length - 1);
-      return beforeVarPath;
-    }
-  }
+export const createPathRegex = (path) => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
+
+export const getDynamicRoutingVar = (path) => {
+  const dynamicRouteVarRegex = new RegExp(/(?<=:)\w+/g);
+  return dynamicRouteVarRegex.exec(path).toString();
 };
