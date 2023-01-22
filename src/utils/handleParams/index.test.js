@@ -45,12 +45,12 @@ describe("test getPathParams", () => {
   test("test _getDynamicRoutingVar", () => {
     expect(_getDynamicRoutingVar("/post/:id").toString()).toBe("id");
   });
+
   test("test handleDynamicRoute", () => {
-    expect(_handleDynamicRoute(routes, "/post/:id")).toEqual([{ page: "postDetailPage", path: "/post/:id" }, ":id"]);
-    // TODO: fix matchedParam ":id"
+    expect(_handleDynamicRoute(routes, path2)).toEqual([{ page: "postDetailPage", path: "/post/:id" }, "12"]);
   });
 
   test("test handleRenderingPage", () => {
-    expect(handleRenderingPage(routes, "/post/:id")).toEqual("postDetailPage");
+    expect(handleRenderingPage(routes, path2)).toEqual("postDetailPage");
   });
 });
