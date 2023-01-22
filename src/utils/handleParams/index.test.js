@@ -1,4 +1,4 @@
-import { createPathRegex, getDynamicRoutingVar, getPathParams } from ".";
+import { _createPathRegex, _getDynamicRoutingVar, getPathParams } from ".";
 
 const routes = [
   {
@@ -14,13 +14,13 @@ const routes = [
 const path = "/post";
 const path2 = "/post/12";
 
-describe("test createPathRegex", () => {
+describe("test _createPathRegex", () => {
   test("test create dynamic route path to regex", () => {
-    expect(createPathRegex("/post/:id")).toEqual(/^\/post\/(.+)$/);
+    expect(_createPathRegex("/post/:id")).toEqual(/^\/post\/(.+)$/);
   });
 
   test("test get matched route path", () => {
-    const pathRegex = createPathRegex("/post/:id");
+    const pathRegex = _createPathRegex("/post/:id");
     const matchedParam = path2.match(pathRegex)[1];
     expect(matchedParam).toBe("12");
   });
@@ -35,7 +35,7 @@ describe("test getPathParams", () => {
 
   // TODO: add test case when route path doesn't have dynamic route variable.
 
-  test("getDynamicRoutingVar", () => {
-    expect(getDynamicRoutingVar("/post/:id").toString()).toBe("id");
+  test("_getDynamicRoutingVar", () => {
+    expect(_getDynamicRoutingVar("/post/:id").toString()).toBe("id");
   });
 });
