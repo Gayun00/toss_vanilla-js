@@ -7,15 +7,26 @@ export const handleQueryParams = () => {
 
 export const getPathParams = (routes, path) => {
   // TODO: handle path that has more than one dynamic route path variable.
+  const [route, matchedParam] = _handleDynamicRoute(routes, path);
+
+  return {
+    [_getDynamicRoutingVar(route.path)]: matchedParam,
+  };
+};
+
+export const handleRenderingPage = (routes, path) => {
+  const [route] = _handleDynamicRoute(routes, path);
+  return route.page;
+};
+
+export const _handleDynamicRoute = (routes, path) => {
   for (let route of routes) {
     if (route.path.includes(":")) {
       const pathRegex = _createPathRegex(route.path);
       const matchedParam = path.match(pathRegex)[1];
       if (!matchedParam) return;
 
-      return {
-        [_getDynamicRoutingVar(route.path)]: matchedParam,
-      };
+      return [route, matchedParam];
     }
   }
 };

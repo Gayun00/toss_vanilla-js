@@ -1,4 +1,11 @@
-import { _createPathRegex, _getDynamicRoutingVar, getPathParams } from ".";
+import {
+  _createPathRegex,
+  _getDynamicRoutingVar,
+  getPathParams,
+  _getMatchedDynamicRoutePath,
+  handleRenderingPage,
+  _handleDynamicRoute,
+} from ".";
 
 const routes = [
   {
@@ -35,7 +42,15 @@ describe("test getPathParams", () => {
 
   // TODO: add test case when route path doesn't have dynamic route variable.
 
-  test("_getDynamicRoutingVar", () => {
+  test("test _getDynamicRoutingVar", () => {
     expect(_getDynamicRoutingVar("/post/:id").toString()).toBe("id");
+  });
+  test("test handleDynamicRoute", () => {
+    expect(_handleDynamicRoute(routes, "/post/:id")).toEqual([{ page: "postDetailPage", path: "/post/:id" }, ":id"]);
+    // TODO: fix matchedParam ":id"
+  });
+
+  test("test handleRenderingPage", () => {
+    expect(handleRenderingPage(routes, "/post/:id")).toEqual("postDetailPage");
   });
 });
