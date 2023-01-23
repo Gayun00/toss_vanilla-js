@@ -6,27 +6,29 @@ export const handleQueryParams = () => {
 };
 
 export const getPathParams = (routes, path) => {
-  // TODO: handle path that has more than one dynamic route path variable.
-  const [route, matchedParam] = _handleDynamicRoute(routes, path);
-
+  const [route, matchedParam] = _getMatchedRoute(routes, path);
   return {
     [_getDynamicRoutingVar(route.path)]: matchedParam,
   };
 };
 
 export const handleRenderingPage = (routes, path) => {
-  const [route] = _handleDynamicRoute(routes, path);
+  const [route] = _getMatchedRoute(routes, path);
   return route.page;
 };
 
-export const _handleDynamicRoute = (routes, path) => {
+export const _getMatchedRoute = (routes, path) => {
   for (let route of routes) {
     if (route.path.includes(":")) {
       const pathRegex = _createPathRegex(route.path);
-      const matchedParam = path.match(pathRegex)[1];
-      if (!matchedParam) return;
+      const matchedParam = path.match(pathRegex) ? path.match(pathRegex)[1] : null;
+      if (!matchedParam) throw new Error("not supported path variable");
 
       return [route, matchedParam];
+    } else {
+      if (route.path === path) {
+        return [route];
+      }
     }
   }
 };
@@ -35,5 +37,5 @@ export const _createPathRegex = (path) => new RegExp("^" + path.replace(/\//g, "
 
 export const _getDynamicRoutingVar = (path) => {
   const dynamicRouteVarRegex = new RegExp(/(?<=:)\w+/g);
-  return dynamicRouteVarRegex.exec(path).toString();
+  return dynamicRouteVarRegex.exec(path)?.toString();
 };

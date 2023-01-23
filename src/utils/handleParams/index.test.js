@@ -4,7 +4,7 @@ import {
   getPathParams,
   _getMatchedDynamicRoutePath,
   handleRenderingPage,
-  _handleDynamicRoute,
+  _getMatchedRoute,
 } from ".";
 
 const routes = [
@@ -34,20 +34,27 @@ describe("test _createPathRegex", () => {
 });
 
 describe("test getPathParams", () => {
-  test("get matched route path with created path regex", () => {
+  test("get matched dynamic route path with created path regex", () => {
     expect(getPathParams(routes, path2)).toEqual({
       id: "12",
     });
   });
 
-  // TODO: add test case when route path doesn't have dynamic route variable.
+  test("get matched route path with created path regex", () => {
+    // TODO: correct to test throwing error
+    expect(getPathParams(routes, path)).toEqual({ undefined });
+  });
 
   test("test _getDynamicRoutingVar", () => {
     expect(_getDynamicRoutingVar("/post/:id").toString()).toBe("id");
   });
 
   test("test handleDynamicRoute", () => {
-    expect(_handleDynamicRoute(routes, path2)).toEqual([{ page: "postDetailPage", path: "/post/:id" }, "12"]);
+    expect(_getMatchedRoute(routes, path2)).toEqual([{ page: "postDetailPage", path: "/post/:id" }, "12"]);
+  });
+
+  test("test handleDynamicRoute when route does not have dynamic route variable", () => {
+    expect(_getMatchedRoute(routes, path)).toEqual([{ page: "postListPage", path: "/post" }]);
   });
 
   test("test handleRenderingPage", () => {
