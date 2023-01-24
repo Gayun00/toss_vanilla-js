@@ -1,8 +1,8 @@
 import { ListPage } from "../pages/List";
 import { DetailPage } from "../pages/Detail";
+import { handleRenderingPage } from "../utils/handleParams";
 
 export class Router {
-  #routes;
   #$app;
   #$listPage;
   #$detailPage;
@@ -11,13 +11,14 @@ export class Router {
     this.#$app = document.querySelector(".root");
     this.#$listPage = new ListPage();
     this.#$detailPage = new DetailPage();
-
-    this.#routes = { "/": this.#$listPage, "/detail": this.#$detailPage };
+    this.routes = [
+      { path: "/post", page: this.#$listPage },
+      { path: "/post/:id", page: this.#$detailPage },
+    ];
   }
 
   renderPage() {
-    const [_, pathname, id] = window.location.pathname.split("/");
-    const page = this.#routes[`/${pathname}`];
+    const page = handleRenderingPage(this.routes, window.location.pathname);
     this.#$app.innerHTML = "";
     page.attachTo(this.#$app);
   }
