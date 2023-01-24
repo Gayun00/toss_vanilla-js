@@ -1,13 +1,14 @@
 import { ListPage } from "../pages/List";
 import { DetailPage } from "../pages/Detail";
-import { handleRenderingPage } from "../utils/handleParams";
+import { getPathParams, handleRenderingPage } from "../utils/handleParams";
 
 export class Router {
   #$app;
 
   constructor() {
     Router.instance = this;
-    this.routes = this.initRoutes();
+    this.routes = [];
+    this.init();
     this.#$app = document.querySelector(".root");
   }
 
@@ -18,8 +19,8 @@ export class Router {
     return this.instance;
   }
 
-  initRoutes() {
-    return [
+  init() {
+    this.routes = [
       { path: "/post", page: new ListPage() },
       { path: "/post/:id", page: new DetailPage() },
     ];
@@ -36,5 +37,9 @@ export class Router {
     window.history.pushState({}, "", `${url}${pathname}${pathparam ? pathparam : ""}`);
     const historyChangeEvent = new CustomEvent("historychanged", {});
     dispatchEvent(historyChangeEvent);
+  }
+
+  getParam() {
+    return getPathParams(this.routes, window.location.pathname);
   }
 }

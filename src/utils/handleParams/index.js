@@ -6,6 +6,7 @@ export const handleQueryParams = () => {
 };
 
 export const getPathParams = (routes, path) => {
+  if (!routes) return;
   const [route, matchedParam] = _getMatchedRoute(routes, path);
   return {
     [_getDynamicRoutingVar(route.path)]: matchedParam,
@@ -13,6 +14,7 @@ export const getPathParams = (routes, path) => {
 };
 
 export const handleRenderingPage = (routes, path) => {
+  if (!routes) return;
   const [route] = _getMatchedRoute(routes, path);
   return route.page;
 };
