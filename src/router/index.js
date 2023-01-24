@@ -4,16 +4,24 @@ import { handleRenderingPage } from "../utils/handleParams";
 
 export class Router {
   #$app;
-  #$listPage;
-  #$detailPage;
 
   constructor() {
+    Router.instance = this;
+    this.routes = this.initRoutes();
     this.#$app = document.querySelector(".root");
-    this.#$listPage = new ListPage();
-    this.#$detailPage = new DetailPage();
-    this.routes = [
-      { path: "/post", page: this.#$listPage },
-      { path: "/post/:id", page: this.#$detailPage },
+  }
+
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new Router();
+    }
+    return this.instance;
+  }
+
+  initRoutes() {
+    return [
+      { path: "/post", page: new ListPage() },
+      { path: "/post/:id", page: new DetailPage() },
     ];
   }
 
