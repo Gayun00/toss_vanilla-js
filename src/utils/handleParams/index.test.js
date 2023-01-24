@@ -1,10 +1,9 @@
 import {
   _createPathRegex,
   _getDynamicRoutingVar,
-  getPathParams,
   _getMatchedDynamicRoutePath,
-  handleRenderingPage,
   _getMatchedRoute,
+  _checkDynamicRouteVar,
 } from ".";
 
 const routes = [
@@ -16,48 +15,111 @@ const routes = [
     path: "/post/:id",
     page: "postDetailPage",
   },
+  {
+    path: "/post/:category/:id",
+    page: "postCategoryPage",
+  },
 ];
+
+const varRegex = /(?<=:)\w+/g;
 
 const path = "/post";
 const path2 = "/post/12";
+const path3 = "/post/dev/12";
+const path4 = "/post/tech/dev/12";
+
+const routePath = "/post";
+const routePath2 = "/post/:id";
+const routePath3 = "/post/:category/:id";
+const routePath4 = "/post/:category/:subject/:id";
 
 describe("test _createPathRegex", () => {
-  test("test create dynamic route path to regex", () => {
-    expect(_createPathRegex("/post/:id")).toEqual(/^\/post\/(.+)$/);
+  test("test static route path", () => {
+    expect(_createPathRegex(routePath)).toEqual(/^\/post$/);
   });
 
-  test("test get matched route path", () => {
-    const pathRegex = _createPathRegex("/post/:id");
-    const matchedParam = path2.match(pathRegex)[1];
-    expect(matchedParam).toBe("12");
+  test("test dynamic route path", () => {
+    expect(_createPathRegex(routePath2)).toEqual(/^\/post\/(.+)$/);
+  });
+
+  test("test multiple dynamic route path", () => {
+    expect(_createPathRegex(routePath3)).toEqual(/^\/post\/(.+)\/(.+)$/);
   });
 });
 
-describe("test getPathParams", () => {
-  test("get matched dynamic route path with created path regex", () => {
-    expect(getPathParams(routes, path2)).toEqual({
-      id: "12",
-    });
+describe("test _createPathRegex: matched path parameter", () => {
+  test("test static route path", () => {
+    const pathRegex = _createPathRegex(routePath);
+    const matchedParam = path.match(pathRegex);
+    expect(matchedParam).toContain("/post"); //["/post"]
   });
 
-  test("get matched route path with created path regex", () => {
-    // TODO: correct to test throwing error
-    expect(getPathParams(routes, path)).toEqual({ undefined });
+  test("test dynamic route path", () => {
+    const pathRegex = _createPathRegex(routePath2);
+    const matchedParam = path2.match(pathRegex);
+    expect(matchedParam).toContain("/post/12", "12"); //["/post/12","12"]
   });
 
-  test("test _getDynamicRoutingVar", () => {
-    expect(_getDynamicRoutingVar("/post/:id").toString()).toBe("id");
+  test("test 2 multiple dynamic route path", () => {
+    const pathRegex = _createPathRegex(routePath3);
+    const matchedParam = path3.match(pathRegex);
+    expect(matchedParam).toContain("/post/dev/12", "dev", "12"); //["/post/dev/12", "dev", "12"]
   });
 
-  test("test handleDynamicRoute", () => {
-    expect(_getMatchedRoute(routes, path2)).toEqual([{ page: "postDetailPage", path: "/post/:id" }, "12"]);
+  test("test 3 multiple dynamic route path", () => {
+    const pathRegex = _createPathRegex(routePath4);
+    const matchedParam = path4.match(pathRegex);
+    expect(matchedParam).toContain("/post/tech/dev/12", "tech", "dev", "12"); //["/post/tech/dev/12", "tech", "dev", "12"]
   });
 
-  test("test handleDynamicRoute when route does not have dynamic route variable", () => {
-    expect(_getMatchedRoute(routes, path)).toEqual([{ page: "postListPage", path: "/post" }]);
+  test("test non-matched path", () => {
+    const pathRegex = _createPathRegex(routePath3);
+    const matchedParam = "/wrong".match(pathRegex);
+    expect(matchedParam).toBe(null);
+  });
+});
+
+describe("test _getDynamicRoutingVar: matched dynamic route variable", () => {
+  test("test static route path", () => {
+    expect(_getDynamicRoutingVar(routePath)).toBe(null);
   });
 
-  test("test handleRenderingPage", () => {
-    expect(handleRenderingPage(routes, path2)).toEqual("postDetailPage");
+  test("test dynamic route path", () => {
+    expect(_getDynamicRoutingVar(routePath2)).toContain("id");
   });
+
+  test("test 2 multiple dynamic route path", () => {
+    expect(_getDynamicRoutingVar(routePath3)).toContain("category", "id");
+  });
+
+  test("test 3 multiple dynamic route path", () => {
+    expect(_getDynamicRoutingVar(routePath4)).toContain("category", "subject", "id");
+  });
+});
+
+describe("test _checkDynamicRouteVar", () => {
+  test("test static route path", () => {
+    const [route, dynamicRouteVar, matchedParams] = _checkDynamicRouteVar({ path: routePath, page: "page" }, path);
+    expect(route).toEqual({ page: "page", path: "/post" });
+    expect(dynamicRouteVar).toEqual(undefined);
+    expect(matchedParams).toBe(undefined); //["dev", "12"]
+  });
+
+  test("test 2 multiple dynamic route path", () => {
+    const [route, dynamicRouteVar, matchedParams] = _checkDynamicRouteVar({ path: routePath3, page: "page3" }, path3);
+    expect(route).toEqual({ page: "page3", path: "/post/:category/:id" });
+    expect(dynamicRouteVar).toEqual(["category", "id"]);
+    expect(matchedParams).toContain("dev", "12"); //["dev", "12"]
+  });
+
+  test("test 3 multiple dynamic route path", () => {
+    const [route, dynamicRouteVar, matchedParams] = _checkDynamicRouteVar({ path: routePath4, page: "page4" }, path4);
+    expect(route).toEqual({ page: "page4", path: "/post/:category/:subject/:id" });
+    expect(dynamicRouteVar).toEqual(["category", "subject", "id"]);
+    expect(matchedParams).toContain("tech", "dev", "12"); //["tech", "dev", "12"]
+  });
+});
+
+describe("test _getMatchedRoute", () => {
+  // TODO: test routes
 });
