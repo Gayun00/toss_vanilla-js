@@ -2,8 +2,9 @@ import {
   _createPathRegex,
   _getDynamicRoutingVar,
   _getMatchedDynamicRoutePath,
-  _getMatchedRoute,
-  _checkDynamicRouteVar,
+  _handleRoutePath,
+  handleRenderPage,
+  getPathParams,
 } from ".";
 
 const varRegex = /(?<=:)\w+/g;
@@ -21,15 +22,19 @@ const routePath4 = "/post/:category/:subject/:id";
 const routes = [
   {
     path: routePath,
-    page: "postListPage",
+    page: "page",
   },
   {
     path: routePath2,
-    page: "postDetailPage",
+    page: "page2",
   },
   {
     path: routePath3,
-    page: "postCategoryPage",
+    page: "page3",
+  },
+  {
+    path: routePath4,
+    page: "page4",
   },
 ];
 
@@ -97,22 +102,69 @@ describe("test _getDynamicRoutingVar: matched dynamic route variable", () => {
   });
 });
 
-describe("test _checkDynamicRouteVar", () => {
+describe("test _handleRoutePath", () => {
   test("test static route path", () => {
-    expect(_checkDynamicRouteVar(routes, path)).toEqual([{ page: "postListPage", path: "/post" }]);
+    expect(_handleRoutePath(routes, path)).toEqual([{ page: "page", path: "/post" }]);
   });
 
   test("test dynamic route path", () => {
-    const [route, dynamicVarArr, matchedParamArr] = _checkDynamicRouteVar(routes, path2);
-    expect(route).toEqual({ page: "postDetailPage", path: "/post/:id" });
-    expect(dynamicVarArr).toBe("id");
-    expect(matchedParamArr).toBe("12");
+    const [route, pathParamObj] = _handleRoutePath(routes, path2);
+    expect(route).toEqual({ page: "page2", path: "/post/:id" });
+    expect(pathParamObj).toEqual({ id: "12" });
   });
 
-  test("test multiple dynamic route path", () => {
-    const [route, dynamicVarArr, matchedParamArr] = _checkDynamicRouteVar(routes, path3);
-    expect(route).toEqual({ page: "postCategoryPage", path: "/post/:category/:id" });
-    expect(dynamicVarArr).toBe("category");
-    // expect(matchedParamArr).toBe("id");
+  test("test 2 multiple dynamic route path", () => {
+    const [route, pathParamObj] = _handleRoutePath(routes, path3);
+    expect(route).toEqual({ page: "page3", path: "/post/:category/:id" });
+    expect(pathParamObj).toEqual({
+      category: "dev",
+      id: "12",
+    });
+  });
+
+  test("test 3 multiple dynamic route path", () => {
+    const [route, pathParamObj] = _handleRoutePath(routes, path4);
+    expect(route).toEqual({ page: "page4", path: "/post/:category/:subject/:id" });
+    expect(pathParamObj).toEqual({
+      category: "tech",
+      subject: "dev",
+      id: "12",
+    });
+  });
+});
+
+describe("test handleRenderPage", () => {
+  test("test static route path", () => {
+    expect(handleRenderPage(routes, path)).toBe("page");
+  });
+
+  test("test dynamic route path", () => {
+    expect(handleRenderPage(routes, path2)).toBe("page2");
+  });
+
+  test("test 2 multiple dynamic route path", () => {
+    expect(handleRenderPage(routes, path3)).toBe("page3");
+  });
+
+  test("test 3 multiple dynamic route path", () => {
+    expect(handleRenderPage(routes, path4)).toBe("page4");
+  });
+});
+
+describe("test getPathParams", () => {
+  test("test static path", () => {
+    expect(getPathParams(routes, path)).toEqual(undefined);
+  });
+
+  test("test dynamic path", () => {
+    expect(getPathParams(routes, path2)).toEqual({ id: "12" });
+  });
+
+  test("test 2 multiple dynamic path", () => {
+    expect(getPathParams(routes, path3)).toEqual({ category: "dev", id: "12" });
+  });
+
+  test("test 3 multiple dynamic path", () => {
+    expect(getPathParams(routes, path4)).toEqual({ category: "tech", subject: "dev", id: "12" });
   });
 });

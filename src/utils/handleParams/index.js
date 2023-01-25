@@ -7,44 +7,35 @@ export const handleQueryParams = () => {
 
 export const getPathParams = (routes, path) => {
   if (!routes) return;
-  const [route, dynamicVarArr, matchedParamArr] = _getDynamicRoutingVar(routes, path);
-  // TODO: refactor func
-  // const paramArr = _getDynamicRoutingVar(route.path).splice(0, 1);
-  // let obj = {};
-  // for (let i = 0; i < dynamicVarArr.length; i++) {
-  //   obj = {
-  //     ...obj,
-  //     [dynamicVarArr[i]]: matchedParamArr[i],
-  //   };
-  // }
-
-  // return obj;
+  const [_, pathParamObj] = _handleRoutePath(routes, path);
+  return pathParamObj;
 };
 
-export const handleRenderingPage = (routes, path) => {
-  if (!routes) return;
-  const [route] = _getMatchedRoute(routes, path);
+export const handleRenderPage = (routes, path) => {
+  const [route] = _handleRoutePath(routes, path);
   return route.page;
 };
 
-// TODO: delete func
-export const _getMatchedRoute = (routes, path) => {
-  for (let route of routes) {
-    _checkDynamicRouteVar(route, path);
-  }
-};
-
-export const _checkDynamicRouteVar = (routes, path) => {
+export const _handleRoutePath = (routes, path) => {
   for (let route of routes) {
     if (route.path.includes(":")) {
       if (route.path.split("/").length === path.split("/").length) {
         const pathRegex = _createPathRegex(route.path);
         const matchedParamArr = path.match(pathRegex);
-        matchedParamArr?.splice(0, 1);
-        const dynamicVarArr = _getDynamicRoutingVar(route.path);
         if (!matchedParamArr) throw new Error("not supported path variable");
+        matchedParamArr.shift();
+        const dynamicVarArr = _getDynamicRoutingVar(route.path);
 
-        return [route, ...dynamicVarArr, ...matchedParamArr];
+        let pathParamObj = {};
+
+        for (let i = 0; i < dynamicVarArr.length; i++) {
+          pathParamObj = {
+            ...pathParamObj,
+            [dynamicVarArr[i]]: matchedParamArr[i],
+          };
+        }
+
+        return [route, pathParamObj];
       }
     } else {
       if (route.path === path) {

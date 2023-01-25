@@ -1,6 +1,6 @@
 import { ListPage } from "../pages/List";
 import { DetailPage } from "../pages/Detail";
-import { getPathParams, handleRenderingPage } from "../utils/handleParams";
+import { getPathParams, handleRenderPage } from "../utils/handleParams";
 
 export class Router {
   #$app;
@@ -27,7 +27,7 @@ export class Router {
   }
 
   renderPage() {
-    const page = handleRenderingPage(this.routes, window.location.pathname);
+    const page = handleRenderPage(this.routes, window.location.pathname);
     this.#$app.innerHTML = "";
     page.attachTo(this.#$app);
   }
