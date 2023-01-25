@@ -8,6 +8,7 @@ export const handleQueryParams = () => {
 export const getPathParams = (routes, path) => {
   if (!routes) return;
   const [route, dynamicVarArr, matchedParamArr] = _getDynamicRoutingVar(routes, path);
+  // TODO: refactor func
   // const paramArr = _getDynamicRoutingVar(route.path).splice(0, 1);
   // let obj = {};
   // for (let i = 0; i < dynamicVarArr.length; i++) {
@@ -26,23 +27,29 @@ export const handleRenderingPage = (routes, path) => {
   return route.page;
 };
 
+// TODO: delete func
 export const _getMatchedRoute = (routes, path) => {
   for (let route of routes) {
     _checkDynamicRouteVar(route, path);
   }
 };
 
-export const _checkDynamicRouteVar = (route, path) => {
-  if (route.path.includes(":")) {
-    const pathRegex = _createPathRegex(route.path);
-    const matchedParamArr = path.match(pathRegex);
-    matchedParamArr?.splice(0, 1);
-    const dynamicVarArr = _getDynamicRoutingVar(route.path);
-    if (!matchedParamArr) throw new Error("not supported path variable");
-    return [route, dynamicVarArr, matchedParamArr];
-  } else {
-    if (route.path === path) {
-      return [route];
+export const _checkDynamicRouteVar = (routes, path) => {
+  for (let route of routes) {
+    if (route.path.includes(":")) {
+      if (route.path.split("/").length === path.split("/").length) {
+        const pathRegex = _createPathRegex(route.path);
+        const matchedParamArr = path.match(pathRegex);
+        matchedParamArr?.splice(0, 1);
+        const dynamicVarArr = _getDynamicRoutingVar(route.path);
+        if (!matchedParamArr) throw new Error("not supported path variable");
+
+        return [route, ...dynamicVarArr, ...matchedParamArr];
+      }
+    } else {
+      if (route.path === path) {
+        return [route];
+      }
     }
   }
 };
