@@ -50,40 +50,20 @@ export const _getMatchedParams = (routePath, path) => {
 };
 
 export const handleRenderPage = (routes, path) => {
+  // TODO: add error handler when routes doesn't exist
   try {
-    const [route] = _handleRoutePath(routes, path);
-    return route.page;
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-export const _handleRoutePath = (routes, path) => {
-  for (let route of routes) {
-    if (route.path.includes(":")) {
-      if (route.path.split("/")?.length === path.split("/")?.length) {
-        const pathRegex = _createPathRegex(route.path);
-        const matchedParams = path.match(pathRegex);
-        if (!matchedParams) throw new Error("not supported path variable");
-        matchedParams.shift();
-        const dynamicVars = _getDynamicRoutingVar(route.path);
-
-        let pathParams = {};
-
-        for (let i = 0; i < dynamicVars?.length; i++) {
-          pathParams = {
-            ...pathParams,
-            [dynamicVars[i]]: matchedParams[i],
-          };
+    for (let route of routes) {
+      if (route.path.includes(":")) {
+        if (route.path.split("/")?.length === path.split("/")?.length) {
+          const matchedParams = _getMatchedParams(route.path, path);
+          if (matchedParams) return route.page;
         }
-
-        return [route, pathParams];
-      }
-    } else {
-      if (route.path === path) {
-        return [route];
+      } else {
+        if (route.path === path) return route.page;
       }
     }
+  } catch (err) {
+    console.error(err);
   }
 };
 
