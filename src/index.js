@@ -14,28 +14,23 @@ class App extends Base {
       { path: "/post/:id", page: new DetailPage() },
     ];
 
-    this.renderPostListPage();
     this.init();
   }
 
   init() {
     window.addEventListener("historychanged", this.renderPage);
-
-    window.addEventListener("popstate", () => {
-      this.renderPage();
-    });
+    window.addEventListener("popstate", this.renderPage);
+    window.addEventListener("load", this.redirectToPostListPage);
 
     Router.getInstance().init(this.routes);
   }
 
-  renderPostListPage() {
-    // TODO: delete after refactoring to redirect to post list page route path.
-    const $listPage = new ListPage().render();
-    this.add($listPage);
-  }
-
   renderPage() {
     Router.getInstance().renderPage();
+  }
+
+  redirectToPostListPage() {
+    Router.getInstance().navigate("post");
   }
 }
 
