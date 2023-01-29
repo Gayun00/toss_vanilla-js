@@ -7,19 +7,21 @@ export const handleQueryParams = () => {
 
 export const getPathParams = (routes, path) => {
   // TODO: add error handler when routes doesn't exist
-  try {
-    for (let route of routes) {
-      if (route.path.includes(":")) {
-        if (route.path.split("/")?.length === path.split("/")?.length) {
-          const matchedParams = _getMatchedParams(route.path, path);
-          const dynamicVars = _getDynamicRoutingVar(route.path);
-          const pathParams = _createPathParamObj(dynamicVars, matchedParams);
-          return pathParams;
-        }
-      }
+  for (let route of routes) {
+    if (checkDynamicRoute(route.path, path)) {
+      const matchedParams = _getMatchedParams(route.path, path);
+      const dynamicVars = _getDynamicRoutingVar(route.path);
+      const pathParams = _createPathParamObj(dynamicVars, matchedParams);
+      return pathParams;
     }
-  } catch (err) {
-    console.error(err);
+  }
+};
+
+const checkDynamicRoute = (routePath, path) => {
+  if (routePath.includes(":")) {
+    if (routePath.split("/")?.length === path.split("/")?.length) {
+      return true;
+    }
   }
 };
 
@@ -51,19 +53,13 @@ export const _getMatchedParams = (routePath, path) => {
 
 export const handleRenderPage = (routes, path) => {
   // TODO: add error handler when routes doesn't exist
-  try {
-    for (let route of routes) {
-      if (route.path.includes(":")) {
-        if (route.path.split("/")?.length === path.split("/")?.length) {
-          const matchedParams = _getMatchedParams(route.path, path);
-          if (matchedParams) return route.page;
-        }
-      } else {
-        if (route.path === path) return route.page;
-      }
+  for (let route of routes) {
+    if (checkDynamicRoute(route.path, path)) {
+      const matchedParams = _getMatchedParams(route.path, path);
+      if (matchedParams) return route.page;
+    } else {
+      if (route.path === path) return route.page;
     }
-  } catch (err) {
-    console.error(err);
   }
 };
 
