@@ -1,4 +1,5 @@
 import { Router } from "./router";
+import { getPathParams } from "./utils/handleParams";
 import { Base } from "./components/Base";
 import { ListPage } from "./pages/List";
 import { DetailPage } from "./pages/Detail";
@@ -13,7 +14,7 @@ class App extends Base {
       { path: "/post", page: new ListPage() },
       { path: "/post/:id", page: new DetailPage() },
     ];
-
+    this.renderPostListPage(); //temporal test code
     this.init();
   }
 
@@ -28,6 +29,12 @@ class App extends Base {
   renderPage() {
     Router.getInstance().renderPage();
   }
+
+  // temporal test code
+  // renderPostListPage() {
+  //   const $listPage = new ListPage().render();
+  //   this.add($listPage);
+  // }
 
   redirectToPostListPage() {
     Router.getInstance().navigate("post");

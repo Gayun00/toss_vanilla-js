@@ -5,6 +5,8 @@ import {
   _handleRoutePath,
   handleRenderPage,
   getPathParams,
+  _getMatchedParams,
+  _createPathParamObj,
 } from ".";
 
 const varRegex = /(?<=:)\w+/g;
@@ -148,6 +150,54 @@ describe("test handleRenderPage", () => {
 
   test("test 3 multiple dynamic route path", () => {
     expect(handleRenderPage(routes, path4)).toBe("page4");
+  });
+});
+
+describe("test _getMatchedParams", () => {
+  test("test static path", () => {
+    // expect(_getMatchedParams(path, routePath)).toContain([]);
+  });
+
+  test("test dynamic path", () => {
+    expect(_getMatchedParams(routePath2, path2)).toContain("12");
+  });
+
+  test("test 2 multiple dynamic path", () => {
+    expect(_getMatchedParams(routePath3, path3)).toContain("dev", "12");
+  });
+
+  test("test 3 multiple dynamic path", () => {
+    expect(_getMatchedParams(routePath4, path4)).toContain("tech", "dev", "12");
+  });
+});
+
+describe("test _createPathParamObj", () => {
+  // TODO: add testing static path
+  test("test dynamic path", () => {
+    const matchedParams = _getMatchedParams(routePath2, path2);
+    const dynamicVars = _getDynamicRoutingVar(routePath2);
+    expect(_createPathParamObj(dynamicVars, matchedParams)).toEqual({
+      id: "12",
+    });
+  });
+
+  test("test 2 multiple dynamic path", () => {
+    const matchedParams = _getMatchedParams(routePath3, path3);
+    const dynamicVars = _getDynamicRoutingVar(routePath3);
+    expect(_createPathParamObj(dynamicVars, matchedParams)).toEqual({
+      category: "dev",
+      id: "12",
+    });
+  });
+
+  test("test 3 multiple dynamic path", () => {
+    const matchedParams = _getMatchedParams(routePath4, path4);
+    const dynamicVars = _getDynamicRoutingVar(routePath4);
+    expect(_createPathParamObj(dynamicVars, matchedParams)).toEqual({
+      category: "tech",
+      subject: "dev",
+      id: "12",
+    });
   });
 });
 
