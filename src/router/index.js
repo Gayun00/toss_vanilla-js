@@ -1,14 +1,10 @@
-import { ListPage } from "../pages/List";
-import { DetailPage } from "../pages/Detail";
 import { getPathParams, handleRenderPage } from "../utils/handleParams";
 
 export class Router {
   #$app;
 
   constructor() {
-    Router.instance = this;
     this.routes = [];
-    this.init();
     this.#$app = document.querySelector(".root");
   }
 
@@ -19,11 +15,8 @@ export class Router {
     return this.instance;
   }
 
-  init() {
-    this.routes = [
-      { path: "/post", page: new ListPage() },
-      { path: "/post/:id", page: new DetailPage() },
-    ];
+  init(routes) {
+    this.routes = routes;
   }
 
   renderPage() {
