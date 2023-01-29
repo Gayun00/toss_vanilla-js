@@ -26,8 +26,7 @@ export class Post extends BaseComponent {
 
   #init() {
     this.getElement.addEventListener("click", () => {
-      const router = new Router();
-      router.navigate("detail", `/${this.#post.id}`);
+      Router.getInstance().navigate("post", `/${this.#post.id}`);
     });
   }
 }

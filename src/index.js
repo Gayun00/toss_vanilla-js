@@ -22,8 +22,7 @@ class App extends Base {
   }
 
   renderPage() {
-    const router = new Router();
-    router.renderPage();
+    Router.getInstance().renderPage();
   }
 }
 

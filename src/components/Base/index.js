@@ -13,6 +13,10 @@ export class Base {
     this.#$element.appendChild($child);
   }
 
+  attachTo($parent) {
+    $parent.appendChild(this.#$element);
+  }
+
   set setElement(value) {
     this.#$element = value;
   }
