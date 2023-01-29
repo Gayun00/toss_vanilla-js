@@ -6,13 +6,47 @@ export const handleQueryParams = () => {
 };
 
 export const getPathParams = (routes, path) => {
-  if (!routes) return;
+  // TODO: add error handler when routes doesn't exist
   try {
-    const [_, pathParams] = _handleRoutePath(routes, path);
-    return pathParams;
+    for (let route of routes) {
+      if (route.path.includes(":")) {
+        if (route.path.split("/")?.length === path.split("/")?.length) {
+          const matchedParams = _getMatchedParams(route.path, path);
+          const dynamicVars = _getDynamicRoutingVar(route.path);
+          const pathParams = _createPathParamObj(dynamicVars, matchedParams);
+          return pathParams;
+        }
+      }
+    }
   } catch (err) {
     console.error(err);
   }
+};
+
+export const validatePath = (path) => {
+  //TODO: add error handling
+};
+
+export const _createPathParamObj = (dynamicVars, matchedParams) => {
+  let pathParams = {};
+
+  for (let i = 0; i < dynamicVars?.length; i++) {
+    pathParams = {
+      ...pathParams,
+      [dynamicVars[i]]: matchedParams[i],
+    };
+  }
+
+  return pathParams;
+};
+
+export const _getMatchedParams = (routePath, path) => {
+  const pathRegex = _createPathRegex(routePath);
+  const matchedParams = path.match(pathRegex);
+  // if (!matchedParams) throw new Error("not supported path variable");
+  matchedParams?.shift();
+  // TODO: throw error when there's no matched params
+  return matchedParams;
 };
 
 export const handleRenderPage = (routes, path) => {
@@ -27,19 +61,19 @@ export const handleRenderPage = (routes, path) => {
 export const _handleRoutePath = (routes, path) => {
   for (let route of routes) {
     if (route.path.includes(":")) {
-      if (route.path.split("/").length === path.split("/").length) {
+      if (route.path.split("/")?.length === path.split("/")?.length) {
         const pathRegex = _createPathRegex(route.path);
         const matchedParams = path.match(pathRegex);
         if (!matchedParams) throw new Error("not supported path variable");
         matchedParams.shift();
-        const dynamicVarArr = _getDynamicRoutingVar(route.path);
+        const dynamicVars = _getDynamicRoutingVar(route.path);
 
         let pathParams = {};
 
-        for (let i = 0; i < dynamicVarArr.length; i++) {
+        for (let i = 0; i < dynamicVars?.length; i++) {
           pathParams = {
             ...pathParams,
-            [dynamicVarArr[i]]: matchedParams[i],
+            [dynamicVars[i]]: matchedParams[i],
           };
         }
 
