@@ -7,13 +7,21 @@ export const handleQueryParams = () => {
 
 export const getPathParams = (routes, path) => {
   if (!routes) return;
-  const [_, pathParamObj] = _handleRoutePath(routes, path);
-  return pathParamObj;
+  try {
+    const [_, pathParamObj] = _handleRoutePath(routes, path);
+    return pathParamObj;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const handleRenderPage = (routes, path) => {
-  const [route] = _handleRoutePath(routes, path);
-  return route.page;
+  try {
+    const [route] = _handleRoutePath(routes, path);
+    return route.page;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 export const _handleRoutePath = (routes, path) => {
