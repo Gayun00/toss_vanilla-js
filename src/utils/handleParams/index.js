@@ -8,8 +8,8 @@ export const handleQueryParams = () => {
 export const getPathParams = (routes, path) => {
   if (!routes) return;
   try {
-    const [_, pathParamObj] = _handleRoutePath(routes, path);
-    return pathParamObj;
+    const [_, pathParams] = _handleRoutePath(routes, path);
+    return pathParams;
   } catch (err) {
     console.error(err);
   }
@@ -29,21 +29,21 @@ export const _handleRoutePath = (routes, path) => {
     if (route.path.includes(":")) {
       if (route.path.split("/").length === path.split("/").length) {
         const pathRegex = _createPathRegex(route.path);
-        const matchedParamArr = path.match(pathRegex);
-        if (!matchedParamArr) throw new Error("not supported path variable");
-        matchedParamArr.shift();
+        const matchedParams = path.match(pathRegex);
+        if (!matchedParams) throw new Error("not supported path variable");
+        matchedParams.shift();
         const dynamicVarArr = _getDynamicRoutingVar(route.path);
 
-        let pathParamObj = {};
+        let pathParams = {};
 
         for (let i = 0; i < dynamicVarArr.length; i++) {
-          pathParamObj = {
-            ...pathParamObj,
-            [dynamicVarArr[i]]: matchedParamArr[i],
+          pathParams = {
+            ...pathParams,
+            [dynamicVarArr[i]]: matchedParams[i],
           };
         }
 
-        return [route, pathParamObj];
+        return [route, pathParams];
       }
     } else {
       if (route.path === path) {

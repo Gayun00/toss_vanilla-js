@@ -108,24 +108,24 @@ describe("test _handleRoutePath", () => {
   });
 
   test("test dynamic route path", () => {
-    const [route, pathParamObj] = _handleRoutePath(routes, path2);
+    const [route, pathParams] = _handleRoutePath(routes, path2);
     expect(route).toEqual({ page: "page2", path: "/post/:id" });
-    expect(pathParamObj).toEqual({ id: "12" });
+    expect(pathParams).toEqual({ id: "12" });
   });
 
   test("test 2 multiple dynamic route path", () => {
-    const [route, pathParamObj] = _handleRoutePath(routes, path3);
+    const [route, pathParams] = _handleRoutePath(routes, path3);
     expect(route).toEqual({ page: "page3", path: "/post/:category/:id" });
-    expect(pathParamObj).toEqual({
+    expect(pathParams).toEqual({
       category: "dev",
       id: "12",
     });
   });
 
   test("test 3 multiple dynamic route path", () => {
-    const [route, pathParamObj] = _handleRoutePath(routes, path4);
+    const [route, pathParams] = _handleRoutePath(routes, path4);
     expect(route).toEqual({ page: "page4", path: "/post/:category/:subject/:id" });
-    expect(pathParamObj).toEqual({
+    expect(pathParams).toEqual({
       category: "tech",
       subject: "dev",
       id: "12",
