@@ -21,7 +21,7 @@ export class DetailPage extends PageComponent {
   }
 
   getParam() {
-    const { id } = Router.getInstance().getParam();
+    const { id } = Router.getInstance().getPathParams();
     this.id = id;
   }
 }
