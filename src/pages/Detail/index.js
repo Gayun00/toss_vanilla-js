@@ -17,6 +17,7 @@ export class DetailPage extends PageComponent {
 
   render() {
     const $postTitle = new PostTitle(this.id).render();
+    this.getElement.innerHTML = "";
     this.add($postTitle);
   }
 

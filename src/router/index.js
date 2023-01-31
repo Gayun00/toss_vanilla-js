@@ -25,9 +25,9 @@ export class Router {
     page.attachTo(this.#$app);
   }
 
-  navigate(pathname, pathparam) {
+  navigate(pathname) {
     const url = new URL(window.location);
-    window.history.pushState({}, "", `${url}${pathname}${pathparam ? pathparam : ""}`);
+    window.history.pushState({}, "", `/${pathname}`);
     const historyChangeEvent = new CustomEvent("historychanged", {});
     dispatchEvent(historyChangeEvent);
   }
