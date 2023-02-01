@@ -4,16 +4,19 @@ const page = "page";
 const page2 = "page2";
 const page3 = "page3";
 const page4 = "page4";
+const page5 = "page5";
 
 const path = "/article";
 const path2 = "/article/12";
 const path3 = "/article/dev/12";
 const path4 = "/article/tech/dev/12";
+const path5 = "/tech/dev/12/4";
 
 const routePath = "/article";
 const routePath2 = "/article/:id";
 const routePath3 = "/article/:category/:id";
 const routePath4 = "/article/:category/:subject/:id";
+const routePath5 = "/article-category/:title/12/:id";
 
 const routes = [
   {
@@ -31,6 +34,10 @@ const routes = [
   {
     path: routePath4,
     page: page4,
+  },
+  {
+    path: routePath5,
+    page: page5,
   },
 ];
 
@@ -66,5 +73,10 @@ describe("test getPathVariables", () => {
   test("test 3 multiple dynamic route path", () => {
     window.location = { pathname: path4 };
     expect(Router.getInstance().getPathVariables()).toEqual({ category: "tech", subject: "dev", id: "12" });
+  });
+
+  test("test non-serial dynamic route path", () => {
+    window.location = { pathname: path5 };
+    expect(Router.getInstance().getPathVariables()).toEqual({ id: "4", title: "dev" });
   });
 });
