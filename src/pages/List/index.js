@@ -3,8 +3,8 @@ import { PageComponent } from "../../components/PageComponent/index.js";
 import { PostList } from "../../components/PostList.js/index.js";
 import { Banner } from "../../components/Banner/index.js";
 import { Footer } from "../../components/Footer/index.js";
-import "./index.css";
 import { getPosts } from "../../utils/api.js";
+import "./index.css";
 
 export class ListPage extends PageComponent {
   constructor() {
@@ -18,7 +18,16 @@ export class ListPage extends PageComponent {
     const banner = new Banner();
     const footer = new Footer();
 
-    const data = await getPosts();
+    const callback = {
+      onSuccess(data) {
+        console.log("on success", data);
+      },
+      onError(err) {
+        console.error("on error", err);
+      },
+    };
+
+    const data = await getPosts(callback);
     const postList = new PostList(data);
     this.add(header.render());
     this.add(postList.render());
