@@ -42,7 +42,7 @@ const routes = [
   },
 ];
 
-describe("test getPathParams", () => {
+describe("test getPathVariables", () => {
   let temp = window.location.pathname;
   Router.getInstance().init(routes);
 
@@ -56,22 +56,22 @@ describe("test getPathParams", () => {
 
   test("test static route path", () => {
     window.location = { pathname: routePath };
-    expect(Router.getInstance().getPathParams()).toBe(undefined);
+    expect(Router.getInstance().getPathVariables()).toBe(undefined);
   });
 
   test("test dynamic route path", () => {
     window.location = { pathname: path2 };
-    expect(Router.getInstance().getPathParams()).toEqual({ id: "12" });
+    expect(Router.getInstance().getPathVariables()).toEqual({ id: "12" });
   });
 
   test("test 2 multiple dynamic route path", () => {
     window.location = { pathname: path3 };
-    expect(Router.getInstance().getPathParams()).toEqual({ category: "dev", id: "12" });
+    expect(Router.getInstance().getPathVariables()).toEqual({ category: "dev", id: "12" });
   });
 
   test("test 3 multiple dynamic route path", () => {
     window.location = { pathname: path4 };
-    expect(Router.getInstance().getPathParams()).toEqual({ category: "tech", subject: "dev", id: "12" });
+    expect(Router.getInstance().getPathVariables()).toEqual({ category: "tech", subject: "dev", id: "12" });
   });
 });
 
