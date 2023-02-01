@@ -32,14 +32,14 @@ export class Router {
     dispatchEvent(historyChangeEvent);
   }
 
-  getPathParams = () => {
+  getPathVariables = () => {
     const path = window.location.pathname;
     // TODO: add error handler when routes doesn't exist
     for (let route of this.#routes) {
-      if (this.#checkDynamicRoute(route.path, path)) {
-        const matchedParams = this.#getMatchedParams(route.path, path);
-        const dynamicVars = this.#getDynamicRoutingVar(route.path);
-        const pathParams = this.#createPathParamObj(dynamicVars, matchedParams);
+      if (this.#checkDynamicRoutePath(route.path, path)) {
+        const pathVariables = this.#getMatchedPathVariables(route.path, path);
+        const dynamicRouteVariables = this.#getDynamicPathVariables(route.path);
+        const pathParams = this.#createPathParams(dynamicRouteVariables, pathVariables); //{ id:"12"} //createPathParams
         return pathParams;
       }
     }
@@ -50,16 +50,16 @@ export class Router {
     const path = window.location.pathname;
     // TODO: add error handler when routes doesn't exist
     for (let route of this.#routes) {
-      if (this.#checkDynamicRoute(route.path, path)) {
-        const matchedParams = this.#getMatchedParams(route.path, path);
-        if (matchedParams) return route.page;
+      if (this.#checkDynamicRoutePath(route.path, path)) {
+        const pathVariables = this.#getMatchedPathVariables(route.path, path);
+        if (pathVariables) return route.page;
       } else {
         if (route.path === path) return route.page;
       }
     }
   };
 
-  #checkDynamicRoute = (routePath, path) => {
+  #checkDynamicRoutePath = (routePath, path) => {
     if (routePath.includes(":")) {
       if (routePath.split("/")?.length === path.split("/")?.length) {
         return true;
@@ -67,31 +67,31 @@ export class Router {
     }
   };
 
-  #createPathParamObj = (dynamicVars, matchedParams) => {
+  #createPathParams = (dynamicRouteVariables, pathVariables) => {
     let pathParams = {};
 
-    for (let i = 0; i < dynamicVars?.length; i++) {
+    for (let i = 0; i < dynamicRouteVariables?.length; i++) {
       pathParams = {
         ...pathParams,
-        [dynamicVars[i]]: matchedParams[i],
+        [dynamicRouteVariables[i]]: pathVariables[i],
       };
     }
 
     return pathParams;
   };
 
-  #getMatchedParams = (routePath, path) => {
+  #getMatchedPathVariables = (routePath, path) => {
     const pathRegex = this.#createPathRegex(routePath);
-    const matchedParams = path.match(pathRegex);
-    // if (!matchedParams) throw new Error("not supported path variable");
-    matchedParams?.shift();
+    const pathVariables = path.match(pathRegex);
+    // if (!pathVariables) throw new Error("not supported path variable");
+    pathVariables?.shift();
     // TODO: throw error when there's no matched params
-    return matchedParams;
+    return pathVariables;
   };
 
   #createPathRegex = (path) => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
-  #getDynamicRoutingVar = (path) => {
+  #getDynamicPathVariables = (path) => {
     const dynamicRouteVarRegex = new RegExp(/(?<=:)\w+/g);
     return path.match(dynamicRouteVarRegex);
   };

@@ -22,7 +22,7 @@ export class DetailPage extends PageComponent {
   }
 
   getParam() {
-    const { id } = Router.getInstance().getPathParams();
+    const { id } = Router.getInstance().getPathVariables();
     this.id = id;
   }
 }
