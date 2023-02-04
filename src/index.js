@@ -3,6 +3,7 @@ import { Base } from "./components/Base";
 import { ListPage } from "./pages/List";
 import { DetailPage } from "./pages/Detail";
 import "./css/reset.css";
+import { NotFoundPage } from "./pages/NotFound";
 
 class App extends Base {
   constructor($app) {
@@ -22,7 +23,8 @@ class App extends Base {
     window.addEventListener("popstate", this.renderPage);
     window.addEventListener("load", this.redirectToPostListPage);
 
-    Router.getInstance().init(this.routes);
+    const $notFoundPage = new NotFoundPage();
+    Router.getInstance().init(this.routes, $notFoundPage);
   }
 
   renderPage() {

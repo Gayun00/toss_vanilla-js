@@ -1,12 +1,4 @@
 import { Router } from ".";
-import {
-  _createPathRegex,
-  _getDynamicRoutingVar,
-  _getMatchedDynamicRoutePath,
-  _handleRoutePath,
-  _getMatchedParams,
-  _createPathParamObj,
-} from "../utils/handleParams";
 
 const page = "page";
 const page2 = "page2";
@@ -17,6 +9,7 @@ const path = "/post";
 const path2 = "/post/12";
 const path3 = "/post/dev/12";
 const path4 = "/post/tech/dev/12";
+const wrongPath = "/postwrong";
 
 const routePath = "/post";
 const routePath2 = "/post/:id";
@@ -42,9 +35,11 @@ const routes = [
   },
 ];
 
+const notFoundPage = "notFoundPage";
+
 describe("test getPathVariables", () => {
   let temp = window.location.pathname;
-  Router.getInstance().init(routes);
+  Router.getInstance().init(routes, notFoundPage);
 
   beforeEach(() => {
     delete window.location;
@@ -77,7 +72,7 @@ describe("test getPathVariables", () => {
 
 describe("test handleRenderPage", () => {
   let temp = window.location.pathname;
-  Router.getInstance().init(routes);
+  Router.getInstance().init(routes, notFoundPage);
 
   beforeEach(() => {
     delete window.location;
@@ -105,5 +100,10 @@ describe("test handleRenderPage", () => {
   test("test dynamic route path", () => {
     window.location = { pathname: routePath4 };
     expect(Router.getInstance().handleRenderPage()).toBe(page4);
+  });
+
+  test("test wrong path", () => {
+    window.location = { pathname: wrongPath };
+    expect(Router.getInstance().handleRenderPage()).toBe(notFoundPage);
   });
 });

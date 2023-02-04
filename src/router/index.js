@@ -4,6 +4,7 @@ export class Router {
 
   constructor() {
     this.#routes = [];
+    this.$notFoundPage;
     this.#$app = document.querySelector(".root");
   }
 
@@ -14,13 +15,14 @@ export class Router {
     return this.instance;
   }
 
-  init(routes) {
+  init(routes, $notFoundPage) {
     this.#routes = routes;
+    this.$notFoundPage = $notFoundPage;
   }
 
   renderPage() {
     // TODO: add test
-    const page = this.handleRenderPage();
+    let page = this.handleRenderPage();
     this.#$app.innerHTML = "";
     page.attachTo(this.#$app);
   }
@@ -57,6 +59,7 @@ export class Router {
         if (route.path === path) return route.page;
       }
     }
+    return this.$notFoundPage;
   };
 
   #checkDynamicRoutePath = (routePath, path) => {
