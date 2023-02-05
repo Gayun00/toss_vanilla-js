@@ -18,6 +18,8 @@ const routePath3 = "/article/:category/:id";
 const routePath4 = "/article/:category/:subject/:id";
 const routePath5 = "/article-category/:title/12/:id";
 
+const initSearch = "category=phone";
+
 const routes = [
   {
     path: routePath,
@@ -87,7 +89,7 @@ describe("test handleSearchParams", () => {
 
   beforeEach(() => {
     delete window.location;
-    window.location = { search: "?query=phone" };
+    window.location = { search: initSearch };
   });
 
   afterEach(() => {
@@ -115,9 +117,9 @@ describe("test handleSearchParams", () => {
   });
 
   test("test handleSearchParams init", () => {
-    expect(window.location.search).toBe("?query=phone");
+    expect(window.location.search).toBe(initSearch);
 
     const [searchParams] = Router.getInstance().handleSearchParams("sort=price");
-    expect(searchParams.toString()).toBe("sort=price&query=phone");
+    expect(searchParams.toString()).toBe(`sort=price&${initSearch}`);
   });
 });
