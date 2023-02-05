@@ -28,8 +28,8 @@ export class Router {
     page.attachTo(this.#$app);
   }
 
-  navigate(pathname) {
-    window.history.pushState({}, "", `/${pathname}`);
+  navigate({ pathname, search }) {
+    window.history.pushState({}, "", `${pathname ? "/" + pathname : ""}${search ? "?" + search : ""}`);
     const historyChangeEvent = new CustomEvent("historychanged", {});
     dispatchEvent(historyChangeEvent);
   }
@@ -63,6 +63,26 @@ export class Router {
   };
 
   handleSearchParams(params = "") {
+    let searchParams = this.createQueryString(params);
+    const currentSearchParams = this.createQueryString(window.location.search);
+
+    for (let key of currentSearchParams.keys()) {
+      if (!searchParams.has(key)) {
+        currentSearchParams.getAll(key).forEach((value) => {
+          searchParams.append(key, value);
+        });
+      }
+    }
+
+    const setSearchParams = (params) => {
+      const newSearchParams = this.createQueryString(params);
+      this.navigate({ search: newSearchParams });
+    };
+
+    return [searchParams, setSearchParams];
+  }
+
+  createQueryString(params = "") {
     const searchParams = new URLSearchParams(
       typeof params === "string" || Array.isArray(params) || params instanceof URLSearchParams
         ? params
@@ -72,12 +92,7 @@ export class Router {
           }, [])
     );
 
-    const setSearchParams = (params) => {
-      const newSearchParams = this.handleSearchParams(params);
-      this.navigate("?" + newSearchParams);
-    };
-
-    return [searchParams, setSearchParams];
+    return searchParams;
   }
 
   #checkDynamicRoutePath = (routePath, path) => {
