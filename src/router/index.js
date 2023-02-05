@@ -62,8 +62,8 @@ export class Router {
     return this.#$notFoundPage;
   };
 
-  handleSearchParams(params = "") {
-    let searchParams = this.createQueryString(params);
+  handleSearchParams(initParams = "") {
+    let searchParams = this.createQueryString(initParams);
     const currentSearchParams = this.createQueryString(window.location.search);
 
     for (let key of currentSearchParams.keys()) {
