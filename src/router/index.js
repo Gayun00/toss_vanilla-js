@@ -81,21 +81,19 @@ export class Router {
   };
 
   #getMatchedPathVariables = (routePath, path) => {
-    const pathRegex = this.#compilePath(routePath);
+    const pathRegex = this.#createPathRegex(routePath);
     const pathVariables = path.match(pathRegex).slice(1);
     // if (!pathVariables) throw new Error("not supported path variable");
     // TODO: throw error when there's no matched params
     return pathVariables;
   };
 
-  #createPathRegex = (path) => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
-
   #getDynamicPathVariables = (path) => {
     const dynamicRouteVarRegex = new RegExp(/(?<=:)\w+/g);
     return path.match(dynamicRouteVarRegex);
   };
 
-  #compilePath = (path) => {
+  #createPathRegex = (path) => {
     const paramNames = [];
     const regexpSource =
       "^" +
