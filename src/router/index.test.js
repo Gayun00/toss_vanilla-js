@@ -96,29 +96,8 @@ describe("test handleSearchParams", () => {
     window.location.search = temp;
   });
 
-  test("test string parameters", () => {
-    const searchParams = Router.getInstance().createQueryString("?color=red&mode=play&mode=edit");
-    expect(searchParams.get("color")).toBe("red");
-  });
-
-  test("test array parameters", () => {
-    const searchParams = Router.getInstance().createQueryString([
-      ["sort", "name"],
-      ["sort", "price"],
-    ]);
-    const searchParams2 = Router.getInstance().createQueryString({ sort: ["name", "price"] });
-    expect(searchParams).toEqual(searchParams2);
-  });
-
-  test("test object parameters", () => {
-    const searchParams = Router.getInstance().createQueryString("?color=red&mode=play&mode=edit");
-    const searchParams2 = Router.getInstance().createQueryString({ color: "red", mode: ["play", "edit"] });
-    expect(searchParams).toEqual(searchParams2);
-  });
-
   test("test handleSearchParams init", () => {
     expect(window.location.search).toBe(initSearch);
-
     const [searchParams] = Router.getInstance().handleSearchParams("sort=price");
     expect(searchParams.toString()).toBe(`sort=price&${initSearch}`);
   });

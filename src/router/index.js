@@ -63,8 +63,8 @@ export class Router {
   };
 
   handleSearchParams(initParams = "") {
-    let searchParams = this.createQueryString(initParams);
-    const currentSearchParams = this.createQueryString(window.location.search);
+    let searchParams = this.#createQueryString(initParams);
+    const currentSearchParams = this.#createQueryString(window.location.search);
 
     for (let key of currentSearchParams.keys()) {
       if (!searchParams.has(key)) {
@@ -75,14 +75,14 @@ export class Router {
     }
 
     const setSearchParams = (params) => {
-      const newSearchParams = this.createQueryString(params);
+      const newSearchParams = this.#createQueryString(params);
       this.navigate({ search: newSearchParams });
     };
 
     return [searchParams, setSearchParams];
   }
 
-  createQueryString(params = "") {
+  #createQueryString(params = "") {
     const searchParams = new URLSearchParams(
       typeof params === "string" || Array.isArray(params) || params instanceof URLSearchParams
         ? params
