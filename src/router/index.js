@@ -75,7 +75,7 @@ export class Router {
 
   #createPathParams = (dynamicRouteVariables, pathVariables) => {
     return dynamicRouteVariables.reduce((pathParams, dynamicRouteVariable, index) => {
-      pathParams[dynamicRouteVariable] = decodeURIComponent(pathVariables[index] || "", dynamicRouteVariable);
+      pathParams[dynamicRouteVariable] = pathVariables[index];
       return pathParams;
     }, {});
   };
