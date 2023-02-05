@@ -80,3 +80,25 @@ describe("test getPathVariables", () => {
     expect(Router.getInstance().getPathVariables()).toEqual({ id: "4", title: "dev" });
   });
 });
+
+describe("test handleSearchParams", () => {
+  test("test string parameters", () => {
+    const searchParams = Router.getInstance().handleSearchParams("?color=red&mode=play&mode=edit");
+    expect(searchParams.get("color")).toBe("red");
+  });
+
+  test("test array parameters", () => {
+    const searchParams = Router.getInstance().handleSearchParams([
+      ["sort", "name"],
+      ["sort", "price"],
+    ]);
+    const searchParams2 = Router.getInstance().handleSearchParams({ sort: ["name", "price"] });
+    expect(searchParams).toEqual(searchParams2);
+  });
+
+  test("test array parameters", () => {
+    const searchParams = Router.getInstance().handleSearchParams("?color=red&mode=play&mode=edit");
+    const searchParams2 = Router.getInstance().handleSearchParams({ color: "red", mode: ["play", "edit"] });
+    expect(searchParams).toEqual(searchParams2);
+  });
+});
