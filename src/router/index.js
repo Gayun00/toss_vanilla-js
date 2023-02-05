@@ -29,7 +29,6 @@ export class Router {
   }
 
   navigate(pathname) {
-    const url = new URL(window.location);
     window.history.pushState({}, "", `/${pathname}`);
     const historyChangeEvent = new CustomEvent("historychanged", {});
     dispatchEvent(historyChangeEvent);
@@ -63,15 +62,22 @@ export class Router {
     return this.#$notFoundPage;
   };
 
-  handleSearchParams(init = "") {
-    return new URLSearchParams(
-      typeof init === "string" || Array.isArray(init) || init instanceof URLSearchParams
-        ? init
-        : Object.keys(init).reduce((memo, key) => {
-            let value = init[key];
+  handleSearchParams(params = "") {
+    const searchParams = new URLSearchParams(
+      typeof params === "string" || Array.isArray(params) || params instanceof URLSearchParams
+        ? params
+        : Object.keys(params).reduce((memo, key) => {
+            let value = params[key];
             return memo.concat(Array.isArray(value) ? value.map((v) => [key, v]) : [[key, value]]);
           }, [])
     );
+
+    const setSearchParams = (params) => {
+      const newSearchParams = this.handleSearchParams(params);
+      this.navigate("?" + newSearchParams);
+    };
+
+    return [searchParams, setSearchParams];
   }
 
   #checkDynamicRoutePath = (routePath, path) => {

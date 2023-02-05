@@ -83,22 +83,31 @@ describe("test getPathVariables", () => {
 
 describe("test handleSearchParams", () => {
   test("test string parameters", () => {
-    const searchParams = Router.getInstance().handleSearchParams("?color=red&mode=play&mode=edit");
+    const [searchParams] = Router.getInstance().handleSearchParams("?color=red&mode=play&mode=edit");
     expect(searchParams.get("color")).toBe("red");
   });
 
   test("test array parameters", () => {
-    const searchParams = Router.getInstance().handleSearchParams([
+    const [searchParams] = Router.getInstance().handleSearchParams([
       ["sort", "name"],
       ["sort", "price"],
     ]);
-    const searchParams2 = Router.getInstance().handleSearchParams({ sort: ["name", "price"] });
+    const [searchParams2] = Router.getInstance().handleSearchParams({ sort: ["name", "price"] });
     expect(searchParams).toEqual(searchParams2);
   });
 
-  test("test array parameters", () => {
-    const searchParams = Router.getInstance().handleSearchParams("?color=red&mode=play&mode=edit");
-    const searchParams2 = Router.getInstance().handleSearchParams({ color: "red", mode: ["play", "edit"] });
+  test("test object parameters", () => {
+    const [searchParams] = Router.getInstance().handleSearchParams("?color=red&mode=play&mode=edit");
+    const [searchParams2] = Router.getInstance().handleSearchParams({ color: "red", mode: ["play", "edit"] });
     expect(searchParams).toEqual(searchParams2);
   });
+
+  // TODO: fix handleSearchParams to add new params to current search Params
+  // test("test setSearchParams", () => {
+  //   const [searchParams, setSearchParams] = Router.getInstance().handleSearchParams({ sort: ["name", "price"] });
+
+  //   expect(searchParams.toString()).toBe("sort=name&sort=price");
+  //   setSearchParams("color=red");
+  //   expect(searchParams.toString()).toBe("sort=name&sort=price&color=red");
+  // });
 });
