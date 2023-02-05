@@ -14,7 +14,6 @@ class App extends Element {
       { path: "/article", page: new ArticleListPage() },
       { path: "/article/:id", page: new ArticleDetail() },
     ];
-    // this.renderPostListPage(); //temporal test code
     this.init();
   }
 
@@ -31,12 +30,6 @@ class App extends Element {
   renderPage() {
     Router.getInstance().renderPage();
   }
-
-  // temporal test code
-  // renderPostListPage() {
-  //   const $ArticleListPage = new ArticleListPage().render();
-  //   this.add($ArticleListPage);
-  // }
 
   redirectToPostListPage() {
     if (window.location.pathname === "/") Router.getInstance().navigate("article");

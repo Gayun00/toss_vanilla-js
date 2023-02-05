@@ -82,32 +82,49 @@ describe("test getPathVariables", () => {
 });
 
 describe("test handleSearchParams", () => {
+  let temp = window.location.search;
+  Router.getInstance().init(routes);
+
+  beforeEach(() => {
+    delete window.location;
+    window.location = { search: "?query=phone" };
+  });
+
+  afterEach(() => {
+    window.location.search = temp;
+  });
+
   test("test string parameters", () => {
-    const [searchParams] = Router.getInstance().handleSearchParams("?color=red&mode=play&mode=edit");
+    const searchParams = Router.getInstance().createQueryString("?color=red&mode=play&mode=edit");
     expect(searchParams.get("color")).toBe("red");
   });
 
   test("test array parameters", () => {
-    const [searchParams] = Router.getInstance().handleSearchParams([
+    const searchParams = Router.getInstance().createQueryString([
       ["sort", "name"],
       ["sort", "price"],
     ]);
-    const [searchParams2] = Router.getInstance().handleSearchParams({ sort: ["name", "price"] });
+    const searchParams2 = Router.getInstance().createQueryString({ sort: ["name", "price"] });
     expect(searchParams).toEqual(searchParams2);
   });
 
   test("test object parameters", () => {
-    const [searchParams] = Router.getInstance().handleSearchParams("?color=red&mode=play&mode=edit");
-    const [searchParams2] = Router.getInstance().handleSearchParams({ color: "red", mode: ["play", "edit"] });
+    const searchParams = Router.getInstance().createQueryString("?color=red&mode=play&mode=edit");
+    const searchParams2 = Router.getInstance().createQueryString({ color: "red", mode: ["play", "edit"] });
     expect(searchParams).toEqual(searchParams2);
   });
 
-  // TODO: fix handleSearchParams to add new params to current search Params
-  // test("test setSearchParams", () => {
-  //   const [searchParams, setSearchParams] = Router.getInstance().handleSearchParams({ sort: ["name", "price"] });
+  test("test handleSearchParams init", () => {
+    expect(window.location.search).toBe("?query=phone");
 
-  //   expect(searchParams.toString()).toBe("sort=name&sort=price");
-  //   setSearchParams("color=red");
-  //   expect(searchParams.toString()).toBe("sort=name&sort=price&color=red");
-  // });
+    const [searchParams] = Router.getInstance().handleSearchParams("sort=price");
+    expect(searchParams.toString()).toBe("sort=price&query=phone");
+  });
+
+  test("test setSearchParams", () => {
+    const [searchParams, setSearchParams] = Router.getInstance().handleSearchParams();
+    // TODO: need to fix setSearchParams to update search params correctly
+    setSearchParams("filter=name");
+    expect(searchParams.toString()).toBe("filter=name");
+  });
 });
