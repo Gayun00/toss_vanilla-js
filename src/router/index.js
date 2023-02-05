@@ -101,8 +101,6 @@ export class Router {
         paramNames.push(paramName);
         return "/([^\\/]+)";
       });
-    const matcher = new RegExp(regexpSource, "i");
-
-    return matcher;
+    return new RegExp(regexpSource, "i");
   };
 }
