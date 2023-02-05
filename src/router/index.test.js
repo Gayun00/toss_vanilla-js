@@ -26,19 +26,19 @@ const routePath4 = "/post/:category/:subject/:id";
 const routes = [
   {
     path: routePath,
-    page: "page",
+    page: page,
   },
   {
     path: routePath2,
-    page: "page2",
+    page: page2,
   },
   {
     path: routePath3,
-    page: "page3",
+    page: page3,
   },
   {
     path: routePath4,
-    page: "page4",
+    page: page4,
   },
 ];
 
@@ -97,12 +97,12 @@ describe("test handleRenderPage", () => {
     expect(Router.getInstance().handleRenderPage()).toBe(page2);
   });
 
-  test("test dynamic route path", () => {
+  test("test 2 multiple dynamic route path", () => {
     window.location = { pathname: routePath3 };
     expect(Router.getInstance().handleRenderPage()).toBe(page3);
   });
 
-  test("test dynamic route path", () => {
+  test("test 3 multiple dynamic route path", () => {
     window.location = { pathname: routePath4 };
     expect(Router.getInstance().handleRenderPage()).toBe(page4);
   });
