@@ -1,9 +1,9 @@
-import { Router } from "./router";
+import { Router } from "./Router";
 import { Element } from "./components/Element";
-import { ListPage } from "./pages/List";
-import { DetailPage } from "./pages/Detail";
-import "./css/reset.css";
+import { ArticleListPage } from "./pages/ArticleList";
+import { ArticleDetail } from "./pages/ArticleDetail";
 import { NotFoundPage } from "./pages/NotFound";
+import "./css/reset.css";
 
 class App extends Element {
   constructor($app) {
@@ -11,8 +11,8 @@ class App extends Element {
     this.$app = $app;
 
     this.routes = [
-      { path: "/post", page: new ListPage() },
-      { path: "/post/:id", page: new DetailPage() },
+      { path: "/article", page: new ArticleListPage() },
+      { path: "/article/:id", page: new ArticleDetail() },
     ];
     // this.renderPostListPage(); //temporal test code
     this.init();
@@ -34,12 +34,12 @@ class App extends Element {
 
   // temporal test code
   // renderPostListPage() {
-  //   const $listPage = new ListPage().render();
-  //   this.add($listPage);
+  //   const $ArticleListPage = new ArticleListPage().render();
+  //   this.add($ArticleListPage);
   // }
 
   redirectToPostListPage() {
-    if (window.location.pathname === "/") Router.getInstance().navigate("post");
+    if (window.location.pathname === "/") Router.getInstance().navigate("article");
   }
 }
 
