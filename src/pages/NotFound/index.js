@@ -20,7 +20,7 @@ class NotFoundContent extends BaseComponent {
     super();
 
     this.create(`
-    <div class="not">
+    <div class="not_found_container">
       <h1>404</h1>
       <h2>Not Found</h2>
     </div>
