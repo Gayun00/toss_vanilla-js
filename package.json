@@ -6,7 +6,7 @@
   "repository": "https://github.com/Gayun00/toss_vanilla-js.git",
   "license": "MIT",
   "scripts": {
-    "start": "webpack serve --mode=development",
+    "start": "webpack serve --mode=development --history-api-fallback",
     "start:prod": "webpack serve --mode=production",
     "build": "webpack  --mode=development",
     "build:prod": "webpack  --mode=development",
