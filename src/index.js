@@ -21,6 +21,8 @@ class App extends Base {
   init() {
     window.addEventListener("historychanged", this.renderPage);
     window.addEventListener("popstate", this.renderPage);
+    window.addEventListener("load", this.renderPage);
+
     window.addEventListener("load", this.redirectToPostListPage);
 
     const $notFoundPage = new NotFoundPage();
@@ -38,7 +40,7 @@ class App extends Base {
   // }
 
   redirectToPostListPage() {
-    Router.getInstance().navigate("post");
+    if (window.location.pathname === "/") Router.getInstance().navigate("post");
   }
 }
 
