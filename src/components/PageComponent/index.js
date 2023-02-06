@@ -1,6 +1,6 @@
-import { Base } from "../Base";
+import { Element } from "../Element";
 
-export class PageComponent extends Base {
+export class PageComponent extends Element {
   constructor(className) {
     super();
 

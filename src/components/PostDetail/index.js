@@ -1,6 +1,6 @@
-import { BaseComponent } from "../BaseComponent";
+import { Component } from "../Component";
 
-export class PostDetail extends BaseComponent {
+export class PostDetail extends Component {
   constructor() {
     super(`
       <p>post detail<p>

@@ -1,7 +1,7 @@
-import { BaseComponent } from "../BaseComponent";
+import { Component } from "../Component";
 import "./index.css";
 
-export class Banner extends BaseComponent {
+export class Banner extends Component {
   constructor() {
     super();
 

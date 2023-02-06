@@ -1,4 +1,4 @@
-import { BaseComponent } from "../../components/BaseComponent";
+import { Component } from "../../components/Component";
 import { PageComponent } from "../../components/PageComponent";
 import "./index.css";
 
@@ -15,7 +15,7 @@ export class NotFoundPage extends PageComponent {
   }
 }
 
-class NotFoundContent extends BaseComponent {
+class NotFoundContent extends Component {
   constructor() {
     super();
 

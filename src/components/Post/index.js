@@ -1,8 +1,8 @@
 import { Router } from "../../router";
-import { BaseComponent } from "../BaseComponent";
+import { Component } from "../Component";
 import "./index.css";
 
-export class Post extends BaseComponent {
+export class Post extends Component {
   #post;
 
   constructor(post) {
