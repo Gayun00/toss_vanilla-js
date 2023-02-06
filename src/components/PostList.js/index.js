@@ -1,8 +1,8 @@
-import { BaseComponent } from "../BaseComponent";
+import { Component } from "../Component";
 import { Post } from "../Post";
 import "./index.css";
 
-export class PostList extends BaseComponent {
+export class PostList extends Component {
   constructor(postList) {
     super();
 

@@ -1,4 +1,4 @@
-export class Base {
+export class Element {
   #$element;
 
   constructor(element) {

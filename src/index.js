@@ -1,11 +1,11 @@
 import { Router } from "./router";
-import { Base } from "./components/Base";
+import { Element } from "./components/Element";
 import { ListPage } from "./pages/List";
 import { DetailPage } from "./pages/Detail";
 import "./css/reset.css";
 import { NotFoundPage } from "./pages/NotFound";
 
-class App extends Base {
+class App extends Element {
   constructor($app) {
     super($app);
     this.$app = $app;
@@ -22,7 +22,6 @@ class App extends Base {
     window.addEventListener("historychanged", this.renderPage);
     window.addEventListener("popstate", this.renderPage);
     window.addEventListener("load", this.renderPage);
-
     window.addEventListener("load", this.redirectToPostListPage);
 
     const $notFoundPage = new NotFoundPage();
