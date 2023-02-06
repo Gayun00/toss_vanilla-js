@@ -13,6 +13,7 @@ module.exports = (_, argv) => {
       clean: true,
     },
     devServer: {
+      historyApiFallback: true,
       port: 3000,
       hot: true,
     },
