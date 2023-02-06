@@ -5,16 +5,15 @@ const page2 = "page2";
 const page3 = "page3";
 const page4 = "page4";
 
-const path = "/post";
-const path2 = "/post/12";
-const path3 = "/post/dev/12";
-const path4 = "/post/tech/dev/12";
-const wrongPath = "/postwrong";
+const path = "/article";
+const path2 = "/article/12";
+const path3 = "/article/dev/12";
+const path4 = "/article/tech/dev/12";
 
-const routePath = "/post";
-const routePath2 = "/post/:id";
-const routePath3 = "/post/:category/:id";
-const routePath4 = "/post/:category/:subject/:id";
+const routePath = "/article";
+const routePath2 = "/article/:id";
+const routePath3 = "/article/:category/:id";
+const routePath4 = "/article/:category/:subject/:id";
 
 const routes = [
   {

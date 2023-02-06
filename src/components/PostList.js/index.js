@@ -12,9 +12,9 @@ export class PostList extends Component {
       </ul>
     `);
 
-    postList.forEach((post) => {
-      const $post = new Post(post).render();
-      this.add($post);
+    postList.forEach((article) => {
+      const $article = new Post(article).render();
+      this.add($article);
     });
   }
 }

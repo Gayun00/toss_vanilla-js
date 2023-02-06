@@ -2,7 +2,7 @@ import { Router } from "../../router";
 import { PageComponent } from "../../components/PageComponent";
 import { PostTitle } from "../../components/PostTitle";
 
-export class DetailPage extends PageComponent {
+export class ArticleDetail extends PageComponent {
   constructor() {
     super("detail_page");
     this.init();

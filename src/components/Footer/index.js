@@ -56,7 +56,7 @@ export class Footer extends Component {
               </a>
             </li>
             <li class="footer__social-list-item">
-              <a aria-label="Toss Naver Post" target="_blank" href="https://post.naver.com/tossblog">
+              <a aria-label="Toss Naver Post" target="_blank" href="https://article.naver.com/tossblog">
                 <img src="https://static.toss.im/assets/homepage/safety/icn-naver.svg" alt="Toss Naver Post">
               </a>
             </li>

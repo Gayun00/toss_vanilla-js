@@ -6,7 +6,7 @@ import { Footer } from "../../components/Footer/index.js";
 import { getPosts } from "../../utils/api.js";
 import "./index.css";
 
-export class ListPage extends PageComponent {
+export class ArticleListPage extends PageComponent {
   constructor() {
     super("list_page");
 
