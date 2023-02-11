@@ -1,6 +1,11 @@
 module.exports = {
   testEnvironment: "jsdom",
   moduleNameMapper: {
-    "\\.(css|less)$": "<rootDir>/styleMock.js",
+    "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
+  },
+  setupFiles: ["<rootDir>/__mocks__/setupJest.js"],
+  globals: {
+    TextEncoder: require("util").TextEncoder,
+    TextDecoder: require("util").TextDecoder,
   },
 };
