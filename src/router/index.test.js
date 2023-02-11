@@ -3,7 +3,6 @@
  */
 
 import { Router } from ".";
-import { Header } from "../components/Header.js";
 import { ArticleDetail } from "../pages/ArticleDetail";
 import { ArticleListPage } from "../pages/ArticleList";
 import { articles } from "../utils/constants";
@@ -18,7 +17,7 @@ const path = "/article";
 const path2 = "/article/12";
 const path3 = "/article/dev/12";
 const path4 = "/article/tech/dev/12";
-const path5 = "/tech/dev/12/4";
+const path5 = "/article-category/dev/12/4";
 
 const routePath = "/article";
 const routePath2 = "/article/:id";
@@ -51,11 +50,10 @@ const routes = [
   },
 ];
 
-const notFoundPage = "notFoundPage";
-
 describe("test getPathVariables", () => {
   let temp = window.location.pathname;
-  Router.getInstance().init(routes, notFoundPage);
+  const $app = document.createElement("div");
+  Router.getInstance().init($app, routes);
 
   beforeEach(() => {
     delete window.location;
@@ -93,7 +91,8 @@ describe("test getPathVariables", () => {
 
 describe("test handleSearchParams", () => {
   let temp = window.location.search;
-  Router.getInstance().init(routes);
+  const $app = document.createElement("div");
+  Router.getInstance().init($app, routes);
 
   beforeEach(() => {
     delete window.location;
@@ -122,7 +121,6 @@ describe("test renderPage", () => {
 
   const articleDetailPage = new ArticleDetail();
   const articleListPage = new ArticleListPage();
-  const $app = jest.mock();
 
   const routes = [
     { path: "/articles", page: articleListPage },
@@ -138,9 +136,11 @@ describe("test renderPage", () => {
     window.location.pathname = temp;
   });
 
-  it("testing something...", () => {
+  it("test renderPage()", () => {
     window.location = { pathname: "/articles" };
-
-    expect(Router.getInstance().renderPage()).toEqual(articleListPage);
+    const $app = document.createElement("div");
+    Router.getInstance().init($app, routes);
+    Router.getInstance().renderPage();
+    expect($app.querySelector(".list_page")).toBeTruthy();
   });
 });
