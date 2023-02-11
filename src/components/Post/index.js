@@ -1,4 +1,4 @@
-import { Router } from "../../router";
+import { Router } from "../../Router";
 import { Component } from "../Component";
 import "./index.css";
 

@@ -1,4 +1,12 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { Router } from ".";
+import { Header } from "../components/Header.js";
+import { ArticleDetail } from "../pages/ArticleDetail";
+import { ArticleListPage } from "../pages/ArticleList";
+import { articles } from "../utils/constants";
 
 const page = "page";
 const page2 = "page2";
@@ -100,5 +108,39 @@ describe("test handleSearchParams", () => {
     expect(window.location.search).toBe(initSearch);
     const [searchParams] = Router.getInstance().handleSearchParams("sort=price");
     expect(searchParams.toString()).toBe(`sort=price&${initSearch}`);
+  });
+});
+
+describe("test renderPage", () => {
+  let temp = window.location.pathname;
+
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve(articles),
+    })
+  );
+
+  const articleDetailPage = new ArticleDetail();
+  const articleListPage = new ArticleListPage();
+  const $app = jest.mock();
+
+  const routes = [
+    { path: "/articles", page: articleListPage },
+    { path: "/article", page: articleDetailPage },
+  ];
+
+  beforeEach(() => {
+    fetch.mockClear();
+    delete window.location;
+  });
+
+  afterEach(() => {
+    window.location.pathname = temp;
+  });
+
+  it("testing something...", () => {
+    window.location = { pathname: "/articles" };
+
+    expect(Router.getInstance().renderPage()).toEqual(articleListPage);
   });
 });
