@@ -2,7 +2,6 @@ import { Router } from "./Router";
 import { Element } from "./components/Element";
 import { ArticleListPage } from "./pages/ArticleList";
 import { ArticleDetail } from "./pages/ArticleDetail";
-import { NotFoundPage } from "./pages/NotFound";
 import "./css/reset.css";
 
 class App extends Element {
@@ -23,8 +22,7 @@ class App extends Element {
     window.addEventListener("load", this.renderPage);
     window.addEventListener("load", this.redirectToPostListPage);
 
-    const $notFoundPage = new NotFoundPage();
-    Router.getInstance().init(this.routes, $notFoundPage);
+    Router.getInstance().init(this.$app, this.routes);
   }
 
   renderPage() {

@@ -16,9 +16,9 @@ export class Router {
     return this.instance;
   }
 
-  init(routes, $notFoundPage) {
+  init($app, routes) {
     this.#routes = routes;
-    this.#$notFoundPage = $notFoundPage;
+    this.#$app = $app;
   }
 
   renderPage() {
