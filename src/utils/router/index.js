@@ -20,7 +20,6 @@ export class Router {
   }
 
   renderPage() {
-    // TODO: add test
     let page = this.#handleRenderPage();
     this.#$app.innerHTML = "";
     page.attachTo(this.#$app);
@@ -34,15 +33,15 @@ export class Router {
 
   getPathVariables = () => {
     const path = window.location.pathname;
-    // TODO: add error handler when routes doesn't exist
     for (let route of this.#routes) {
       if (this.#checkDynamicRoutePath(route.path, path)) {
         const pathVariables = this.#getMatchedPathVariables(route.path, path);
         const dynamicRouteVariables = this.#getDynamicPathVariables(route.path);
-        const pathParams = this.#createPathParams(dynamicRouteVariables, pathVariables); //{ id:"12"} //createPathParams
+        const pathParams = this.#createPathParams(dynamicRouteVariables, pathVariables);
         return pathParams;
       }
     }
+    throw new Error("no matched path variables");
   };
 
   #handleRenderPage = () => {
@@ -112,8 +111,6 @@ export class Router {
   #getMatchedPathVariables = (routePath, path) => {
     const pathRegex = this.#createPathRegex(routePath);
     const pathVariables = path.match(pathRegex).slice(1);
-    // if (!pathVariables) throw new Error("not supported path variable");
-    // TODO: throw error when there's no matched params
     return pathVariables;
   };
 
