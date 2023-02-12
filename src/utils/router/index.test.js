@@ -3,10 +3,10 @@
  */
 
 import { Router } from ".";
-import { Header } from "../components/Header.js";
-import { ArticleDetail } from "../pages/ArticleDetail";
-import { ArticleListPage } from "../pages/ArticleList";
-import { articles } from "../utils/constants";
+import { articles } from "../constants";
+import { ArticleDetailPage } from "../../pages/ArticleDetailPage";
+import { ArticleListPage } from "../../pages/ArticleListPage";
+import { NotFoundPage } from "../../pages/NotFoundPage";
 
 const page = "page";
 const page2 = "page2";
@@ -14,7 +14,6 @@ const page3 = "page3";
 const page4 = "page4";
 const page5 = "page5";
 
-const path = "/article";
 const path2 = "/article/12";
 const path3 = "/article/dev/12";
 const path4 = "/article/tech/dev/12";
@@ -67,7 +66,7 @@ describe("test getPathVariables", () => {
 
   test("test static route path", () => {
     window.location = { pathname: routePath };
-    expect(Router.getInstance().getPathVariables()).toBe(undefined);
+    expect(() => Router.getInstance().getPathVariables()).toThrowError("no matched path variables");
   });
 
   test("test dynamic route path", () => {
@@ -121,12 +120,14 @@ describe("test renderPage", () => {
     })
   );
 
-  const articleDetailPage = new ArticleDetail();
+  const articleDetailPage = new ArticleDetailPage();
   const articleListPage = new ArticleListPage();
+  const notFoundPage = new NotFoundPage();
 
   const routes = [
     { path: "/articles", page: articleListPage },
     { path: "/article", page: articleDetailPage },
+    { path: "*", page: notFoundPage },
   ];
 
   beforeEach(() => {
@@ -160,5 +161,11 @@ describe("test renderPage", () => {
     window.location = { pathname: "/article" };
     Router.getInstance().renderPage();
     expect($app.querySelector(".detail_page")).toBeTruthy();
+  });
+
+  test("test notFoundPage", () => {
+    window.location = { pathname: "/wrongPath" };
+    Router.getInstance().renderPage();
+    expect($app.querySelector(".not_found_page")).toBeTruthy();
   });
 });
