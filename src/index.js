@@ -1,7 +1,7 @@
-import { Router } from "./Router";
+import { Router } from "./utils/router";
 import { Element } from "./components/Element";
-import { ArticleListPage } from "./pages/ArticleList";
-import { ArticleDetail } from "./pages/ArticleDetail";
+import { ArticleListPage } from "./pages/ArticleListPage";
+import { ArticleDetailPage } from "./pages/ArticleDetailPage";
 import "./css/reset.css";
 
 class App extends Element {
@@ -11,7 +11,7 @@ class App extends Element {
 
     this.routes = [
       { path: "/article", page: new ArticleListPage() },
-      { path: "/article/:id", page: new ArticleDetail() },
+      { path: "/article/:id", page: new ArticleDetailPage() },
     ];
     this.init();
   }
