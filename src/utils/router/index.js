@@ -1,11 +1,9 @@
 export class Router {
   #$app;
-  #$notFoundPage;
   #routes;
 
   constructor() {
     this.#routes = [];
-    this.#$notFoundPage;
     this.#$app = document.querySelector(".root");
   }
 
@@ -48,9 +46,7 @@ export class Router {
   };
 
   #handleRenderPage = () => {
-    // TODO: change to private method after update test for renderPage()
     const path = window.location.pathname;
-    // TODO: add error handler when routes doesn't exist
     for (let route of this.#routes) {
       if (this.#checkDynamicRoutePath(route.path, path)) {
         const pathVariables = this.#getMatchedPathVariables(route.path, path);
@@ -59,7 +55,8 @@ export class Router {
         if (route.path === path) return route.page;
       }
     }
-    return this.#$notFoundPage;
+
+    return this.#routes.find((route) => route.path === "*").page;
   };
 
   handleSearchParams(initParams = "") {

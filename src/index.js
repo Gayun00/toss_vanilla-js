@@ -2,6 +2,7 @@ import { Router } from "./utils/router";
 import { Element } from "./components/Element";
 import { ArticleListPage } from "./pages/ArticleListPage";
 import { ArticleDetailPage } from "./pages/ArticleDetailPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 import "./css/reset.css";
 
 class App extends Element {
@@ -12,6 +13,7 @@ class App extends Element {
     this.routes = [
       { path: "/article", page: new ArticleListPage() },
       { path: "/article/:id", page: new ArticleDetailPage() },
+      { path: "*", page: new NotFoundPage() },
     ];
     this.init();
   }
