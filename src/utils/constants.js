@@ -1,3 +1,5 @@
+export const API_SERVER = "http://localhost:5000";
+
 export const articles = [
   {
     id: 0,
