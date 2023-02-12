@@ -3,6 +3,7 @@
  */
 
 import { Router } from ".";
+import { Header } from "../components/Header.js";
 import { ArticleDetail } from "../pages/ArticleDetail";
 import { ArticleListPage } from "../pages/ArticleList";
 import { articles } from "../utils/constants";
@@ -26,6 +27,7 @@ const routePath4 = "/article/:category/:subject/:id";
 const routePath5 = "/article-category/:title/12/:id";
 
 const initSearch = "category=phone";
+const $app = document.createElement("div");
 
 const routes = [
   {
@@ -130,17 +132,33 @@ describe("test renderPage", () => {
   beforeEach(() => {
     fetch.mockClear();
     delete window.location;
+    Router.getInstance().init($app, routes);
   });
 
   afterEach(() => {
     window.location.pathname = temp;
   });
 
-  it("test renderPage()", () => {
+  test("test articleListPage", () => {
     window.location = { pathname: "/articles" };
-    const $app = document.createElement("div");
-    Router.getInstance().init($app, routes);
     Router.getInstance().renderPage();
     expect($app.querySelector(".list_page")).toBeTruthy();
+  });
+
+  test("test articleListPage component render", () => {
+    window.location = { pathname: "/articles" };
+    Router.getInstance().renderPage();
+
+    expect($app.querySelector(".list_page")).toBeTruthy();
+    expect($app.querySelector(".header")).toBeTruthy();
+    expect($app.querySelector(".post_list")).toBeTruthy();
+    expect($app.querySelector(".banner")).toBeTruthy();
+    expect($app.querySelector(".footer")).toBeTruthy();
+  });
+
+  test("test articleDetailPage", () => {
+    window.location = { pathname: "/article" };
+    Router.getInstance().renderPage();
+    expect($app.querySelector(".detail_page")).toBeTruthy();
   });
 });
