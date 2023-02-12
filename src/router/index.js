@@ -28,7 +28,7 @@ export class Router {
     page.attachTo(this.#$app);
   }
 
-  navigate({ pathname, search }) {
+  navigate(pathname, search) {
     window.history.pushState({}, "", `${pathname ? "/" + pathname : ""}${search ? "?" + search : ""}`);
     const historyChangeEvent = new CustomEvent("historychanged", {});
     dispatchEvent(historyChangeEvent);
