@@ -1,20 +1,19 @@
 import { API_SERVER } from "./constants";
 
-const fetchRequest = (url, method, param) => {
+const fetchRequest = ({ url, method, param, handler }) => {
   return fetch(
     url,
     param && {
       method: method,
       body: JSON.stringify(param),
     }
-  );
-};
-
-export const getPosts = ({ onSuccess, onError }) =>
-  fetchRequest(`${API_SERVER}/posts`)
+  )
     .then((res) => res.json())
     .then((data) => {
-      onSuccess(data);
+      handler.onSuccess(data);
       return data;
     })
-    .catch((err) => onError(err));
+    .catch((err) => handler.onError(err));
+};
+
+export const getPosts = (handler) => fetchRequest({ url: `${API_SERVER}/posts`, handler });
