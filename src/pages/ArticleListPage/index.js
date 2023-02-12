@@ -1,9 +1,9 @@
-import { Header } from "../../components/Header.js/index.js";
+import { getPosts } from "../../utils/api.js";
 import { PageComponent } from "../../components/PageComponent/index.js";
-import { PostList } from "../../components/PostList.js/index.js";
+import { Header } from "../../components/Header/index.js";
+import { ArticleList } from "../../components/ArticleList/index.js";
 import { Banner } from "../../components/Banner/index.js";
 import { Footer } from "../../components/Footer/index.js";
-import { getPosts } from "../../utils/api.js";
 import "./index.css";
 
 export class ArticleListPage extends PageComponent {
@@ -28,13 +28,13 @@ export class ArticleListPage extends PageComponent {
     };
 
     const data = await getPosts(callback);
-    const postList = new PostList(data);
+    const articleList = new ArticleList(data);
     this.add(header.render());
-    this.add(postList.render());
+    this.add(articleList.render());
     this.add(banner.render());
     this.add(footer.render());
 
-    // TODO: seperate render other section with postlist
+    // TODO: seperate render other section with ArticleList
     // guarantee rendering order using event loop
 
     header.render().addEventListener("click", (e) => {

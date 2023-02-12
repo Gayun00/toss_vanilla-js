@@ -1,9 +1,9 @@
 import { Component } from "../Component";
-import { Post } from "../Post";
+import { Post } from "../Article";
 import "./index.css";
 
-export class PostList extends Component {
-  constructor(postList) {
+export class ArticleList extends Component {
+  constructor(ArticleList) {
     super();
 
     this.create(`
@@ -12,7 +12,7 @@ export class PostList extends Component {
       </ul>
     `);
 
-    postList.forEach((article) => {
+    ArticleList.forEach((article) => {
       const $article = new Post(article).render();
       this.add($article);
     });

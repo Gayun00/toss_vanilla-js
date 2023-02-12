@@ -1,8 +1,8 @@
-import { Router } from "../../router";
+import { Router } from "../../utils/router";
 import { PageComponent } from "../../components/PageComponent";
-import { PostTitle } from "../../components/PostTitle";
+import { PostTitle } from "../../components/ArticleTitle";
 
-export class ArticleDetail extends PageComponent {
+export class ArticleDetailPage extends PageComponent {
   constructor() {
     super("detail_page");
     this.init();
