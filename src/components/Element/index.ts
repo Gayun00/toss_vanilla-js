@@ -1,7 +1,7 @@
 export class Element {
   #$element;
 
-  constructor(element) {
+  constructor(element: HTMLElement) {
     this.#$element = element;
   }
 
@@ -9,15 +9,15 @@ export class Element {
     return this.#$element;
   }
 
-  add($child) {
+  add($child:HTMLElement) {
     this.#$element.appendChild($child);
   }
 
-  attachTo($parent) {
+  attachTo($parent:HTMLElement) {
     $parent.appendChild(this.#$element);
   }
 
-  set setElement(value) {
+  set setElement(value:HTMLElement) {
     this.#$element = value;
   }
 
