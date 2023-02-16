@@ -1,31 +1,39 @@
+interface Route {
+  path: string;
+  page: any; // need to replace to other type
+}
+
+interface Routes extends Array<Route>{}
+
 export class Router {
-  #$app;
-  #routes;
+  #$app: HTMLElement | null;
+  #routes: Routes;
+  private static instance: Router;
 
   constructor() {
     this.#routes = [];
     this.#$app = document.querySelector(".root");
   }
 
-  static getInstance() {
+  static getInstance():Router {
     if (!this.instance) {
       this.instance = new Router();
     }
     return this.instance;
   }
 
-  init($app, routes) {
+  init($app: HTMLElement, routes:Routes) {
     this.#routes = routes;
     this.#$app = $app;
   }
 
   renderPage() {
     let page = this.#handleRenderPage();
-    this.#$app.innerHTML = "";
+    if(this.#$app) this.#$app.innerHTML = "";
     page.attachTo(this.#$app);
   }
 
-  navigate(pathname, search) {
+  navigate(pathname:string, search?:string) {
     window.history.pushState({}, "", `${pathname ? "/" + pathname : ""}${search ? "?" + search : ""}`);
     const historyChangeEvent = new CustomEvent("historychanged", {});
     dispatchEvent(historyChangeEvent);
@@ -55,7 +63,7 @@ export class Router {
       }
     }
 
-    return this.#routes.find((route) => route.path === "*").page;
+    return this.#routes.find((route:Route) => route.path === "*").page;
   };
 
   handleSearchParams(initParams = "") {
@@ -70,17 +78,17 @@ export class Router {
       }
     }
 
-    const setSearchParams = (params) => {
+    const setSearchParams = (params: any) => {
       const newSearchParams = this.#createQueryString(params);
-      this.navigate({ search: newSearchParams });
+      this.navigate( newSearchParams.toString() );
     };
 
     return [searchParams, setSearchParams];
   }
 
-  #createQueryString(params = "") {
+  #createQueryString(params = ""):URLSearchParams {
     const searchParams = new URLSearchParams(
-      typeof params === "string" || Array.isArray(params) || params instanceof URLSearchParams
+      typeof params === "string" || Array.isArray(params) || params as any instanceof URLSearchParams
         ? params
         : Object.keys(params).reduce((memo, key) => {
             let value = params[key];
@@ -91,7 +99,7 @@ export class Router {
     return searchParams;
   }
 
-  #checkDynamicRoutePath = (routePath, path) => {
+  #checkDynamicRoutePath = (routePath:string, path:string):boolean|undefined => {
     if (routePath.includes(":")) {
       if (routePath.split("/").length === path.split("/").length) {
         const pathRegex = this.#createPathRegex(routePath);
@@ -101,25 +109,25 @@ export class Router {
     }
   };
 
-  #createPathParams = (dynamicRouteVariables, pathVariables) => {
-    return dynamicRouteVariables.reduce((pathParams, dynamicRouteVariable, index) => {
+  #createPathParams = (dynamicRouteVariables: RegExpMatchArray, pathVariables: string[]) => {
+    return dynamicRouteVariables.reduce((pathParams: {}, dynamicRouteVariable, index) => {
       pathParams[dynamicRouteVariable] = pathVariables[index];
       return pathParams;
     }, {});
   };
 
-  #getMatchedPathVariables = (routePath, path) => {
+  #getMatchedPathVariables = (routePath:string, path:string):string[]|undefined => {
     const pathRegex = this.#createPathRegex(routePath);
-    const pathVariables = path.match(pathRegex).slice(1);
+    const pathVariables = path.match(pathRegex)?.slice(1);
     return pathVariables;
   };
 
-  #getDynamicPathVariables = (path) => {
+  #getDynamicPathVariables = (path:string):RegExpMatchArray|null => {
     const dynamicRouteVarRegex = new RegExp(/(?<=:)\w+/g);
     return path.match(dynamicRouteVarRegex);
   };
 
-  #createPathRegex = (path) => {
+  #createPathRegex = (path:string) => {
     const paramNames = [];
     const regexpSource =
       "^" +
