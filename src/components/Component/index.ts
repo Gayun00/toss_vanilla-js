@@ -5,10 +5,10 @@ export class Component extends Element {
     super();
   }
 
-  create(htmlString) {
+  create(htmlString: string) {
     const $template = document.createElement("template");
     $template.innerHTML = htmlString;
-    this.setElement = $template.content.firstElementChild;
+    this.setElement = $template.content.firstElementChild as HTMLElement;
     return this.getElement;
   }
 }

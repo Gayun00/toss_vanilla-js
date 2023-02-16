@@ -1,27 +1,31 @@
 export class Element {
-  #$element;
+  #$element: HTMLElement | null;
 
-  constructor(element: HTMLElement) {
-    this.#$element = element;
+  constructor() {
+    this.#$element = null;
+  }
+
+  init($element: HTMLElement) {
+    this.#$element = $element;
   }
 
   render() {
     return this.#$element;
   }
 
-  add($child:HTMLElement) {
-    this.#$element.appendChild($child);
+  add($child: HTMLElement) {
+    this.#$element?.appendChild($child);
   }
 
-  attachTo($parent:HTMLElement) {
-    $parent.appendChild(this.#$element);
+  attachTo($parent: HTMLElement) {
+    if (this.#$element) $parent.appendChild(this.#$element);
   }
 
-  set setElement(value:HTMLElement) {
+  set setElement(value: HTMLElement) {
     this.#$element = value;
   }
 
-  get getElement() {
+  get getElement(): HTMLElement | null {
     return this.#$element;
   }
 }
