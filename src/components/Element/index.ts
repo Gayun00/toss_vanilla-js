@@ -1,15 +1,15 @@
 export class Element {
   #$element: HTMLElement | null;
 
-  constructor() {
-    this.#$element = null;
+  constructor($element: HTMLElement | null = null) {
+    this.#$element = $element;
   }
 
   init($element: HTMLElement) {
     this.#$element = $element;
   }
 
-  render() {
+  render(): HTMLElement | null {
     return this.#$element;
   }
 
