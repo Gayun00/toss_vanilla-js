@@ -2,10 +2,18 @@ import { Router } from "../../utils/router";
 import { Component } from "../Component";
 import "./index.css";
 
+interface IArticle {
+  id: number;
+  title: string;
+  thumbnail: string;
+  description: string;
+  date: string;
+}
+
 export class Article extends Component {
   #article;
 
-  constructor(article) {
+  constructor(article: IArticle) {
     super();
 
     this.create(`
@@ -25,7 +33,7 @@ export class Article extends Component {
   }
 
   #init() {
-    this.getElement.addEventListener("click", () => {
+    this.getElement?.addEventListener("click", () => {
       Router.getInstance().navigate(`article/${this.#article.id}`);
     });
   }
