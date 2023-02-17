@@ -1,6 +1,6 @@
 import { Router } from "../../utils/router";
 import { PageComponent } from "../../components/PageComponent";
-import { PostTitle } from "../../components/ArticleTitle";
+import { ArticleTitle } from "../../components/ArticleTitle";
 
 export class ArticleDetailPage extends PageComponent {
   constructor() {
@@ -16,7 +16,7 @@ export class ArticleDetailPage extends PageComponent {
   }
 
   render() {
-    const $postTitle = new PostTitle(this.id).render();
+    const $postTitle = new ArticleTitle(this.id).render();
     this.getElement.innerHTML = "";
     this.add($postTitle);
   }

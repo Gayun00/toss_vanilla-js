@@ -2,7 +2,7 @@ import { Router } from "../../utils/router";
 import { Component } from "../Component";
 import "./index.css";
 
-export class Post extends Component {
+export class Article extends Component {
   #article;
 
   constructor(article) {

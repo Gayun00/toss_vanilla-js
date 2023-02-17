@@ -1,6 +1,6 @@
 import { Component } from "../Component";
 
-export class PostTitle extends Component {
+export class ArticleTitle extends Component {
   constructor(title) {
     super();
     this.create(`
