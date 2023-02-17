@@ -6,12 +6,12 @@ export class NotFoundPage extends PageComponent {
   constructor() {
     super("not_found_page");
 
-    this.render();
+    this.renderElement();
   }
 
-  render() {
+  renderElement() {
     const $notFoundContent = new NotFoundContent().render();
-    this.add($notFoundContent);
+    if ($notFoundContent) this.add($notFoundContent);
   }
 }
 
