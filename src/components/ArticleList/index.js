@@ -1,5 +1,5 @@
 import { Component } from "../Component";
-import { Post } from "../Article";
+import { Article } from "../Article";
 import "./index.css";
 
 export class ArticleList extends Component {
@@ -13,7 +13,7 @@ export class ArticleList extends Component {
     `);
 
     ArticleList.forEach((article) => {
-      const $article = new Post(article).render();
+      const $article = new Article(article).render();
       this.add($article);
     });
   }
