@@ -1,9 +1,9 @@
 import { Component } from "../Component";
-import { Article } from "../Article";
+import { Article, IArticle } from "../Article";
 import "./index.css";
 
 export class ArticleList extends Component {
-  constructor(ArticleList) {
+  constructor(ArticleList: Array<IArticle>) {
     super();
 
     this.create(`
@@ -12,9 +12,9 @@ export class ArticleList extends Component {
       </ul>
     `);
 
-    ArticleList.forEach((article) => {
+    ArticleList.forEach((article: IArticle) => {
       const $article = new Article(article).render();
-      this.add($article);
+      if ($article) this.add($article);
     });
   }
 }

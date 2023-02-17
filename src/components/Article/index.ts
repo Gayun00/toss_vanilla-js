@@ -2,7 +2,7 @@ import { Router } from "../../utils/router";
 import { Component } from "../Component";
 import "./index.css";
 
-interface IArticle {
+export interface IArticle {
   id: number;
   title: string;
   thumbnail: string;
