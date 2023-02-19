@@ -1,14 +1,7 @@
+import { IArticle } from "../../utils/interfaces";
 import { Router } from "../../utils/router";
 import { Component } from "../Component";
 import "./index.css";
-
-export interface IArticle {
-  id: number;
-  title: string;
-  thumbnail: string;
-  description: string;
-  date: string;
-}
 
 export class Article extends Component {
   #article;
