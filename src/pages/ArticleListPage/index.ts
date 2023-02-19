@@ -1,3 +1,4 @@
+import { ApiHandlers, IArticles } from "./../../utils/interfaces/index";
 import { getPosts } from "../../utils/api.js";
 import { PageComponent } from "../../components/PageComponent/index.js";
 import { Header } from "../../components/Header/index.js";
@@ -18,11 +19,11 @@ export class ArticleListPage extends PageComponent {
     const banner = new Banner();
     const footer = new Footer();
 
-    const callback = {
-      onSuccess(data) {
+    const callback: ApiHandlers = {
+      onSuccess(data: IArticles) {
         console.log("on success", data);
       },
-      onError(err) {
+      onError(err: Error) {
         console.error("on error", err);
       },
     };
@@ -34,11 +35,10 @@ export class ArticleListPage extends PageComponent {
     this.add(banner.render());
     this.add(footer.render());
 
-    // TODO: seperate render other section with ArticleList
-    // guarantee rendering order using event loop
-
-    header.render().addEventListener("click", (e) => {
-      if (e.target.className !== "hamburger") return;
+    const $header = header.render();
+    $header?.addEventListener("click", (e: MouseEvent) => {
+      const clickedTarget = e.target as HTMLElement;
+      if (clickedTarget.className !== "hamburger") return;
       $header.classList.toggle("expanded");
     });
   }
