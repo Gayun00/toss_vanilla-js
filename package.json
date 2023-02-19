@@ -12,7 +12,8 @@
   "exclude": [
     "node_modules",
     "build",
-    "**/*.(spec|test).ts"
+    "**/*.(spec|test).ts",
+    "./dist/**/*"
   ],
   "scripts": {
     "start": "webpack serve --mode=development --history-api-fallback",
@@ -45,6 +46,7 @@
     "mini-css-extract-plugin": "^1.6.0",
     "prettier": "^2.3.0",
     "ts-jest": "^29.0.5",
+    "ts-loader": "^9.4.2",
     "typescript": "^4.9.5",
     "webpack": "^5.37.0",
     "webpack-cli": "^4.7.0",

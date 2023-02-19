@@ -36,6 +36,15 @@ module.exports = (_, argv) => {
           test: /\.css$/,
           use: [MiniCssExtractPlugin.loader, "css-loader"],
         },
+        {
+          test: /\.ts(x?)$/,
+          exclude: /node_modules/,
+          use: [
+            {
+              loader: "ts-loader",
+            },
+          ],
+        },
       ],
     },
     plugins: [
