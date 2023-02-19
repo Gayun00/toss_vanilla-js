@@ -13,7 +13,8 @@ export class Element {
     return this.#$element;
   }
 
-  add($child: HTMLElement) {
+  add($child: HTMLElement | null) {
+    if (!$child) return;
     this.#$element?.appendChild($child);
   }
 

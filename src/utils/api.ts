@@ -1,18 +1,7 @@
+import { ApiHandlers, FetchRequest } from "./interfaces/index";
 import { API_SERVER } from "./constants";
 
-interface IFetchRequest {
-  url: string;
-  method?: string;
-  param?: object;
-  handler?: Handler;
-}
-
-export type Handler = {
-  onSuccess: (data: unknown) => void;
-  onError: (err: Error) => void;
-};
-
-const fetchRequest = ({ url, method, param, handler }: IFetchRequest) => {
+const fetchRequest = ({ url, method, param, handler }: FetchRequest) => {
   return fetch(
     url,
     param && {
@@ -28,4 +17,4 @@ const fetchRequest = ({ url, method, param, handler }: IFetchRequest) => {
     .catch((err) => handler?.onError(err));
 };
 
-export const getPosts = (handler: void) => fetchRequest({ url: `${API_SERVER}/posts`, handler });
+export const getPosts = (handler: ApiHandlers) => fetchRequest({ url: `${API_SERVER}/posts`, handler });

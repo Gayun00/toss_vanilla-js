@@ -1,4 +1,5 @@
-import { IArticle } from "./../components/Article/index";
+import { IArticle } from "./interfaces";
+
 export const API_SERVER = "http://localhost:5000";
 
 export const articles: Array<IArticle> = [
