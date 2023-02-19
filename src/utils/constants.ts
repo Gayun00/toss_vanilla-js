@@ -1,6 +1,7 @@
+import { IArticle } from "./../components/Article/index";
 export const API_SERVER = "http://localhost:5000";
 
-export const articles = [
+export const articles: Array<IArticle> = [
   {
     id: 0,
     thumbnail: "https://toss.tech/wp-content/uploads/2022/12/01-1.png",
