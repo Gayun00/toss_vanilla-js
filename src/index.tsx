@@ -6,6 +6,9 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 import "./css/reset.css";
 
 class App extends Element {
+  $app
+  routes
+
   constructor($app) {
     super($app);
     this.$app = $app;
