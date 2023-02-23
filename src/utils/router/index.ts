@@ -1,4 +1,4 @@
-import { IArticles, PathParams, Routes } from "./../interfaces/index";
+import { PathParams, Routes } from "./../interfaces/index";
 export class Router {
   #$app;
   #routes: Routes;
@@ -7,7 +7,6 @@ export class Router {
   constructor() {
     this.#routes = [];
     this.#$app = document.querySelector(".root");
-    Router.instance = new Router();
   }
 
   static getInstance() {
@@ -102,7 +101,7 @@ export class Router {
     return searchParams;
   }
 
-  #checkDynamicRoutePath = (routePath: string, path: string) => {
+  #checkDynamicRoutePath = (routePath: string, path: string): boolean => {
     if (routePath.includes(":")) {
       if (routePath.split("/").length === path.split("/").length) {
         const pathRegex = this.#createPathRegex(routePath);
@@ -110,6 +109,7 @@ export class Router {
         if (matchedParams) return true;
       }
     }
+    return false;
   };
 
   #createPathParams = (dynamicRouteVariables: RegExpMatchArray | null, pathVariables: string[] | undefined) => {
