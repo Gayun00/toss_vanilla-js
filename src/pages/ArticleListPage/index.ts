@@ -1,10 +1,10 @@
-import { ApiHandlers, IArticles } from "./../../utils/interfaces/index";
-import { getPosts } from "../../utils/api.js";
-import { PageComponent } from "../../components/PageComponent/index.js";
-import { Header } from "../../components/Header/index.js";
-import { ArticleList } from "../../components/ArticleList/index.js";
-import { Banner } from "../../components/Banner/index.js";
-import { Footer } from "../../components/Footer/index.js";
+import { getPosts } from "../../utils/api";
+import { ApiHandlers, IArticles } from "../../utils/interfaces";
+import { ArticleList } from "../../components/ArticleList";
+import { Banner } from "../../components/Banner";
+import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Header";
+import { PageComponent } from "../../components/PageComponent";
 import "./index.css";
 
 export class ArticleListPage extends PageComponent {

@@ -1,4 +1,4 @@
-import { Router } from "../../utils/router";
+// import { Router } from "../../utils/router";
 import { PageComponent } from "../../components/PageComponent";
 import { ArticleTitle } from "../../components/ArticleTitle";
 
@@ -24,7 +24,7 @@ export class ArticleDetailPage extends PageComponent {
   }
 
   getParam() {
-    const { id } = Router.getInstance().getPathVariables();
-    this.id = id;
+    // const { id } = Router.getInstance().getPathVariables();
+    // this.id = id;
   }
 }

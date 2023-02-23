@@ -1,5 +1,6 @@
+import { IArticle } from "../../utils/interfaces";
 import { Component } from "../Component";
-import { Article, IArticle } from "../Article";
+import { Article } from "../Article";
 import "./index.css";
 
 export class ArticleList extends Component {
