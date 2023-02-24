@@ -30,5 +30,9 @@ export interface FetchRequest {
 }
 
 export interface PathParams {
-  [dynamicRouteVariable: string]: string | undefined | string[];
+  [dynamicRouteVariable: string]: number | string | undefined | string[];
+}
+
+export interface ObjectParams {
+  [key: string]: number | string | undefined | string[];
 }
