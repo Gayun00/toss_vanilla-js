@@ -51,41 +51,46 @@ const routes = [
   },
 ];
 
+Object.defineProperty(window, "location", {
+  value: {
+    pathname: "",
+  },
+  writable: true,
+});
+
 describe("test getPathVariables", () => {
   let temp = window.location.pathname;
   const $app = document.createElement("div");
   Router.getInstance().init($app, routes);
 
-  beforeEach(() => {
-    delete window.location;
-  });
+  beforeEach(() => {});
 
   afterEach(() => {
     window.location.pathname = temp;
   });
 
   test("test static route path", () => {
-    window.location = { pathname: routePath };
+    window.location.pathname = routePath;
     expect(() => Router.getInstance().getPathVariables()).toThrowError("no matched path variables");
   });
 
   test("test dynamic route path", () => {
-    window.location = { pathname: path2 };
+    window.location.pathname = path2;
     expect(Router.getInstance().getPathVariables()).toEqual({ id: "12" });
   });
 
   test("test 2 multiple dynamic route path", () => {
-    window.location = { pathname: path3 };
+    window.location.pathname = path3;
     expect(Router.getInstance().getPathVariables()).toEqual({ category: "dev", id: "12" });
   });
 
   test("test 3 multiple dynamic route path", () => {
-    window.location = { pathname: path4 };
+    window.location.pathname = path4;
     expect(Router.getInstance().getPathVariables()).toEqual({ category: "tech", subject: "dev", id: "12" });
   });
 
   test("test non-serial dynamic route path", () => {
-    window.location = { pathname: path5 };
+    window.location.pathname = path5;
     expect(Router.getInstance().getPathVariables()).toEqual({ id: "4", title: "dev" });
   });
 });
@@ -96,8 +101,7 @@ describe("test handleSearchParams", () => {
   Router.getInstance().init($app, routes);
 
   beforeEach(() => {
-    delete window.location;
-    window.location = { search: initSearch };
+    window.location.search = initSearch;
   });
 
   afterEach(() => {
@@ -107,17 +111,18 @@ describe("test handleSearchParams", () => {
   test("test handleSearchParams init", () => {
     expect(window.location.search).toBe(initSearch);
     const [searchParams] = Router.getInstance().handleSearchParams("sort=price");
-    expect(searchParams.toString()).toBe(`sort=price&${initSearch}`);
+    expect(searchParams?.toString()).toBe(`sort=price&${initSearch}`);
   });
 });
 
 describe("test renderPage", () => {
   let temp = window.location.pathname;
 
-  global.fetch = jest.fn(() =>
-    Promise.resolve({
-      json: () => Promise.resolve(articles),
-    })
+  global.fetch = jest.fn(
+    (): Promise<any> =>
+      Promise.resolve({
+        json: () => Promise.resolve(articles),
+      })
   );
 
   const articleDetailPage = new ArticleDetailPage();
@@ -131,8 +136,6 @@ describe("test renderPage", () => {
   ];
 
   beforeEach(() => {
-    fetch.mockClear();
-    delete window.location;
     Router.getInstance().init($app, routes);
   });
 
@@ -141,13 +144,13 @@ describe("test renderPage", () => {
   });
 
   test("test articleListPage", () => {
-    window.location = { pathname: "/articles" };
+    window.location.pathname = "/articles";
     Router.getInstance().renderPage();
     expect($app.querySelector(".list_page")).toBeTruthy();
   });
 
   test("test articleListPage component render", () => {
-    window.location = { pathname: "/articles" };
+    window.location.pathname = "/articles";
     Router.getInstance().renderPage();
 
     expect($app.querySelector(".list_page")).toBeTruthy();
@@ -158,13 +161,13 @@ describe("test renderPage", () => {
   });
 
   test("test articleDetailPage", () => {
-    window.location = { pathname: "/article" };
+    window.location.pathname = "/article";
     Router.getInstance().renderPage();
     expect($app.querySelector(".detail_page")).toBeTruthy();
   });
 
   test("test notFoundPage", () => {
-    window.location = { pathname: "/wrongPath" };
+    window.location.pathname = "/wrongPath";
     Router.getInstance().renderPage();
     expect($app.querySelector(".not_found_page")).toBeTruthy();
   });
