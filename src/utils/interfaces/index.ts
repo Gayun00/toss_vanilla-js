@@ -29,10 +29,6 @@ export interface FetchRequest {
   handler?: ApiHandlers;
 }
 
-export interface PathParams {
-  [dynamicRouteVariable: string]: number | string | undefined | string[];
-}
-
-export interface ObjectParams {
-  [key: string]: number | string | undefined | string[];
+export interface SearchParams {
+  [key: string]: number | string | string[] | undefined;
 }

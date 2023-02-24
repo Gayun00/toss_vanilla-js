@@ -1,4 +1,4 @@
-import { ObjectParams, PathParams, Routes } from "./../interfaces/index";
+import { Routes, SearchParams } from "./../interfaces/index";
 export class Router {
   #$app: HTMLElement | null;
   #routes: Routes;
@@ -73,8 +73,7 @@ export class Router {
       }
     }
 
-    const setSearchParams = (params: any) => {
-      //need to change
+    const setSearchParams = (params: SearchParams) => {
       const newSearchParams = this.#createSearchParams(params).toString();
       this.navigate("", newSearchParams);
     };
@@ -82,7 +81,7 @@ export class Router {
     return [searchParams, setSearchParams];
   }
 
-  #createSearchParams(params: string | PathParams = "") {
+  #createSearchParams(params: string | SearchParams = ""): URLSearchParams {
     let searchParams;
     if (typeof params === "string" || Array.isArray(params) || params instanceof URLSearchParams) {
       searchParams = new URLSearchParams(params);
@@ -93,7 +92,7 @@ export class Router {
     return searchParams;
   }
 
-  #handleObjectParams = (params: ObjectParams) => {
+  #handleObjectParams = (params: SearchParams) => {
     const searchParams = new URLSearchParams();
     const paramKeys = Object.keys(params);
 
@@ -126,7 +125,7 @@ export class Router {
   };
 
   #createPathParams = (dynamicRouteVariables: RegExpMatchArray | null, pathVariables: string[] | undefined) => {
-    return dynamicRouteVariables?.reduce((pathParams: PathParams, dynamicRouteVariable, index) => {
+    return dynamicRouteVariables?.reduce((pathParams: SearchParams, dynamicRouteVariable, index) => {
       pathParams[dynamicRouteVariable] = pathVariables?.[index];
       return pathParams;
     }, {});
