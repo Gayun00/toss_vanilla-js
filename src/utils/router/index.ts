@@ -1,4 +1,4 @@
-import { PathParams, Routes } from "./../interfaces/index";
+import { ObjectParams, PathParams, Routes } from "./../interfaces/index";
 export class Router {
   #$app;
   #routes: Routes;
@@ -82,24 +82,35 @@ export class Router {
   }
 
   #createQueryString(params: string | PathParams = "") {
-    const searchParams = new URLSearchParams(
-      typeof params === "string" || Array.isArray(params) || params instanceof URLSearchParams
-        ? params
-        : Object.keys(params).reduce((searchParams: string[][], key) => {
-            //has to rename searchParams
-            let value = params[key]; //to const
-            if (!value) return searchParams;
-
-            if (Array.isArray(value)) {
-              return searchParams.concat(value.map((searchParam) => [key, searchParam]));
-            } else {
-              return searchParams.concat([[key, value]]); //이중 배열
-            }
-          }, [])
-    );
+    let searchParams;
+    if (typeof params === "string" || Array.isArray(params) || params instanceof URLSearchParams) {
+      searchParams = new URLSearchParams(params);
+    } else {
+      searchParams = this.handleObjParams(params);
+    }
 
     return searchParams;
   }
+
+  handleObjParams = (params: ObjectParams) => {
+    const searchParams = new URLSearchParams();
+    const paramKeys = Object.keys(params);
+
+    paramKeys.forEach((paramKey) => {
+      const paramValue = params[paramKey];
+      if (!paramValue) return searchParams;
+
+      if (!Array.isArray(paramValue)) {
+        searchParams.append(paramKey, paramValue.toString());
+      } else {
+        paramValue.forEach((value) => {
+          searchParams.append(paramKey, value);
+        });
+      }
+    });
+
+    return searchParams;
+  };
 
   #checkDynamicRoutePath = (routePath: string, path: string): boolean => {
     if (routePath.includes(":")) {
