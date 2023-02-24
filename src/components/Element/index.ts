@@ -10,6 +10,7 @@ export class Element {
   }
 
   render(): HTMLElement | null {
+    if (!this.#$element) return null;
     return this.#$element;
   }
 
@@ -27,6 +28,7 @@ export class Element {
   }
 
   get getElement(): HTMLElement | null {
+    if (!this.#$element) return null;
     return this.#$element;
   }
 }

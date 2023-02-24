@@ -6,13 +6,11 @@ import { NotFoundPage } from "./pages/NotFoundPage";
 import "./css/reset.css";
 
 class App extends Element {
-  $app;
   routes;
 
-  constructor($app: any) {
-    super($app);
-    this.$app = $app;
-
+  constructor() {
+    super();
+    this.setElement = document.createElement("div");
     this.routes = [
       { path: "/article", page: new ArticleListPage() },
       { path: "/article/:id", page: new ArticleDetailPage() },
@@ -26,8 +24,7 @@ class App extends Element {
     window.addEventListener("popstate", this.renderPage);
     window.addEventListener("load", this.renderPage);
     window.addEventListener("load", this.redirectToPostListPage);
-
-    Router.getInstance().init(this.$app, this.routes);
+    if (this.getElement) Router.getInstance().init(this.getElement, this.routes);
   }
 
   renderPage() {
@@ -38,5 +35,6 @@ class App extends Element {
     if (window.location.pathname === "/") Router.getInstance().navigate("article");
   }
 }
-
-new App(document.querySelector(".root"));
+const $root = document.querySelector(".root") as HTMLElement;
+const app = new App();
+if ($root) app.attachTo($root);
