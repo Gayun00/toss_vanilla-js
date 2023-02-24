@@ -6,7 +6,7 @@
   "repository": "https://github.com/Gayun00/toss_vanilla-js.git",
   "license": "MIT",
   "include": [
-    "src/**/*",
+    "./src/**/*",
     "package.json"
   ],
   "exclude": [
