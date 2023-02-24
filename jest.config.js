@@ -8,4 +8,5 @@ module.exports = {
     TextEncoder: require("util").TextEncoder,
     TextDecoder: require("util").TextDecoder,
   },
+  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/dist/"],
 };
