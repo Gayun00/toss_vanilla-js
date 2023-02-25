@@ -8,11 +8,13 @@ import { ArticleDetailPage } from "../../pages/ArticleDetailPage";
 import { ArticleListPage } from "../../pages/ArticleListPage";
 import { NotFoundPage } from "../../pages/NotFoundPage";
 
-const page = "page";
-const page2 = "page2";
-const page3 = "page3";
-const page4 = "page4";
-const page5 = "page5";
+const testPage = new ArticleDetailPage();
+
+const page = testPage;
+const page2 = testPage;
+const page3 = testPage;
+const page4 = testPage;
+const page5 = testPage;
 
 const path2 = "/article/12";
 const path3 = "/article/dev/12";

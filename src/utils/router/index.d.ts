@@ -1,15 +1,8 @@
 import Router from "./src/utils/Router/index.ts";
 
-interface IRoute {
-  path: string;
-  page: any;
-}
-
-type IRoutes = Array<Iroute>;
-
 interface Config {
   $app: HTMLElement;
-  routes: IRoutes;
+  routes: Routes;
 }
 
 declare module Router {

@@ -19,8 +19,8 @@ export class Element {
     this.#$element?.appendChild($child);
   }
 
-  attachTo($parent: HTMLElement) {
-    if (this.#$element) $parent.appendChild(this.#$element);
+  attachTo($parent: HTMLElement | null) {
+    if (this.#$element) $parent?.appendChild(this.#$element);
   }
 
   set setElement(value: HTMLElement) {
