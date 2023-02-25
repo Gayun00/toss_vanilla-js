@@ -1,6 +1,6 @@
 import { PathParams, Routes } from "./../interfaces/index";
 export class Router {
-  #$app;
+  #$app: HTMLElement | null;
   #routes: Routes;
   private static instance: Router;
 
@@ -24,7 +24,7 @@ export class Router {
   renderPage() {
     let page = this.#handleRenderPage();
     if (this.#$app) this.#$app.innerHTML = "";
-    page.attachTo(this.#$app);
+    page?.attachTo(this.#$app);
   }
 
   navigate(pathname?: string, search?: string) {

@@ -1,3 +1,5 @@
+import { PageComponent } from "./../../components/PageComponent/index";
+
 export interface IArticle {
   id: number;
   title: string;
@@ -10,7 +12,7 @@ export type IArticles = Array<IArticle>;
 
 export interface Route {
   path: string;
-  page: any; //need to change
+  page: PageComponent;
 }
 
 export type Routes = Array<Route>;
