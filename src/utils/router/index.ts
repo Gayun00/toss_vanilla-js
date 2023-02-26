@@ -123,7 +123,7 @@ export class Router {
     return false;
   };
 
-  #createPathParams = (dynamicRouteVariables: RegExpMatchArray | null, pathVariables: string[] | undefined) => {
+  #createPathParams = (dynamicRouteVariables: RegExpMatchArray, pathVariables: string[] = []) => {
     return dynamicRouteVariables?.reduce((pathParams: SearchParams, dynamicRouteVariable, index) => {
       pathParams[dynamicRouteVariable] = pathVariables?.[index];
       return pathParams;
@@ -136,9 +136,11 @@ export class Router {
     return pathVariables;
   };
 
-  #getDynamicPathVariables = (path: string): RegExpMatchArray | null => {
+  #getDynamicPathVariables = (path: string): RegExpMatchArray => {
     const dynamicRouteVarRegex = new RegExp(/(?<=:)\w+/g);
-    return path.match(dynamicRouteVarRegex);
+    const matchedPath = path.match(dynamicRouteVarRegex);
+    if (!matchedPath) throw new Error("no matched path");
+    return matchedPath;
   };
 
   #createPathRegex = (path: string) => {
