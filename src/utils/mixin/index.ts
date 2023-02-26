@@ -1,5 +1,7 @@
+import { IComponent } from "../interfaces";
+
 type MixinConstructor<T = {}> = new (...args: any[]) => T;
-type MixinType = MixinConstructor<{ $element: HTMLElement }>;
+type MixinType = MixinConstructor<IComponent>;
 
 export interface IMixin {
   render(): HTMLElement;
