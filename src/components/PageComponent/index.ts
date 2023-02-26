@@ -1,6 +1,7 @@
+import { IComponent } from "../../utils/interfaces";
 import { mixinElementMethods } from "../../utils/mixin";
 
-class OriginPageComponent {
+class OriginPageComponent implements IComponent {
   $element: HTMLElement;
 
   constructor(className: string) {

@@ -17,6 +17,10 @@ export interface Route {
 
 export type Routes = Array<Route>;
 
+export interface IComponent {
+  $element: HTMLElement;
+}
+
 export interface ApiHandlers {
   onSuccess(data: IArticles): void;
   onError(error: Error): void;
