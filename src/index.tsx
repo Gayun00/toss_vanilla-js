@@ -1,15 +1,15 @@
+import { mixinElementMethods } from "./utils/mixin";
 import { Router } from "./utils/router";
-import { Component } from "./components/Component";
 import { ArticleListPage } from "./pages/ArticleListPage";
 import { ArticleDetailPage } from "./pages/ArticleDetailPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import "./css/reset.css";
 
-class App extends Component {
+class OriginApp {
   routes;
+  $element;
 
   constructor() {
-    super();
     this.$element = document.createElement("div");
     this.routes = [
       { path: "/article", page: new ArticleListPage() },
@@ -35,6 +35,8 @@ class App extends Component {
     if (window.location.pathname === "/") Router.getInstance().navigate("article");
   }
 }
+
 const $root = document.querySelector(".root") as HTMLElement;
+const App = mixinElementMethods(OriginApp);
 const app = new App();
 if ($root) app.attachTo($root);
