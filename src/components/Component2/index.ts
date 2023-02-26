@@ -1,7 +1,8 @@
 export class Component2 {
-  $element: HTMLElement | null;
+  $element: HTMLElement;
+
   constructor() {
-    this.$element = null;
+    this.$element = document.createElement("div");
   }
 
   create(htmlString: string) {

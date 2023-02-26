@@ -2,21 +2,21 @@ import { Component2 } from "../Component2";
 import { PageComponent2 } from "../PageComponent2";
 
 type MixinConstructor<T = {}> = new (...args: any[]) => T;
-type MixinType3 = MixinConstructor<{ $element: HTMLElement | null }>;
+type MixinType3 = MixinConstructor<{ $element: HTMLElement }>;
 
 export interface IMixin {
-  render(): void;
-  add($child: HTMLElement | null): void;
+  render(): HTMLElement;
+  add($child: HTMLElement): void;
   attachTo($parent: HTMLElement): void;
 }
 
 function mixinElement<T extends MixinType3>(Class: T) {
   return class Mixin extends Class implements IMixin {
-    render() {
+    render(): HTMLElement {
       return this.$element;
     }
 
-    add($child: HTMLElement | null) {
+    add($child: HTMLElement) {
       if ($child) this.$element?.appendChild($child);
     }
 

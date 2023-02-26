@@ -1,5 +1,5 @@
 export class PageComponent2 {
-  $element: HTMLElement | null;
+  $element: HTMLElement;
 
   constructor(className: string) {
     this.$element = document.createElement("div");
