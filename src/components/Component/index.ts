@@ -1,5 +1,5 @@
 import { IComponent } from "../../utils/interfaces";
-import { mixinElementMethods } from "../../utils/mixin";
+import { mixinComponentMethods } from "../../utils/mixin";
 
 class OriginComponent implements IComponent {
   $element: HTMLElement;
@@ -15,4 +15,4 @@ class OriginComponent implements IComponent {
   }
 }
 
-export const Component = mixinElementMethods(OriginComponent);
+export const Component = mixinComponentMethods(OriginComponent);

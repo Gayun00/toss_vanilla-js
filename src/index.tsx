@@ -1,4 +1,4 @@
-import { mixinElementMethods } from "./utils/mixin";
+import { mixinComponentMethods } from "./utils/mixin";
 import { Router } from "./utils/router";
 import { ArticleListPage } from "./pages/ArticleListPage";
 import { ArticleDetailPage } from "./pages/ArticleDetailPage";
@@ -37,6 +37,6 @@ class OriginApp {
 }
 
 const $root = document.querySelector(".root") as HTMLElement;
-const App = mixinElementMethods(OriginApp);
+const App = mixinComponentMethods(OriginApp);
 const app = new App();
 if ($root) app.attachTo($root);
