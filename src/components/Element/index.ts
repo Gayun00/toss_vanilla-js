@@ -1,25 +1,20 @@
 export class Element {
-  #$element: HTMLElement | null;
+  #$element: HTMLElement;
 
-  constructor($element: HTMLElement | null = null) {
-    this.#$element = $element;
+  constructor() {
+    this.#$element = document.createElement("div");
   }
 
-  init($element: HTMLElement) {
-    this.#$element = $element;
-  }
-
-  render(): HTMLElement | null {
-    if (!this.#$element) return null;
+  render() {
     return this.#$element;
   }
 
-  add($child: HTMLElement | null) {
+  add($child: HTMLElement) {
     if (!$child) return;
     this.#$element?.appendChild($child);
   }
 
-  attachTo($parent: HTMLElement | null) {
+  attachTo($parent: HTMLElement) {
     if (this.#$element) $parent?.appendChild(this.#$element);
   }
 
@@ -27,8 +22,7 @@ export class Element {
     this.#$element = value;
   }
 
-  get getElement(): HTMLElement | null {
-    if (!this.#$element) return null;
+  get getElement() {
     return this.#$element;
   }
 }

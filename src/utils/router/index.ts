@@ -23,7 +23,8 @@ export class Router {
 
   renderPage() {
     let page = this.#handleRenderPage();
-    if (this.#$app) this.#$app.innerHTML = "";
+    if (!this.#$app) return;
+    this.#$app.innerHTML = "";
     page?.attachTo(this.#$app);
   }
 
