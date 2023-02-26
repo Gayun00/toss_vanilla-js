@@ -1,5 +1,5 @@
 import { Router } from "./utils/router";
-import { MixinComponent } from "./components/Mixin";
+import { MixinComponent } from "./components/Component2";
 import { ArticleListPage } from "./pages/ArticleListPage";
 import { ArticleDetailPage } from "./pages/ArticleDetailPage";
 import { NotFoundPage } from "./pages/NotFoundPage";

@@ -1,5 +1,5 @@
 import { Router } from "../../utils/router";
-import { MixinComponent } from "./../Mixin/index";
+import { MixinComponent } from "../Component";
 import { IArticle } from "../../utils/interfaces";
 import "./index.css";
 

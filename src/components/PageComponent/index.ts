@@ -1,10 +1,12 @@
-import { Element } from "../Element";
+import { mixinElement } from "../../utils/mixin";
 
-export class PageComponent extends Element {
+class PageComponent {
+  $element: HTMLElement;
+
   constructor(className: string) {
-    super();
-
-    this.setElement = document.createElement("div");
-    this.getElement?.classList.add(className);
+    this.$element = document.createElement("div");
+    this.$element?.classList.add(className);
   }
 }
+
+export const MixinPageComponent = mixinElement(PageComponent);

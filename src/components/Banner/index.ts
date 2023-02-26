@@ -1,4 +1,4 @@
-import { MixinComponent } from "./../Mixin/index";
+import { MixinComponent } from "../Component2";
 import "./index.css";
 
 export class Banner extends MixinComponent {

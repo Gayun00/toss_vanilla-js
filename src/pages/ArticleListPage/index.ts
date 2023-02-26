@@ -1,6 +1,6 @@
 import { getPosts } from "../../utils/api";
 import { ApiHandlers, IArticles } from "../../utils/interfaces";
-import { MixinPageComponent } from "../../components/Mixin";
+import { MixinPageComponent } from "../../components/PageComponent2";
 import { ArticleList } from "../../components/ArticleList";
 import { Banner } from "../../components/Banner";
 import { Footer } from "../../components/Footer";

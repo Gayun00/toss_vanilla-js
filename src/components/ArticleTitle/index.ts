@@ -1,4 +1,4 @@
-import { MixinComponent } from "./../Mixin/index";
+import { MixinComponent } from "../Component2";
 
 export class ArticleTitle extends MixinComponent {
   constructor(title: string) {

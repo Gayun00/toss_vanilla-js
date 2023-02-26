@@ -1,6 +1,6 @@
-import { MixinComponent } from "./../Mixin/index";
 import { IArticle } from "../../utils/interfaces";
 import { Article } from "../Article";
+import { MixinComponent } from "../Component2";
 import "./index.css";
 
 export class ArticleList extends MixinComponent {

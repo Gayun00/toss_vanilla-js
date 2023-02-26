@@ -1,5 +1,5 @@
-import { MixinPageComponent } from "./../../components/Mixin/index";
 // import { Router } from "../../utils/router";
+import { MixinPageComponent } from "../../components/PageComponent2";
 import { ArticleTitle } from "../../components/ArticleTitle";
 
 export class ArticleDetailPage extends MixinPageComponent {
