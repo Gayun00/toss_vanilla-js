@@ -1,9 +1,9 @@
-import { IArticle } from "../../utils/interfaces";
 import { Router } from "../../utils/router";
-import { Component } from "../Component";
+import { MixinComponent } from "./../Mixin/index";
+import { IArticle } from "../../utils/interfaces";
 import "./index.css";
 
-export class Article extends Component {
+export class Article extends MixinComponent {
   #article;
 
   constructor(article: IArticle) {
@@ -26,7 +26,7 @@ export class Article extends Component {
   }
 
   #init() {
-    this.getElement?.addEventListener("click", () => {
+    this.$element?.addEventListener("click", () => {
       Router.getInstance().navigate(`article/${this.#article.id}`);
     });
   }

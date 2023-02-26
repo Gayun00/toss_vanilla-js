@@ -1,8 +1,8 @@
+import { MixinPageComponent } from "./../../components/Mixin/index";
 import { Component } from "../../components/Component";
-import { PageComponent } from "../../components/PageComponent";
 import "./index.css";
 
-export class NotFoundPage extends PageComponent {
+export class NotFoundPage extends MixinPageComponent {
   constructor() {
     super("not_found_page");
 

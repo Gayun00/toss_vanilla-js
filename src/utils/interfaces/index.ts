@@ -1,4 +1,4 @@
-import { PageComponent } from "./../../components/PageComponent/index";
+import { IMixin } from "./../../components/Mixin/index";
 
 export interface IArticle {
   id: number;
@@ -12,7 +12,7 @@ export type IArticles = Array<IArticle>;
 
 export interface Route {
   path: string;
-  page: PageComponent;
+  page: IMixin;
 }
 
 export type Routes = Array<Route>;

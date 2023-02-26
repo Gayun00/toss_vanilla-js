@@ -1,16 +1,16 @@
 import { Router } from "./utils/router";
-import { Element } from "./components/Element";
+import { MixinComponent } from "./components/Mixin";
 import { ArticleListPage } from "./pages/ArticleListPage";
 import { ArticleDetailPage } from "./pages/ArticleDetailPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import "./css/reset.css";
 
-class App extends Element {
+class App extends MixinComponent {
   routes;
 
   constructor() {
     super();
-    this.setElement = document.createElement("div");
+    this.$element = document.createElement("div");
     this.routes = [
       { path: "/article", page: new ArticleListPage() },
       { path: "/article/:id", page: new ArticleDetailPage() },
@@ -24,7 +24,7 @@ class App extends Element {
     window.addEventListener("popstate", this.renderPage);
     window.addEventListener("load", this.renderPage);
     window.addEventListener("load", this.redirectToPostListPage);
-    if (this.getElement) Router.getInstance().init(this.getElement, this.routes);
+    if (this.$element) Router.getInstance().init(this.$element, this.routes);
   }
 
   renderPage() {

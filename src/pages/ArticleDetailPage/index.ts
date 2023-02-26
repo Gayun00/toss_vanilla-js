@@ -1,8 +1,8 @@
+import { MixinPageComponent } from "./../../components/Mixin/index";
 // import { Router } from "../../utils/router";
-import { PageComponent } from "../../components/PageComponent";
 import { ArticleTitle } from "../../components/ArticleTitle";
 
-export class ArticleDetailPage extends PageComponent {
+export class ArticleDetailPage extends MixinPageComponent {
   id: number;
   constructor() {
     super("detail_page");
@@ -19,7 +19,7 @@ export class ArticleDetailPage extends PageComponent {
 
   renderElement() {
     const $postTitle = new ArticleTitle(this.id.toString()).render();
-    if (this.getElement) this.getElement.innerHTML = "";
+    if (this.$element) this.$element.innerHTML = "";
     if ($postTitle) this.add($postTitle);
   }
 

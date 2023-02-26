@@ -1,6 +1,6 @@
-import { Component } from "../Component";
+import { MixinComponent } from "./../Mixin/index";
 
-export class ArticleTitle extends Component {
+export class ArticleTitle extends MixinComponent {
   constructor(title: string) {
     super();
     this.create(`

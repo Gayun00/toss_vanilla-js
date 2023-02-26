@@ -1,13 +1,13 @@
 import { getPosts } from "../../utils/api";
 import { ApiHandlers, IArticles } from "../../utils/interfaces";
+import { MixinPageComponent } from "../../components/Mixin";
 import { ArticleList } from "../../components/ArticleList";
 import { Banner } from "../../components/Banner";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
-import { PageComponent } from "../../components/PageComponent";
 import "./index.css";
 
-export class ArticleListPage extends PageComponent {
+export class ArticleListPage extends MixinPageComponent {
   constructor() {
     super("list_page");
 
