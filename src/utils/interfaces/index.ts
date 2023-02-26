@@ -1,4 +1,4 @@
-import { IMixin } from "./../../components/Mixin/index";
+import { IMixin } from "./../../../dist/components/Mixin/index.d";
 
 export interface IArticle {
   id: number;

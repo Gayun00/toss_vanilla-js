@@ -1,6 +1,6 @@
-import { mixinElement } from "../../utils/mixin";
+import { mixinElementMethods } from "../../utils/mixin";
 
-class Component {
+class OriginComponent {
   $element: HTMLElement;
 
   constructor() {
@@ -14,4 +14,4 @@ class Component {
   }
 }
 
-export const MixinComponent = mixinElement(Component);
+export const Component = mixinElementMethods(OriginComponent);

@@ -7,7 +7,7 @@ export interface IMixin {
   attachTo($parent: HTMLElement): void;
 }
 
-export function mixinElement<T extends MixinType>(Class: T) {
+export function mixinElementMethods<T extends MixinType>(Class: T) {
   return class Mixin extends Class implements IMixin {
     render() {
       return this.$element;

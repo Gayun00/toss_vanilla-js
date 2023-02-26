@@ -1,9 +1,9 @@
 import { IArticle } from "../../utils/interfaces";
 import { Article } from "../Article";
-import { MixinComponent } from "../Component2";
+import { Component } from "../Component";
 import "./index.css";
 
-export class ArticleList extends MixinComponent {
+export class ArticleList extends Component {
   constructor(ArticleList: Array<IArticle>) {
     super();
 

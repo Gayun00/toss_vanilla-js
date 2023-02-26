@@ -1,9 +1,9 @@
 import { Router } from "../../utils/router";
-import { MixinComponent } from "../Component";
+import { Component } from "../Component";
 import { IArticle } from "../../utils/interfaces";
 import "./index.css";
 
-export class Article extends MixinComponent {
+export class Article extends Component {
   #article;
 
   constructor(article: IArticle) {

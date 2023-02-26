@@ -1,8 +1,8 @@
 // import { Router } from "../../utils/router";
-import { MixinPageComponent } from "../../components/PageComponent2";
+import { PageComponent } from "../../components/PageComponent";
 import { ArticleTitle } from "../../components/ArticleTitle";
 
-export class ArticleDetailPage extends MixinPageComponent {
+export class ArticleDetailPage extends PageComponent {
   id: number;
   constructor() {
     super("detail_page");

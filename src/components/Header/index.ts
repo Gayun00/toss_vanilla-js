@@ -1,7 +1,7 @@
-import { MixinComponent } from "../Component2";
+import { Component } from "../Component";
 import "./index.css";
 
-export class Header extends MixinComponent {
+export class Header extends Component {
   constructor() {
     super();
 

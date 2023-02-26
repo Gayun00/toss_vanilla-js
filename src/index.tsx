@@ -1,11 +1,11 @@
 import { Router } from "./utils/router";
-import { MixinComponent } from "./components/Component2";
+import { Component } from "./components/Component";
 import { ArticleListPage } from "./pages/ArticleListPage";
 import { ArticleDetailPage } from "./pages/ArticleDetailPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import "./css/reset.css";
 
-class App extends MixinComponent {
+class App extends Component {
   routes;
 
   constructor() {
