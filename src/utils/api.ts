@@ -39,7 +39,7 @@ const request = <TParams extends Params, TData = object>({
 
 const axios = {
   get<TParams extends Params, TData = object>({ url, params, data, options }: AxiosParams<TParams, TData>) {
-    request({
+    return request({
       url,
       params,
       data,
