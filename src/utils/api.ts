@@ -1,4 +1,4 @@
-import { ApiHandlers, FetchRequest } from "./interfaces/index";
+import { ApiHandlers } from "./interfaces/index";
 import { API_SERVER } from "./constants";
 
 interface AxiosParams<TParams = Params, TData = object> {
@@ -16,24 +16,6 @@ interface AxiosOptions<TData> {
   onSuccess?: (data: TData) => void;
   onError?: (error: Error) => void;
 }
-
-const fetchRequest = ({ url, method, param, handler }: FetchRequest) => {
-  return fetch(
-    url,
-    param && {
-      method: method,
-      body: JSON.stringify(param),
-    }
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      handler?.onSuccess(data);
-      return data;
-    })
-    .catch((err) => handler?.onError(err));
-};
-
-export const getPosts = (handler: ApiHandlers) => fetchRequest({ url: `${API_SERVER}/posts`, handler });
 
 const request = <TParams extends Params, TData = object>({
   url,
@@ -56,16 +38,41 @@ const request = <TParams extends Params, TData = object>({
 };
 
 const axios = {
-  get() {
-    //
+  get<TParams extends Params, TData = object>({ url, params, data, options }: AxiosParams<TParams, TData>) {
+    request({
+      url,
+      params,
+      data,
+      options,
+    });
   },
-  post() {
-    //
+  post<TParams extends Params, TData = object>({ url, params, data, options }: AxiosParams<TParams, TData>) {
+    request({
+      url,
+      method: "post",
+      params,
+      data,
+      options,
+    });
   },
-  put() {
-    //
+  put<TParams extends Params, TData = object>({ url, params, data, options }: AxiosParams<TParams, TData>) {
+    request({
+      url,
+      method: "put",
+      params,
+      data,
+      options,
+    });
   },
-  delete() {
-    //
+  delete<TParams extends Params, TData = object>({ url, params, data, options }: AxiosParams<TParams, TData>) {
+    request({
+      url,
+      method: "delete",
+      params,
+      data,
+      options,
+    });
   },
 };
+
+export const getPosts = (handler: ApiHandlers) => axios.get({ url: `${API_SERVER}/posts`, options: handler });
