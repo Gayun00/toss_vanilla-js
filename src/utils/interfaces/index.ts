@@ -30,5 +30,5 @@ export interface FetchRequest {
 }
 
 export interface SearchParams {
-  [key: string]: number | string | string[] | undefined;
+  [key: string]: number | string | string[];
 }

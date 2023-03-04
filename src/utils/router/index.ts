@@ -1,3 +1,4 @@
+import { PageComponent } from "../../components/PageComponent";
 import { Routes, SearchParams } from "./../interfaces/index";
 export class Router {
   #$app: HTMLElement | null;
@@ -9,7 +10,7 @@ export class Router {
     this.#$app = document.querySelector(".root");
   }
 
-  static getInstance() {
+  static getInstance(): Router {
     if (!this.instance) {
       this.instance = new Router();
     }
@@ -34,7 +35,7 @@ export class Router {
     dispatchEvent(historyChangeEvent);
   }
 
-  getPathVariables = () => {
+  getPathVariables = (): SearchParams => {
     const path = window.location.pathname;
     for (let route of this.#routes) {
       if (this.#checkDynamicRoutePath(route.path, path)) {
@@ -47,7 +48,7 @@ export class Router {
     throw new Error("no matched path variables");
   };
 
-  #handleRenderPage = () => {
+  #handleRenderPage = (): PageComponent => {
     const path = window.location.pathname;
     for (let route of this.#routes) {
       if (this.#checkDynamicRoutePath(route.path, path)) {
@@ -58,10 +59,12 @@ export class Router {
       }
     }
 
-    return this.#routes.find((route) => route.path === "*")?.page;
+    const matchedPage = this.#routes.find((route) => route.path === "*")?.page;
+    if (!matchedPage) throw Error("no matched page");
+    return matchedPage;
   };
 
-  handleSearchParams(initParams = "") {
+  handleSearchParams(initParams = ""): (URLSearchParams | ((params: SearchParams) => void))[] {
     let searchParams = this.#createSearchParams(initParams);
     const currentSearchParams = this.#createSearchParams(window.location.search);
 
@@ -81,7 +84,7 @@ export class Router {
     return [searchParams, setSearchParams];
   }
 
-  #createSearchParams(params: string | SearchParams = ""): URLSearchParams {
+  #createSearchParams(params: string | SearchParams): URLSearchParams {
     let searchParams;
     if (typeof params === "string" || Array.isArray(params) || params instanceof URLSearchParams) {
       searchParams = new URLSearchParams(params);
@@ -92,7 +95,7 @@ export class Router {
     return searchParams;
   }
 
-  #handleObjectParams = (params: SearchParams) => {
+  #handleObjectParams = (params: SearchParams): URLSearchParams => {
     const searchParams = new URLSearchParams();
     const paramKeys = Object.keys(params);
 
@@ -124,16 +127,19 @@ export class Router {
     return false;
   };
 
-  #createPathParams = (dynamicRouteVariables: RegExpMatchArray, pathVariables: string[] = []) => {
+  #createPathParams = (dynamicRouteVariables: RegExpMatchArray, pathVariables: string[]): SearchParams => {
     return dynamicRouteVariables?.reduce((pathParams: SearchParams, dynamicRouteVariable, index) => {
-      pathParams[dynamicRouteVariable] = pathVariables?.[index];
+      const pathParamValue = pathVariables[index];
+      if (!pathParamValue) throw Error("no matched path param value");
+      pathParams[dynamicRouteVariable] = pathParamValue;
       return pathParams;
     }, {});
   };
 
-  #getMatchedPathVariables = (routePath: string, path: string) => {
+  #getMatchedPathVariables = (routePath: string, path: string): string[] => {
     const pathRegex = this.#createPathRegex(routePath);
     const pathVariables = path.match(pathRegex)?.slice(1);
+    if (!pathVariables) throw Error("no matched path variable");
     return pathVariables;
   };
 
@@ -144,7 +150,7 @@ export class Router {
     return matchedPath;
   };
 
-  #createPathRegex = (path: string) => {
+  #createPathRegex = (path: string): RegExp => {
     const paramNames = [];
     const regexpSource =
       "^" +
