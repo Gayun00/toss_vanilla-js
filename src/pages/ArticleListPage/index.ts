@@ -36,7 +36,7 @@ export class ArticleListPage extends PageComponent {
     this.add(footer.render());
 
     const $header = header.render();
-    $header?.addEventListener("click", (e: MouseEvent) => {
+    $header.addEventListener("click", (e: MouseEvent) => {
       const clickedTarget = e.target as HTMLElement;
       if (clickedTarget.className !== "hamburger") return;
       $header.classList.toggle("expanded");

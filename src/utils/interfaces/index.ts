@@ -1,5 +1,7 @@
 import { PageComponent } from "./../../components/PageComponent/index";
 
+export type ComponentElement = HTMLElement | null;
+
 export interface IArticle {
   id: number;
   title: string;

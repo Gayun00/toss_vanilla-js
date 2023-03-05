@@ -24,7 +24,7 @@ class App extends Component {
     window.addEventListener("popstate", this.renderPage);
     window.addEventListener("load", this.renderPage);
     window.addEventListener("load", this.redirectToPostListPage);
-    if (this.$element) Router.getInstance().init(this.$element, this.routes);
+    Router.getInstance().init(this.$element, this.routes);
   }
 
   renderPage() {

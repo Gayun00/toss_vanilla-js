@@ -11,7 +11,7 @@ export class NotFoundPage extends PageComponent {
 
   renderElement() {
     const $notFoundContent = new NotFoundContent().render();
-    if ($notFoundContent) this.add($notFoundContent);
+    this.add($notFoundContent);
   }
 }
 

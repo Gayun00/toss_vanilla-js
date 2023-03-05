@@ -10,12 +10,11 @@ export class Component {
   }
 
   add($child: HTMLElement) {
-    if (!$child) return;
-    this.$element?.appendChild($child);
+    this.$element.appendChild($child);
   }
 
   attachTo($parent: HTMLElement) {
-    if (this.$element) $parent?.appendChild(this.$element);
+    $parent.appendChild(this.$element);
   }
 
   create(htmlString: string) {

@@ -15,7 +15,7 @@ export class ArticleList extends Component {
 
     ArticleList.forEach((article: IArticle) => {
       const $article = new Article(article).render();
-      if ($article) this.add($article);
+      this.add($article);
     });
   }
 }
