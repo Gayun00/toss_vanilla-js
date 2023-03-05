@@ -1,4 +1,4 @@
-import { getPosts } from "../../utils/api";
+import { getArticles } from "../../utils/api";
 import { ApiHandlers, IArticles } from "../../utils/interfaces";
 import { ArticleList } from "../../components/ArticleList";
 import { Banner } from "../../components/Banner";
@@ -28,7 +28,7 @@ export class ArticleListPage extends PageComponent {
       },
     };
 
-    const data = await getPosts(callback);
+    const data = await getArticles(callback);
     const articleList = new ArticleList(data);
     this.add(header.render());
     this.add(articleList.render());

@@ -6,10 +6,10 @@ interface AxiosParams<TParams = Params, TData = object> {
   options?: AxiosOptions<TData>;
 }
 
-type Params = Record<string, string>;
+export type Params = Record<string, string>;
 type AxiosMethod = "get" | "post" | "put" | "delete";
 
-interface AxiosOptions<TData> {
+export interface AxiosOptions<TData> {
   onSuccess?: (data: TData) => void;
   onError?: (error: Error) => void;
 }

@@ -1,5 +1,6 @@
-import { ApiHandlers } from "./interfaces";
+import { IArticles } from "./interfaces";
 import { API_SERVER } from "./constants";
-import { axios } from "./axios";
+import { axios, AxiosOptions, Params } from "./axios";
 
-export const getPosts = (handler: ApiHandlers) => axios.get({ url: `${API_SERVER}/posts`, options: handler });
+export const getArticles = (handler: AxiosOptions<IArticles>) =>
+  axios.get<Params, IArticles>({ url: `${API_SERVER}/posts`, options: handler });
