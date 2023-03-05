@@ -19,7 +19,7 @@ export class ArticleDetailPage extends PageComponent {
 
   renderElement() {
     const $postTitle = new ArticleTitle(this.id.toString()).render();
-    if (this.getElement) this.getElement.innerHTML = "";
+    if (this.$element) this.$element.innerHTML = "";
     if ($postTitle) this.add($postTitle);
   }
 
