@@ -5,6 +5,6 @@ export class PageComponent extends Component {
     super();
 
     this.$element = document.createElement("div");
-    this.$element?.classList.add(className);
+    this.$element.classList.add(className);
   }
 }
