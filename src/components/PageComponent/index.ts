@@ -1,10 +1,10 @@
-import { Element } from "../Element";
+import { Component } from "../Component";
 
-export class PageComponent extends Element {
+export class PageComponent extends Component {
   constructor(className: string) {
     super();
 
-    this.setElement = document.createElement("div");
-    this.getElement?.classList.add(className);
+    this.$element = document.createElement("div");
+    this.$element?.classList.add(className);
   }
 }

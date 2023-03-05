@@ -26,7 +26,7 @@ export class Article extends Component {
   }
 
   #init() {
-    this.getElement?.addEventListener("click", () => {
+    this.$element?.addEventListener("click", () => {
       Router.getInstance().navigate(`article/${this.#article.id}`);
     });
   }

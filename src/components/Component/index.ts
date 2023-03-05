@@ -1,14 +1,27 @@
-import { Element } from "../Element";
+export class Component {
+  $element: HTMLElement;
 
-export class Component extends Element {
   constructor() {
-    super();
+    this.$element = document.createElement("div");
+  }
+
+  render() {
+    return this.$element;
+  }
+
+  add($child: HTMLElement) {
+    if (!$child) return;
+    this.$element?.appendChild($child);
+  }
+
+  attachTo($parent: HTMLElement) {
+    if (this.$element) $parent?.appendChild(this.$element);
   }
 
   create(htmlString: string) {
     const $template = document.createElement("template");
     $template.innerHTML = htmlString;
-    this.setElement = $template.content.firstElementChild as HTMLElement;
-    return this.getElement;
+    this.$element = $template.content.firstElementChild as HTMLElement;
+    return this.$element;
   }
 }
