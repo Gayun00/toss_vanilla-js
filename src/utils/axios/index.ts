@@ -35,7 +35,7 @@ const request = <TParams extends Params, TData = object>({
 };
 
 export const axios = {
-  get<TParams extends Params, TData = object>({ url, params, data, options }: AxiosParams<TParams, TData>) {
+  get<TParams extends Params, TData>({ url, params, data, options }: AxiosParams<TParams, TData>): Promise<TData> {
     return request({
       url,
       params,
@@ -43,7 +43,7 @@ export const axios = {
       options,
     });
   },
-  post<TParams extends Params, TData = object>({ url, params, data, options }: AxiosParams<TParams, TData>) {
+  post<TParams extends Params, TData>({ url, params, data, options }: AxiosParams<TParams, TData>): Promise<TData> {
     return request({
       url,
       method: "post",
@@ -52,7 +52,7 @@ export const axios = {
       options,
     });
   },
-  put<TParams extends Params, TData = object>({ url, params, data, options }: AxiosParams<TParams, TData>) {
+  put<TParams extends Params, TData>({ url, params, data, options }: AxiosParams<TParams, TData>): Promise<TData> {
     return request({
       url,
       method: "put",
@@ -61,7 +61,7 @@ export const axios = {
       options,
     });
   },
-  delete<TParams extends Params, TData = object>({ url, params, data, options }: AxiosParams<TParams, TData>) {
+  delete<TParams extends Params, TData>({ url, params, data, options }: AxiosParams<TParams, TData>): Promise<TData> {
     return request({
       url,
       method: "delete",
