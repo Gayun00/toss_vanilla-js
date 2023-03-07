@@ -1,4 +1,3 @@
-// import { Router } from "../../utils/router";
 import { PageComponent } from "../../components/PageComponent";
 import { ArticleTitle } from "../../components/ArticleTitle";
 
@@ -12,7 +11,6 @@ export class ArticleDetailPage extends PageComponent {
 
   init() {
     window.addEventListener("historychanged", () => {
-      this.getParam();
       this.renderElement();
     });
   }
@@ -21,10 +19,5 @@ export class ArticleDetailPage extends PageComponent {
     const $postTitle = new ArticleTitle(this.id.toString()).render();
     this.$element.innerHTML = "";
     this.add($postTitle);
-  }
-
-  getParam() {
-    // const { id } = Router.getInstance().getPathVariables();
-    // this.id = id;
   }
 }
