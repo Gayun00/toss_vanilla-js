@@ -14,14 +14,15 @@ export interface AxiosOptions<TData> {
   onError?: (error: Error) => void;
 }
 
-const request = <TParams extends Params, TData = object>({
-  url,
-  method,
-  params,
-  data,
-  options,
-}: AxiosParams<TParams, TData>) => {
-  const searchParams = new URLSearchParams(params).toString();
+const request = <TParams, TData = object>({ url, method, params, data, options }: AxiosParams<TParams, TData>) => {
+  const convertedParams = params
+    ? Object.entries(params).reduce((newObj: Record<string, string>, [key, value]) => {
+        newObj[key] = value.toString();
+        return newObj;
+      }, {})
+    : "";
+
+  const searchParams = new URLSearchParams(convertedParams).toString();
   return fetch(`${url}?${searchParams}`, {
     method,
     body: JSON.stringify(data),
@@ -35,30 +36,22 @@ const request = <TParams extends Params, TData = object>({
 };
 
 export const axios = {
-  get<TParams extends Params, TData>({ url, params, data, options }: AxiosParams<TParams, TData>): Promise<TData> {
+  get<TParams, TData>(params: AxiosParams<TParams, TData>): Promise<TData> {
     return request({
-      url,
-      params,
-      data,
-      options,
+      ...params,
+      method: "get",
     });
   },
-  post<TParams extends Params, TData>({ url, params, data, options }: AxiosParams<TParams, TData>): Promise<TData> {
+  post<TParams, TData>(params: AxiosParams<TParams, TData>): Promise<TData> {
     return request({
-      url,
+      ...params,
       method: "post",
-      params,
-      data,
-      options,
     });
   },
-  put<TParams extends Params, TData>({ url, params, data, options }: AxiosParams<TParams, TData>): Promise<TData> {
+  put<TParams extends Params, TData>(params: AxiosParams<TParams, TData>): Promise<TData> {
     return request({
-      url,
+      ...params,
       method: "put",
-      params,
-      data,
-      options,
     });
   },
   delete<TParams extends Params, TData>({ url, params, data, options }: AxiosParams<TParams, TData>): Promise<TData> {

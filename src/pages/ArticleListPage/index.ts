@@ -28,7 +28,12 @@ export class ArticleListPage extends PageComponent {
       },
     };
 
-    const data = await getArticles(callback);
+    const params = {
+      size: 3,
+      page: 5,
+    };
+
+    const data = await getArticles(params, callback);
     const articleList = new ArticleList(data);
     this.add(header.render());
     this.add(articleList.render());
