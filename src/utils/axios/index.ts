@@ -48,19 +48,16 @@ export const axios = {
       method: "post",
     });
   },
-  put<TParams extends Params, TData>(params: AxiosParams<TParams, TData>): Promise<TData> {
+  put<TParams, TData>(params: AxiosParams<TParams, TData>): Promise<TData> {
     return request({
       ...params,
       method: "put",
     });
   },
-  delete<TParams extends Params, TData>({ url, params, data, options }: AxiosParams<TParams, TData>): Promise<TData> {
+  delete<TParams, TData>(params: AxiosParams<TParams, TData>): Promise<TData> {
     return request({
-      url,
+      ...params,
       method: "delete",
-      params,
-      data,
-      options,
     });
   },
 };
