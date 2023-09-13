@@ -1,5 +1,6 @@
 ## Vanilla js로 웹 페이지 및 라우팅 기능 구현하기
-
+- React DOM Router의 작동원리에 대해 공부하기 위해 라우팅 기능 vanilla JS로 직접 구현
+- 클래스 상속을 통해 React component를 vanilla JS로 구현
 
 <br>
 
