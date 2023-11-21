@@ -1,0 +1,26 @@
+@import url("../../css/global.css");
+
+.post_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 30px;
+  max-width: 980px;
+}
+
+.post_list__title {
+  margin: 18px 0 40px 0;
+  padding: 20px 0;
+  width: 100%;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gray-800);
+}
+
+@media (max-width: 700px) {
+  .post_list {
+    width: 92%;
+    margin: 0 auto;
+    transition: transform 0.2s ease;
+  }
+}

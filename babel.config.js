@@ -1,10 +1,8 @@
 module.exports = {
-  presets: [
-    [
-      '@babel/preset-env',
-      {
-        targets: '> 1% and last 2 versions',
-      },
-    ],
-  ],
+  presets: [["@babel/preset-env", { targets: { node: "current" } }], "@babel/preset-typescript"],
+  env: {
+    test: {
+      plugins: ["@babel/plugin-transform-modules-commonjs", "@babel/plugin-transform-runtime"],
+    },
+  },
 };
